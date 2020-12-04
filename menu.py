@@ -46,45 +46,6 @@ else:
 
 
 
-
-
-# -------------------------------------------------------------
-#  KNOB DEFAULTS ::::::::::::::::::::::::::::::::::::::::::::::
-# -------------------------------------------------------------
-
-# ----- TRACKER -------------------
-nuke.knobDefault('Tracker4.shutteroffset', "centered")
-nuke.knobDefault('Tracker4.label', "Motion: [value transform]\nRef Frame: [value reference_frame]")
-nuke.addOnUserCreate(lambda:nuke.thisNode()['reference_frame'].setValue(nuke.frame()), nodeClass='Tracker4')
-
-# ----- SHUFFLES -------------------
-nuke.knobDefault('Shuffle.label', "[value in]")
-nuke.knobDefault('ShuffleCopy.label', "[value in]")
-
-# ----- COLORSPACE -------------------
-nuke.knobDefault('Colorspace.label', "[value colorspace_in] > [value colorspace_out]")
-
-# ----- FRAMEHOLD -------------------
-nuke.addOnUserCreate(lambda:nuke.thisNode()['first_frame'].setValue(nuke.frame()), nodeClass='FrameHold')
-
-# ----- ZDEFOCUS ---------------
-nuke.knobDefault('ZDefocus2.math', "depth")
-
-# ----- MOTION BLUR SHUTTER CENTERED ---------------
-nuke.knobDefault('Tracker4.shutteroffset', "centered")
-nuke.knobDefault('TimeBlur.shutteroffset', "centered")
-nuke.knobDefault('Transform.shutteroffset', "centered")
-nuke.knobDefault('TransformMasked.shutteroffset', "centered")
-nuke.knobDefault('CornerPin2D.shutteroffset', "centered")
-nuke.knobDefault('MotionBlur2D.shutteroffset', "centered")
-nuke.knobDefault('MotionBlur3D.shutteroffset', "centered")
-nuke.knobDefault('ScanlineRender.shutteroffset', "centered")
-nuke.knobDefault('Card3D.shutteroffset', "centered")
-
-
-
-
-
 # -------------------------------------------------------------
 #  TOOLS ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # -------------------------------------------------------------
