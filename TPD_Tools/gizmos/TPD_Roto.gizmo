@@ -1,0 +1,469 @@
+Group {
+ name TPD_Roto
+ onCreate "k = nuke.thisNode()\['viewer_toolbox']\nk.setFlag(int('0x00000002', 0)) # start viewer group\nk.setFlag(int('0x00000000', 0))# position in left toolbar"
+ tile_color 0x374c5bff
+ label "\[value lightPass]\n\[value in]\n\[knob tile_color \[value node_colors]]"
+ note_font Verdana
+ addUserKnob {20 Roto}
+ addUserKnob {41 color l value T TPD_ROTO_IN_GRP.color}
+ addUserKnob {41 opacity T TPD_ROTO_IN_GRP.opacity}
+ addUserKnob {41 feather T TPD_ROTO_IN_GRP.feather}
+ addUserKnob {41 feather_falloff l "feather falloff" -STARTLINE T TPD_ROTO_IN_GRP.feather_falloff}
+ addUserKnob {41 size l blur T Blur1.size}
+ addUserKnob {26 ""}
+ addUserKnob {4 lightPass l "lighting pass" M {Diffuse AO Ambient Specular SSS "" "" "" "" ""}}
+ addUserKnob {4 node_colors -STARTLINE +INVISIBLE M {0x374c5bff 0x373e5bff 0x4c375bff 0x5b3740ff 0x5b4837ff}}
+ node_colors {{lightPass}}
+ addUserKnob {41 in l "mask 1" T Shuffle1.in}
+ addUserKnob {41 in_1 l "mask 2" +INVISIBLE T Shuffle2.in}
+ addUserKnob {26 ""}
+ addUserKnob {22 refreshRoto l <b><i>Refresh</i></b> T TPD_Roto.Reload_TPD_Roto() +STARTLINE}
+ addUserKnob {41 key l "        spline key" -STARTLINE T TPD_ROTO_IN_GRP.key}
+ addUserKnob {41 curves l "" +STARTLINE T TPD_ROTO_IN_GRP.curves}
+ addUserKnob {26 info l " " T "<b><i>TPD_Roto V1.0.5</i></b> by Noah Catan\n<br><br>Last Updated 12.03.2020"}
+ addUserKnob {20 viewer_toolbox n 1}
+ addUserKnob {41 toolbox l "" +STARTLINE T TPD_ROTO_IN_GRP.toolbox}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 shortcuts l Shortcuts -STARTLINE}
+ addUserKnob {26 text_1 l "" +STARTLINE T "<h2>Roto</h2>\n<br>\n<br><b>Ctrl+Shift</b> - Warp Roto-Shape"}
+ addUserKnob {20 Transform +INVISIBLE}
+ addUserKnob {41 translate T TPD_ROTO_IN_GRP.translate}
+ addUserKnob {41 rotate T TPD_ROTO_IN_GRP.rotate}
+ addUserKnob {41 scale T TPD_ROTO_IN_GRP.scale}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -92
+  ypos -387
+ }
+ Dot {
+  name Dot3
+  xpos -58
+  ypos -326
+ }
+set N24588c00 [stack 0]
+ Dot {
+  name Dot4
+  xpos 59
+  ypos -326
+ }
+ Shuffle {
+  in none
+  name Shuffle2
+  label "\[value in] > \[value out]"
+  xpos 25
+  ypos -285
+ }
+ Dot {
+  name Dot5
+  xpos 59
+  ypos -211
+ }
+push $N24588c00
+ Shuffle {
+  in none
+  name Shuffle1
+  label "\[value in] > \[value out]"
+  xpos -92
+  ypos -283
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge2
+  xpos -92
+  ypos -214
+ }
+ Dot {
+  name Dot1
+  xpos -58
+  ypos -53
+ }
+push $N24588c00
+ Dot {
+  name Dot9
+  xpos -168
+  ypos -326
+ }
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle4
+  label "\[value in] > \[value out]"
+  xpos -202
+  ypos -283
+ }
+ Roto {
+  output alpha
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44800000 x44428000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1920 1080}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  view {}
+  motionblur_on true
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name TPD_ROTO_IN_GRP
+  xpos -202
+  ypos -220
+ }
+ Blur {
+  channels alpha
+  size 2
+  name Blur1
+  xpos -202
+  ypos -184
+ }
+ Dot {
+  name Dot10
+  xpos -168
+  ypos -125
+ }
+set N24629800 [stack 0]
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge1
+  xpos -202
+  ypos -56
+ }
+push $N24629800
+ Dot {
+  name Dot11
+  xpos -283
+  ypos -125
+ }
+ Dot {
+  name Dot2
+  xpos -283
+  ypos 24
+ }
+ Switch {
+  inputs 2
+  which {{parent.Shuffle1.in==0?0:1}}
+  name Switch1
+  xpos -202
+  ypos 21
+ }
+ Dot {
+  name Dot6
+  xpos -168
+  ypos 157
+ }
+set N24628400 [stack 0]
+ Dot {
+  name Dot12
+  xpos -24
+  ypos 157
+ }
+set N24628000 [stack 0]
+ Dot {
+  name Dot13
+  xpos 118
+  ypos 157
+ }
+set N24629c00 [stack 0]
+ Dot {
+  name Dot15
+  xpos 262
+  ypos 157
+ }
+set N57b93c00 [stack 0]
+ Dot {
+  name Dot17
+  xpos 394
+  ypos 157
+ }
+set N57b93800 [stack 0]
+ Dot {
+  name Dot19
+  xpos 538
+  ypos 157
+ }
+set N57b93400 [stack 0]
+ Dot {
+  name Dot21
+  xpos 679
+  ypos 157
+ }
+set N57b93000 [stack 0]
+ Dot {
+  name Dot23
+  xpos 823
+  ypos 157
+ }
+set N57b92c00 [stack 0]
+ Dot {
+  name Dot25
+  xpos 961
+  ypos 157
+ }
+set N57b92800 [stack 0]
+ Dot {
+  name Dot26
+  xpos 961
+  ypos 267
+ }
+set N57b92400 [stack 0]
+push $N57b92800
+ Dot {
+  name Dot27
+  xpos 1105
+  ypos 157
+ }
+add_layer {LGHT_SSS LGHT_SSS.red LGHT_SSS.green LGHT_SSS.blue LGHT_SSS.alpha}
+ Shuffle {
+  in LGHT_SSS
+  name Shuffle8
+  label "\[value in] > \[value out]"
+  xpos 1071
+  ypos 199
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge7
+  xpos 1071
+  ypos 264
+ }
+ Dot {
+  name Dot28
+  xpos 1105
+  ypos 332
+ }
+push $N57b92400
+ ShuffleCopy {
+  inputs 2
+  alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 LGHT_SSS
+  name ShuffleCopy5
+  label "\[value in] > \[value out]"
+  xpos 927
+  ypos 323
+ }
+push $N57b93000
+ Dot {
+  name Dot22
+  xpos 679
+  ypos 267
+ }
+set N57baec00 [stack 0]
+push $N57b92c00
+add_layer {LGHT_SPECULAR LGHT_SPECULAR.red LGHT_SPECULAR.green LGHT_SPECULAR.blue LGHT_SPECULAR.alpha}
+ Shuffle {
+  in LGHT_SPECULAR
+  name Shuffle7
+  label "\[value in] > \[value out]"
+  xpos 789
+  ypos 199
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge6
+  xpos 789
+  ypos 264
+ }
+ Dot {
+  name Dot24
+  xpos 823
+  ypos 332
+ }
+push $N57baec00
+ ShuffleCopy {
+  inputs 2
+  alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 LGHT_SPECULAR
+  name ShuffleCopy4
+  label "\[value in] > \[value out]"
+  xpos 645
+  ypos 323
+ }
+push $N57b93800
+ Dot {
+  name Dot18
+  xpos 394
+  ypos 267
+ }
+set N57bd7800 [stack 0]
+push $N57b93400
+add_layer {LGHT_AMBIENT LGHT_AMBIENT.red LGHT_AMBIENT.green LGHT_AMBIENT.blue LGHT_AMBIENT.alpha}
+ Shuffle {
+  in LGHT_AMBIENT
+  name Shuffle6
+  label "\[value in] > \[value out]"
+  xpos 504
+  ypos 199
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge5
+  xpos 504
+  ypos 264
+ }
+ Dot {
+  name Dot20
+  xpos 538
+  ypos 332
+ }
+push $N57bd7800
+ ShuffleCopy {
+  inputs 2
+  alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 LGHT_AMBIENT
+  name ShuffleCopy3
+  label "\[value in] > \[value out]"
+  xpos 360
+  ypos 323
+ }
+push $N24629c00
+ Dot {
+  name Dot14
+  xpos 118
+  ypos 267
+ }
+set N57bd6400 [stack 0]
+push $N57b93c00
+add_layer {LGHT_AO LGHT_AO.red LGHT_AO.green LGHT_AO.blue LGHT_AO.alpha}
+ Shuffle {
+  in LGHT_AO
+  name Shuffle5
+  label "\[value in] > \[value out]"
+  xpos 228
+  ypos 199
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge4
+  xpos 228
+  ypos 264
+ }
+ Dot {
+  name Dot16
+  xpos 262
+  ypos 332
+ }
+push $N57bd6400
+ ShuffleCopy {
+  inputs 2
+  alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 LGHT_AO
+  name ShuffleCopy2
+  label "\[value in] > \[value out]"
+  xpos 84
+  ypos 323
+ }
+push $N24628400
+ Dot {
+  name Dot7
+  xpos -168
+  ypos 267
+ }
+set N57bff000 [stack 0]
+push $N24628000
+add_layer {LGHT_DIFFUSE LGHT_DIFFUSE.red LGHT_DIFFUSE.green LGHT_DIFFUSE.blue LGHT_DIFFUSE.alpha}
+ Shuffle {
+  in LGHT_DIFFUSE
+  black black
+  white black
+  red2 black
+  green2 black
+  name Shuffle3
+  label "\[value in] > \[value out]"
+  xpos -58
+  ypos 198
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge3
+  xpos -58
+  ypos 264
+ }
+ Dot {
+  name Dot8
+  xpos -24
+  ypos 332
+ }
+push $N57bff000
+ ShuffleCopy {
+  inputs 2
+  alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 LGHT_DIFFUSE
+  name ShuffleCopy1
+  label "\[value in] > \[value out]"
+  xpos -202
+  ypos 323
+ }
+set N57bfe000 [stack 0]
+ Switch {
+  inputs 5
+  which {{parent.lightPass}}
+  name Switch2
+  xpos -202
+  ypos 509
+ }
+ Output {
+  name Output1
+  xpos -202
+  ypos 828
+ }
+push $N57bfe000
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  xpos 275
+  ypos 873
+ }
+end_group
