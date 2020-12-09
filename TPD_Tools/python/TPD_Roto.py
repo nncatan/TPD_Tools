@@ -3,13 +3,18 @@
 #  by Noah Catan
 #
 #  TDP_Roto.py
-#  Version: 1.0.2
-#  Last Updated: 12.04.2020
+#  Version: 1.0.3
+#  Last Updated: 12.09.2020
 # -------------------------------------------------------------
 
 import nuke
 
+
+
 def Create_TPD_Roto():
+	'''
+		Creates the TPD_Roto node
+	'''
 
 	# Create TPD_Roto
 	n = nuke.createNode('TPD_Roto')
@@ -19,45 +24,51 @@ def Create_TPD_Roto():
 		if n.input(0).knob('lightPass'):
 			n.knob('lightPass').setValue(int(n.input(0).knob('lightPass').getValue()))
 
-	n.begin() # Open the group
-
-	# Open TPD_ROTO_IN_GRP and then close it
-	r = nuke.toNode('TPD_ROTO_IN_GRP')
-	if nuke.toNode('preferences').knob('maxPanels').value() <= 1:
-		nuke.toNode('preferences').knob('maxPanels').setValue(2)
-		nuke.show(r)
-		r.hideControlPanel()
-		nuke.toNode('preferences').knob('maxPanels').setValue(1)
-	else:
-		nuke.show(r)
-		r.hideControlPanel()
-
-	n.end() # Close the group
+	Open_Close_Roto(n)
 	
 	n.knob('selected').setValue(True)
 	nuke.show(n)
+
+
+
 
 def Reload_TPD_Roto():
+	'''
+		Reloads TPD_Roto. This function is connected to the "Refresh" button on TPD_Roto
+		A user can click that button if roto transform box is still hidden
+	'''
 
 	n = nuke.thisNode()
-	
-	n.begin() # Open the group
+	Open_Close_Roto(n)
 
-	# Open TPD_ROTO_IN_GRP and then close it
-	r = nuke.toNode('TPD_ROTO_IN_GRP')
-	if nuke.toNode('preferences').knob('maxPanels').value() <= 1:
-		nuke.toNode('preferences').knob('maxPanels').setValue(2)
-		nuke.show(r)
-		r.hideControlPanel()
-		nuke.toNode('preferences').knob('maxPanels').setValue(1)
-	else:
-		nuke.show(r)
-		r.hideControlPanel()
 
-	n.end() # Close the group
+
+
+def Open_Close_Roto(TPDRotoNode):
+	'''
+		Opens and closes TPD_Roto node, to fix the weird bug that hides the roto transform box
+	'''
 	
-	n.knob('selected').setValue(True)
-	nuke.show(n)
+	# Open the group
+	TPDRotoNode.begin() 
+	
+	roto = nuke.toNode('TPD_ROTO_IN_GRP')
+
+	# Find the 'maxPanels' value from the Preferences tab and add 1
+	prefs = nuke.toNode('preferences').knob('maxPanels')
+	prefs.setValue(prefs.value()+1)
+
+	# Open and close the roto node
+	nuke.show(roto)
+	roto.hideControlPanel()
+
+	# Set the 'maxPanels' value back to normal
+	prefs.setValue(prefs.value()-1)
+	
+	# Close the group
+	TPDRotoNode.end() 
+
+
 
 
 nuke.menu('Nodes').addCommand('TPD_Tools/TPD_Roto', 'TPD_Roto.Create_TPD_Roto()', 'alt+o', icon=None)

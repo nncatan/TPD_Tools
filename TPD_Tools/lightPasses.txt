@@ -1,0 +1,13 @@
+Key_Light
+AO*
+Secondary
+Ambient
+Custom
+Translucent
+SSS_Skin
+SSS_Rest
+Specular
+Rim_Light
+
+
+

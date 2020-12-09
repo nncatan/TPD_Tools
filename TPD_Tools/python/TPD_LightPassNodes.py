@@ -8,6 +8,7 @@
 # --------------------------------------------------------
 
 import nuke
+#import TPD_ColorPalette
 
 # List of light passes
 lightPasses = [
@@ -30,7 +31,7 @@ rgbaLayers = ['DIP']
 
 def create_lp_layer(lpass):
     '''
-    Creates an alpha layer based on a Light Pass List item
+        Creates an alpha layer based on a Light Pass List item
     '''
 
     lpass = nuke.Layer('PASS_{}'.format(lpass.upper()), ['{}.alpha'.format(lpass.upper())])
@@ -39,7 +40,7 @@ def create_lp_layer(lpass):
 
 def create_rgba_layer(lpass):
     '''
-    Creates an rgba layer
+        Creates an rgba layer
     '''
 
     lpass = nuke.Layer('{}'.format(lpass.upper()), ['{}.red'.format(lpass.upper()), '{}.green'.format(lpass.upper()), '{}.blue'.format(lpass.upper()), '{}.alpha'.format(lpass.upper())])
@@ -47,7 +48,7 @@ def create_rgba_layer(lpass):
 
 def create_layers():
     '''
-    Creates layers from the the Light Passes List and other custom layers
+        Creates layers from the the Light Passes List and other custom layers
     '''
 
     # Create passes for all the items in the Characters In Scene List
@@ -61,7 +62,7 @@ def create_layers():
 
 def create_lp_nodes(lpass, node):
     '''
-    Creates a nodes for a single light pass
+        Creates a nodes for a single light pass
     '''
 
     #clear selection
