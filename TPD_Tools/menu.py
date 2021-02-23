@@ -10,11 +10,13 @@
 # Global Imports
 import nuke
 
+
+# Menus
+menu = nuke.menu('Nodes')
+TPD = menu.addMenu('TPD_Tools', icon="TPD_Icon.png", index=-1)
+
+
 # Import Python Scripts
 import TPD_Roto
 import TPD_ColorPalette
-import Test_Directory
-
-# Menus
-nuke.menu('Nodes').addMenu('TPD_Tools', icon="TPD_Icon.png")
-
+import TPD_DIPSetup

@@ -14,4 +14,3 @@ import nuke
 nuke.pluginAddPath('./gizmos')
 nuke.pluginAddPath('./icons')
 nuke.pluginAddPath('./python')
-nuke.pluginAddPath('./templates')
