@@ -7,4 +7,4 @@ Drag the *init.py* script and the *TPD_Tools* folder into your .nuke folder.
 
 If you already have an init.py, add this to it:
 
-nuke.pluginAddPath('./TPD_Tools')
+> nuke.pluginAddPath('./TPD_Tools')
