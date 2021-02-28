@@ -70,5 +70,4 @@ def Open_Close_Roto(TPDRotoNode):
 
 
 
-
 nuke.menu('Nodes').addCommand('TPD_Tools/TPD_Roto', 'TPD_Roto.Create_TPD_Roto()', 'alt+o', icon=None)

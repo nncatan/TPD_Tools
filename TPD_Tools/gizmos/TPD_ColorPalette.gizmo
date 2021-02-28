@@ -171,6 +171,36 @@ Group {
   addUserKnob {7 a}
   a 1
  }
+ NoOp {
+  inputs 0
+  name CTRL_KEYLIGHT
+  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
+  xpos 112
+  ypos 17
+  addUserKnob {20 User}
+  addUserKnob {40 chip l "Key Light" -STARTLINE}
+  chip 0xff
+  addUserKnob {7 r}
+  addUserKnob {7 g}
+  addUserKnob {7 b}
+  addUserKnob {7 a}
+  a 1
+ }
+ NoOp {
+  inputs 0
+  name CTRL_SHADOW
+  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
+  xpos 18
+  ypos 17
+  addUserKnob {20 User}
+  addUserKnob {40 chip l Shadow -STARTLINE}
+  chip 0xff
+  addUserKnob {7 r}
+  addUserKnob {7 g}
+  addUserKnob {7 b}
+  addUserKnob {7 a}
+  a 1
+ }
  Input {
   inputs 0
   name Input1
@@ -182,62 +212,71 @@ Group {
   xpos -173
   ypos 91
  }
-set N4c74f000 [stack 0]
+set Na7234400 [stack 0]
  Dot {
   name Dot2
   xpos 344
   ypos 91
  }
-set N4c74ec00 [stack 0]
+set Nb28bf400 [stack 0]
  Dot {
   name Dot3
   xpos 694
   ypos 91
  }
-set N4c74e800 [stack 0]
+set Nb28bec00 [stack 0]
  Dot {
   name Dot4
   xpos 1044
   ypos 91
  }
-set N4c74e400 [stack 0]
+set Naf57cc00 [stack 0]
  Dot {
   name Dot5
   xpos 1394
   ypos 91
  }
-set N4c74e000 [stack 0]
+set Naf57d800 [stack 0]
  Dot {
   name Dot6
   xpos 1744
   ypos 91
  }
-set N457a7c00 [stack 0]
+set Naf57d400 [stack 0]
  Dot {
   name Dot7
   xpos 2094
   ypos 91
  }
-set N457a7800 [stack 0]
+set Naf57dc00 [stack 0]
  Dot {
   name Dot8
   xpos 2444
   ypos 91
  }
-set N457a7400 [stack 0]
+set Naf57d000 [stack 0]
  Dot {
   name Dot9
   xpos 2794
   ypos 91
  }
-set N457a7000 [stack 0]
+set N99535800 [stack 0]
+add_layer {LGHT_RIM_LIGHT LGHT_RIM_LIGHT.alpha}
+add_layer {DIP DIP.red DIP.green DIP.blue DIP.alpha}
+ Remove {
+  operation keep
+  channels LGHT_RIM_LIGHT
+  channels2 DIP
+  name Remove10
+  xpos 2760
+  ypos 109
+ }
  Dot {
   name DOT2_RIM_LIGHT
   xpos 2794
   ypos 172
  }
-set N457a6c00 [stack 0]
-add_layer {LGHT_RIM_LIGHT LGHT_RIM_LIGHT.alpha}
+set N2435ac00 [stack 0]
  Shuffle {
   in LGHT_RIM_LIGHT
   red black
@@ -248,8 +287,7 @@ add_layer {LGHT_RIM_LIGHT LGHT_RIM_LIGHT.alpha}
   xpos 2760
   ypos 248
  }
-push $N457a6c00
-add_layer {DIP DIP.red DIP.green DIP.blue DIP.alpha}
+push $N2435ac00
  Shuffle {
   in DIP
   red white
@@ -260,7 +298,7 @@ add_layer {DIP DIP.red DIP.green DIP.blue DIP.alpha}
   xpos 2884
   ypos 163
  }
-set N457a6400 [stack 0]
+set N2435b400 [stack 0]
  Grade {
   white {{parent.CTRL_RIMLIGHT.r} {parent.CTRL_RIMLIGHT.g} {parent.CTRL_RIMLIGHT.b} {parent.CTRL_RIMLIGHT.a}}
   name RIM_LIGHT_LIGHT
@@ -268,7 +306,7 @@ set N457a6400 [stack 0]
   xpos 2976
   ypos 204
  }
-push $N457a6400
+push $N2435b400
  Grade {
   white {0 0 0 0}
   name RIM_LIGHT_SHADOW
@@ -279,20 +317,27 @@ push $N457a6400
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name RIM_LIGHT_KEYMIX
   xpos 2884
   ypos 254
  }
-set N4211d800 [stack 0]
-push $N457a7400
+set Nbecb800 [stack 0]
+push $Naf57d000
+add_layer {LGHT_SPECULAR LGHT_SPECULAR.alpha}
+ Remove {
+  operation keep
+  channels LGHT_SPECULAR
+  channels2 DIP
+  name Remove9
+  xpos 2410
+  ypos 109
+ }
  Dot {
   name DOT2_SPECULAR
   xpos 2444
   ypos 172
  }
-set N4211d400 [stack 0]
-add_layer {LGHT_SPECULAR LGHT_SPECULAR.alpha}
+set Nbecb000 [stack 0]
  Shuffle {
   in LGHT_SPECULAR
   red black
@@ -303,7 +348,7 @@ add_layer {LGHT_SPECULAR LGHT_SPECULAR.alpha}
   xpos 2410
   ypos 248
  }
-push $N4211d400
+push $Nbecb000
  Shuffle {
   in DIP
   red white
@@ -314,7 +359,7 @@ push $N4211d400
   xpos 2534
   ypos 163
  }
-set N4211cc00 [stack 0]
+set Nbeca400 [stack 0]
  Grade {
   white {{parent.CTRL_SPECULAR.r} {parent.CTRL_SPECULAR.g} {parent.CTRL_SPECULAR.b} {parent.CTRL_SPECULAR.a}}
   name SPECULAR_LIGHT
@@ -322,7 +367,7 @@ set N4211cc00 [stack 0]
   xpos 2626
   ypos 204
  }
-push $N4211cc00
+push $Nbeca400
  Grade {
   white {0 0 0 0}
   name SPECULAR_SHADOW
@@ -333,20 +378,27 @@ push $N4211cc00
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name SPECULAR_KEYMIX
   xpos 2534
   ypos 254
  }
-set N4211c000 [stack 0]
-push $N457a7800
+set N1f628000 [stack 0]
+push $Naf57dc00
+add_layer {LGHT_SSS_REST LGHT_SSS_REST.alpha}
+ Remove {
+  operation keep
+  channels LGHT_SSS_REST
+  channels2 DIP
+  name Remove8
+  xpos 2060
+  ypos 109
+ }
  Dot {
   name DOT2_SSS_REST
   xpos 2094
   ypos 172
  }
-set N497f5c00 [stack 0]
-add_layer {LGHT_SSS_REST LGHT_SSS_REST.alpha}
+set N1f628800 [stack 0]
  Shuffle {
   in LGHT_SSS_REST
   red black
@@ -357,7 +409,7 @@ add_layer {LGHT_SSS_REST LGHT_SSS_REST.alpha}
   xpos 2060
   ypos 248
  }
-push $N497f5c00
+push $N1f628800
  Shuffle {
   in DIP
   red white
@@ -368,7 +420,7 @@ push $N497f5c00
   xpos 2184
   ypos 163
  }
-set N497f5400 [stack 0]
+set N1f629000 [stack 0]
  Grade {
   white {{parent.CTRL_SSSREST.r} {parent.CTRL_SSSREST.g} {parent.CTRL_SSSREST.b} {parent.CTRL_SSSREST.a}}
   name SSS_REST_LIGHT
@@ -376,7 +428,7 @@ set N497f5400 [stack 0]
   xpos 2276
   ypos 205
  }
-push $N497f5400
+push $N1f629000
  Grade {
   white {0 0 0 0}
   name SSS_REST_SHADOW
@@ -387,20 +439,27 @@ push $N497f5400
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name SSS_REST_KEYMIX
   xpos 2184
   ypos 254
  }
-set N497f4800 [stack 0]
-push $N457a7c00
+set N312b000 [stack 0]
+push $Naf57d400
+add_layer {LGHT_SSS_SKIN LGHT_SSS_SKIN.alpha}
+ Remove {
+  operation keep
+  channels LGHT_SSS_SKIN
+  channels2 DIP
+  name Remove7
+  xpos 1710
+  ypos 109
+ }
  Dot {
   name DOT2_SSS_SKIN
   xpos 1744
   ypos 172
  }
-set N497f4400 [stack 0]
-add_layer {LGHT_SSS_SKIN LGHT_SSS_SKIN.alpha}
+set N312a800 [stack 0]
  Shuffle {
   in LGHT_SSS_SKIN
   red black
@@ -411,7 +470,7 @@ add_layer {LGHT_SSS_SKIN LGHT_SSS_SKIN.alpha}
   xpos 1710
   ypos 248
  }
-push $N497f4400
+push $N312a800
  Shuffle {
   in DIP
   red white
@@ -422,7 +481,7 @@ push $N497f4400
   xpos 1834
   ypos 163
  }
-set N46519c00 [stack 0]
+set N420a800 [stack 0]
  Grade {
   white {{parent.CTRL_SSSSKIN.r} {parent.CTRL_SSSSKIN.g} {parent.CTRL_SSSSKIN.b} {parent.CTRL_SSSSKIN.a}}
   name SSS_SKIN_LIGHT
@@ -430,7 +489,7 @@ set N46519c00 [stack 0]
   xpos 1925
   ypos 205
  }
-push $N46519c00
+push $N420a800
  Grade {
   white {0 0 0 0}
   name SSS_SKIN_SHADOW
@@ -441,20 +500,27 @@ push $N46519c00
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name SSS_SKIN_KEYMIX
   xpos 1834
   ypos 254
  }
-set N46519000 [stack 0]
-push $N4c74e000
+set N420b800 [stack 0]
+push $Naf57d800
+add_layer {LGHT_TRANSLUCENT LGHT_TRANSLUCENT.alpha}
+ Remove {
+  operation keep
+  channels LGHT_TRANSLUCENT
+  channels2 DIP
+  name Remove6
+  xpos 1360
+  ypos 109
+ }
  Dot {
   name DOT2_TRANSLUCENT
   xpos 1394
   ypos 172
  }
-set N46518c00 [stack 0]
-add_layer {LGHT_TRANSLUCENT LGHT_TRANSLUCENT.alpha}
+set N420b000 [stack 0]
  Shuffle {
   in LGHT_TRANSLUCENT
   red black
@@ -465,7 +531,7 @@ add_layer {LGHT_TRANSLUCENT LGHT_TRANSLUCENT.alpha}
   xpos 1360
   ypos 248
  }
-push $N46518c00
+push $N420b000
  Shuffle {
   in DIP
   red white
@@ -476,7 +542,7 @@ push $N46518c00
   xpos 1484
   ypos 163
  }
-set N46518400 [stack 0]
+set N9aee8400 [stack 0]
  Grade {
   white {{parent.CTRL_TRANSLUCENT.r} {parent.CTRL_TRANSLUCENT.g} {parent.CTRL_TRANSLUCENT.b} {parent.CTRL_TRANSLUCENT.a}}
   name TRANSLUCENT_LIGHT
@@ -484,7 +550,7 @@ set N46518400 [stack 0]
   xpos 1576
   ypos 204
  }
-push $N46518400
+push $N9aee8400
  Grade {
   white {0 0 0 0}
   name TRANSLUCENT_SHADOW
@@ -495,20 +561,27 @@ push $N46518400
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name TRANSLUCENT_KEYMIX
   xpos 1484
   ypos 254
  }
-set N450db800 [stack 0]
-push $N4c74e400
+set N3bd4d800 [stack 0]
+push $Naf57cc00
+add_layer {LGHT_CUSTOM LGHT_CUSTOM.alpha}
+ Remove {
+  operation keep
+  channels LGHT_CUSTOM
+  channels2 DIP
+  name Remove5
+  xpos 1010
+  ypos 109
+ }
  Dot {
   name DOT2_CUSTOM
   xpos 1044
   ypos 172
  }
-set N450db400 [stack 0]
-add_layer {LGHT_CUSTOM LGHT_CUSTOM.alpha}
+set N9c80bc00 [stack 0]
  Shuffle {
   in LGHT_CUSTOM
   red black
@@ -519,7 +592,7 @@ add_layer {LGHT_CUSTOM LGHT_CUSTOM.alpha}
   xpos 1010
   ypos 248
  }
-push $N450db400
+push $N9c80bc00
  Shuffle {
   in DIP
   red white
@@ -530,7 +603,7 @@ push $N450db400
   xpos 1134
   ypos 163
  }
-set N450dac00 [stack 0]
+set N9c80b400 [stack 0]
  Grade {
   white {{parent.CTRL_CUSTOM.r} {parent.CTRL_CUSTOM.g} {parent.CTRL_CUSTOM.b} {parent.CTRL_CUSTOM.a}}
   name CUSTOM_LIGHT
@@ -538,7 +611,7 @@ set N450dac00 [stack 0]
   xpos 1228
   ypos 205
  }
-push $N450dac00
+push $N9c80b400
  Grade {
   white {0 0 0 0}
   name CUSTOM_SHADOW
@@ -549,20 +622,27 @@ push $N450dac00
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name CUSTOM_KEYMIX
   xpos 1134
   ypos 276
  }
-set N450da000 [stack 0]
-push $N4c74e800
+set N99f4e800 [stack 0]
+push $Nb28bec00
+add_layer {LGHT_AMBIENT LGHT_AMBIENT.alpha}
+ Remove {
+  operation keep
+  channels LGHT_AMBIENT
+  channels2 DIP
+  name Remove4
+  xpos 660
+  ypos 109
+ }
  Dot {
   name DOT2_AMBIENT
   xpos 694
   ypos 172
  }
-set N45583c00 [stack 0]
-add_layer {LGHT_AMBIENT LGHT_AMBIENT.alpha}
+set N2e7ea000 [stack 0]
  Shuffle {
   in LGHT_AMBIENT
   red black
@@ -573,7 +653,7 @@ add_layer {LGHT_AMBIENT LGHT_AMBIENT.alpha}
   xpos 660
   ypos 248
  }
-push $N45583c00
+push $N2e7ea000
  Shuffle {
   in DIP
   red white
@@ -584,7 +664,7 @@ push $N45583c00
   xpos 784
   ypos 163
  }
-set N45583400 [stack 0]
+set N1e279c00 [stack 0]
  Grade {
   white {{parent.CTRL_AMBIENT.r} {parent.CTRL_AMBIENT.g} {parent.CTRL_AMBIENT.b} {parent.CTRL_AMBIENT.a}}
   name AMBIENT_LIGHT
@@ -592,7 +672,7 @@ set N45583400 [stack 0]
   xpos 879
   ypos 205
  }
-push $N45583400
+push $N1e279c00
  Grade {
   white {0 0 0 0}
   name AMBIENT_SHADOW
@@ -603,20 +683,27 @@ push $N45583400
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name AMBIENT_KEYMIX
   xpos 784
   ypos 254
  }
-set N45582800 [stack 0]
-push $N4c74ec00
+set N1e279000 [stack 0]
+push $Nb28bf400
+add_layer {LGHT_SECONDARY LGHT_SECONDARY.alpha}
+ Remove {
+  operation keep
+  channels LGHT_SECONDARY
+  channels2 DIP
+  name Remove3
+  xpos 310
+  ypos 109
+ }
  Dot {
   name DOT2_SECONDARY
   xpos 344
   ypos 172
  }
-set N45582400 [stack 0]
-add_layer {LGHT_SECONDARY LGHT_SECONDARY.alpha}
+set N1e278800 [stack 0]
  Shuffle {
   in LGHT_SECONDARY
   red black
@@ -627,7 +714,7 @@ add_layer {LGHT_SECONDARY LGHT_SECONDARY.alpha}
   xpos 310
   ypos 248
  }
-push $N45582400
+push $N1e278800
  Shuffle {
   in DIP
   red white
@@ -638,7 +725,7 @@ push $N45582400
   xpos 434
   ypos 163
  }
-set N465dbc00 [stack 0]
+set N1e278000 [stack 0]
  Grade {
   white {{parent.CTRL_SECONDARY.r} {parent.CTRL_SECONDARY.g} {parent.CTRL_SECONDARY.b} {parent.CTRL_SECONDARY.a}}
   name SECONDARY_LIGHT
@@ -646,7 +733,7 @@ set N465dbc00 [stack 0]
   xpos 526
   ypos 204
  }
-push $N465dbc00
+push $N1e278000
  Grade {
   white {0 0 0 0}
   name SECONDARY_SHADOW
@@ -657,12 +744,11 @@ push $N465dbc00
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name SECONDARY_KEYMIX
   xpos 434
   ypos 254
  }
-set N465db000 [stack 0]
+set Nd331400 [stack 0]
  Dot {
   name Dot12
   xpos 468
@@ -738,26 +824,34 @@ set N465db000 [stack 0]
   xpos 2884
   ypos 490
  }
-set N435dd000 [stack 0]
+set Nb5829400 [stack 0]
  Dot {
   name Dot18
   xpos 2918
   ypos 561
  }
-push $N457a7000
+push $N99535800
  Dot {
   name Dot10
   xpos 3144
   ypos 91
  }
-set N435dc800 [stack 0]
+set Nb5828c00 [stack 0]
+add_layer {LGHT_AO LGHT_AO.alpha}
+ Remove {
+  operation keep
+  channels LGHT_AO
+  channels2 DIP
+  name Remove11
+  xpos 3110
+  ypos 109
+ }
  Dot {
   name DOT2_AO
   xpos 3144
   ypos 172
  }
-set N435dc400 [stack 0]
-add_layer {LGHT_AO LGHT_AO.alpha}
+set Nb5828400 [stack 0]
  Shuffle {
   in LGHT_AO
   red black
@@ -766,9 +860,9 @@ add_layer {LGHT_AO LGHT_AO.alpha}
   name SHUFFLE_AO
   label "\[value in]"
   xpos 3110
-  ypos 207
+  ypos 255
  }
-push $N435dc400
+push $Nb5828400
  Shuffle {
   in DIP
   red white
@@ -779,7 +873,7 @@ push $N435dc400
   xpos 3234
   ypos 163
  }
-set N49b39c00 [stack 0]
+set N161cbc00 [stack 0]
  Grade {
   white {{parent.CTRL_AO.r} {parent.CTRL_AO.g} {parent.CTRL_AO.b} {parent.CTRL_AO.a}}
   name AO_LIGHT
@@ -787,7 +881,7 @@ set N49b39c00 [stack 0]
   xpos 3330
   ypos 208
  }
-push $N49b39c00
+push $N161cbc00
  Grade {
   white {1 1 1 1}
   name AO_SHADOW
@@ -798,20 +892,27 @@ push $N49b39c00
  Keymix {
   inputs 3
   channels rgb
-  mix 0
   name AO_KEYMIX
   xpos 3234
   ypos 261
  }
-set N49b39000 [stack 0]
-push $N4c74f000
+set N161cb000 [stack 0]
+push $Na7234400
+add_layer {LGHT_KEY_LIGHT LGHT_KEY_LIGHT.alpha}
+ Remove {
+  operation keep
+  channels LGHT_KEY_LIGHT
+  channels2 DIP
+  name Remove2
+  xpos -207
+  ypos 109
+ }
  Dot {
   name DOT2_KEY_LIGHT
   xpos -173
   ypos 172
  }
-set N49b38c00 [stack 0]
-add_layer {LGHT_KEY_LIGHT LGHT_KEY_LIGHT.alpha}
+set N161ca800 [stack 0]
  Shuffle {
   in LGHT_KEY_LIGHT
   red black
@@ -822,13 +923,13 @@ add_layer {LGHT_KEY_LIGHT LGHT_KEY_LIGHT.alpha}
   xpos -207
   ypos 283
  }
-push $N49b38c00
+push $N161ca800
  Dot {
   name Dot16
   xpos -44
   ypos 172
  }
-set N49b38400 [stack 0]
+set N161ca000 [stack 0]
  Shuffle {
   in DIP
   red white
@@ -839,7 +940,7 @@ set N49b38400 [stack 0]
   xpos 66
   ypos 163
  }
-set N49b38000 [stack 0]
+set N9560fc00 [stack 0]
  Grade {
   white {{parent.CTRL_SHADOW.r} {parent.CTRL_SHADOW.g} {parent.CTRL_SHADOW.b} {parent.CTRL_SHADOW.a}}
   name KEY_LIGHT_SHADOW
@@ -847,7 +948,7 @@ set N49b38000 [stack 0]
   xpos 19
   ypos 209
  }
-push $N49b38400
+push $N161ca000
  Shuffle {
   red white
   green white
@@ -866,11 +967,12 @@ push $N49b38400
  Dissolve {
   inputs 2
   channels rgb
+  which 1
   name Dissolve1
   xpos 19
   ypos 245
  }
-push $N49b38000
+push $N9560fc00
  Grade {
   white {{parent.CTRL_KEYLIGHT.r} {parent.CTRL_KEYLIGHT.g} {parent.CTRL_KEYLIGHT.b} {parent.CTRL_KEYLIGHT.a}}
   name KEY_LIGHT_LIGHT
@@ -878,7 +980,7 @@ push $N49b38000
   xpos 114
   ypos 211
  }
-push $N49b38000
+push $N9560fc00
  Dot {
   name Dot19
   xpos 224
@@ -892,6 +994,7 @@ push $N49b38000
  Dissolve {
   inputs 2
   channels rgb
+  which 1
   name Dissolve2
   xpos 114
   ypos 247
@@ -900,11 +1003,10 @@ push $N49b38000
   inputs 3
   channels rgb
   name KEY_LIGHT_KEYMIX
-  selected true
   xpos 19
   ypos 289
  }
-set N49658c00 [stack 0]
+set N1738d800 [stack 0]
  Dot {
   name Dot15
   xpos 53
@@ -920,7 +1022,7 @@ set N49658c00 [stack 0]
   xpos 3234
   ypos 435
  }
-set N49658400 [stack 0]
+set N1738d000 [stack 0]
  Merge2 {
   inputs 2
   operation plus
@@ -960,12 +1062,20 @@ set N49658400 [stack 0]
   ypos 606
   disable {{!parent.text_1}}
  }
-set N465a9800 [stack 0]
-push $N435dc800
+set N1738c400 [stack 0]
+push $Nb5828c00
  Dot {
   name Dot11
   xpos 3528
   ypos 91
+ }
+ Remove {
+  operation keep
+  channels rgba
+  channels2 DIP
+  name Remove12
+  xpos 3494
+  ypos 109
  }
  Shuffle {
   in DIP
@@ -974,7 +1084,7 @@ push $N435dc800
   xpos 3494
   ypos 163
  }
-set N465a9000 [stack 0]
+set N9e705800 [stack 0]
  Dot {
   name Dot17
   xpos 3741
@@ -1007,8 +1117,8 @@ set N465a9000 [stack 0]
   ypos 326
   disable {{!parent.text_1}}
  }
-set N465a8800 [stack 0]
-push $N49b39000
+set N9e705000 [stack 0]
+push $N161cb000
  Premult {
   name Premult3
   xpos 3330
@@ -1041,8 +1151,8 @@ push $N49b39000
   ypos 341
   disable {{!parent.text_1}}
  }
-set N465a8000 [stack 0]
-push $N4211d800
+set N9e704800 [stack 0]
+push $Nbecb800
  Premult {
   name Premult4
   xpos 2980
@@ -1075,8 +1185,8 @@ push $N4211d800
   ypos 341
   disable {{!parent.text_1}}
  }
-set N46603800 [stack 0]
-push $N4211c000
+set N9e704000 [stack 0]
+push $N1f628000
  Premult {
   name Premult5
   xpos 2630
@@ -1109,8 +1219,8 @@ push $N4211c000
   ypos 341
   disable {{!parent.text_1}}
  }
-set N46603000 [stack 0]
-push $N497f4800
+set N9f6f1800 [stack 0]
+push $N312b000
  Premult {
   name Premult6
   xpos 2280
@@ -1143,8 +1253,8 @@ push $N497f4800
   ypos 341
   disable {{!parent.text_1}}
  }
-set N46602800 [stack 0]
-push $N46519000
+set N9f6f1000 [stack 0]
+push $N420b800
  Premult {
   name Premult7
   xpos 1930
@@ -1177,8 +1287,8 @@ push $N46519000
   ypos 341
   disable {{!parent.text_1}}
  }
-set N46602000 [stack 0]
-push $N450db800
+set N9f6f0800 [stack 0]
+push $N3bd4d800
  Premult {
   name Premult8
   xpos 1580
@@ -1211,8 +1321,8 @@ push $N450db800
   ypos 341
   disable {{!parent.text_1}}
  }
-set N4201b800 [stack 0]
-push $N450da000
+set N9f6f0000 [stack 0]
+push $N99f4e800
  Premult {
   name Premult9
   xpos 1230
@@ -1245,8 +1355,8 @@ push $N450da000
   ypos 341
   disable {{!parent.text_1}}
  }
-set N4201b000 [stack 0]
-push $N45582800
+set Na7543800 [stack 0]
+push $N1e279000
  Premult {
   name Premult10
   xpos 880
@@ -1279,8 +1389,8 @@ push $N45582800
   ypos 341
   disable {{!parent.text_1}}
  }
-set N4201a800 [stack 0]
-push $N465db000
+set Na7543000 [stack 0]
+push $Nd331400
  Premult {
   name Premult11
   xpos 533
@@ -1313,8 +1423,8 @@ push $N465db000
   ypos 352
   disable {{!parent.text_1}}
  }
-set N4201a000 [stack 0]
-push $N49658c00
+set Na7542800 [stack 0]
+push $N1738d800
  Premult {
   name Premult2
   xpos 109
@@ -1347,14 +1457,14 @@ push $N49658c00
   ypos 356
   disable {{!parent.text_1}}
  }
-set N44c1f800 [stack 0]
-push $N465a9000
+set Na7542000 [stack 0]
+push $N9e705800
  Unpremult {
   name Unpremult1
   xpos 3494
   ypos 199
  }
-set N44c1f400 [stack 0]
+set Naed61c00 [stack 0]
  Dot {
   name Dot13
   xpos 3618
@@ -1365,9 +1475,9 @@ set N44c1f400 [stack 0]
   xpos 3618
   ypos 616
  }
-push $N435dd000
-push $N49658400
-push $N44c1f400
+push $Nb5829400
+push $N1738d000
+push $Naed61c00
  Merge2 {
   inputs 2
   operation multiply
@@ -1401,7 +1511,7 @@ push $N44c1f400
   xpos 3494
   ypos 652
  }
-set N44ea1c00 [stack 0]
+set Naed60400 [stack 0]
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -1429,18 +1539,18 @@ set N44ea1c00 [stack 0]
   ypos 652
   disable {{!parent.text_1}}
  }
-push $N465a8800
-push $N465a9800
-push $N465a8000
-push $N46603800
-push $N46603000
-push $N46602800
-push $N46602000
-push $N4201b800
-push $N4201b000
-push $N4201a800
-push $N4201a000
-push $N44c1f800
+push $N9e705000
+push $N1738c400
+push $N9e704800
+push $N9e704000
+push $N9f6f1800
+push $N9f6f1000
+push $N9f6f0800
+push $N9f6f0000
+push $Na7543800
+push $Na7543000
+push $Na7542800
+push $Na7542000
  ContactSheet {
   inputs 13
   width {{width*columns}}
@@ -1454,7 +1564,7 @@ push $N44c1f800
   ypos 676
   hide_input true
  }
-push $N44ea1c00
+push $Naed60400
  Switch {
   inputs 14
   which {{parent.breakdown}}
@@ -1474,35 +1584,5 @@ push $N44ea1c00
   name Output1
   xpos 3494
   ypos 740
- }
- NoOp {
-  inputs 0
-  name CTRL_KEYLIGHT
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 112
-  ypos 17
-  addUserKnob {20 User}
-  addUserKnob {40 chip l "Key Light" -STARTLINE}
-  chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
- }
- NoOp {
-  inputs 0
-  name CTRL_SHADOW
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 18
-  ypos 17
-  addUserKnob {20 User}
-  addUserKnob {40 chip l Shadow -STARTLINE}
-  chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
  }
 end_group
