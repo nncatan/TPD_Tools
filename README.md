@@ -1,5 +1,7 @@
 # TPD_Tools
-Nuke tools and pipeline for 2d volumetric style lighting
+TPD_Tools is a 2D lighting toolset for the Foundry's Nuke.
+
+This toolset was developed during the production of SCAD Animation Studios' *The Pope's Dog* (2021), to recreate the hand-crafted lighting approach pioneered by SPA Studio's *Klaus* (2019).
 
 ### INSTALLATION
 
