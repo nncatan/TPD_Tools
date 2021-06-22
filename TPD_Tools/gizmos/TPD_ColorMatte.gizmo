@@ -1,0 +1,508 @@
+Group {
+ name TPD_ColorMatte
+ tile_color 0x3b9f00ff
+ label "\[value desc]"
+ note_font Verdana
+ addUserKnob {20 User}
+ addUserKnob {41 colormatte_channel l channel T Shuffle21.in}
+ addUserKnob {1 desc}
+ addUserKnob {26 ""}
+ addUserKnob {6 enable_m01 l enable +STARTLINE}
+ enable_m01 true
+ addUserKnob {41 matte01 l "matte 01  " -STARTLINE T Grade14.white}
+ addUserKnob {6 enable_m02 l enable +STARTLINE}
+ addUserKnob {41 matte02 l "matte 02  " -STARTLINE T Grade1.white}
+ addUserKnob {6 enable_m03 l enable +STARTLINE}
+ addUserKnob {41 matte03 l "matte 03  " -STARTLINE T Grade2.white}
+ addUserKnob {6 enable_m04 l enable +STARTLINE}
+ addUserKnob {41 matte04 l "matte 04  " -STARTLINE T Grade3.white}
+ addUserKnob {6 enable_m05 l enable +STARTLINE}
+ addUserKnob {41 matte05 l "matte 05  " -STARTLINE T Grade4.white}
+ addUserKnob {6 enable_m06 l enable +STARTLINE}
+ addUserKnob {41 matte06 l "matte 06  " -STARTLINE T Grade5.white}
+ addUserKnob {6 invertMask l "invert mask" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {20 edge_treatment l "edge treatment" n 1}
+ edge_treatment 0
+ addUserKnob {26 text l "      " T " "}
+ addUserKnob {41 tolerance T CONTROL.tolerance}
+ addUserKnob {41 range T ErodeSmooth1.range}
+ addUserKnob {41 size l blur T ErodeSmooth1.size}
+ addUserKnob {41 tighten T ErodeSmooth1.tighten}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {26 info l "     " T "<b><i>TPD_ColorMatte V1.0.0</i></b> by Noah Catan\n<br><br>Last Updated 06.07.2021"}
+}
+ Input {
+  inputs 0
+  name Input
+  label "\[value number]"
+  xpos -429
+  ypos 515
+ }
+ Shuffle {
+  in tpd_colormatte
+  name Shuffle21
+  label "\[value in]"
+  xpos -429
+  ypos 583
+ }
+ Dot {
+  name Dot6
+  xpos -395
+  ypos 723
+ }
+set Nd8b82400 [stack 0]
+ Unpremult {
+  name Unpremult17
+  xpos -345
+  ypos 720
+ }
+ Dot {
+  name Dot14
+  xpos -223
+  ypos 723
+ }
+set Nd8b82000 [stack 0]
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha black
+  name Shuffle22
+  label WHITE
+  xpos -257
+  ypos 769
+ }
+ Dot {
+  name Dot2
+  xpos 93
+  ypos 778
+ }
+set Nd8baf800 [stack 0]
+ Dot {
+  name Dot5
+  xpos 418
+  ypos 778
+ }
+set Nd8baf400 [stack 0]
+ Dot {
+  name Dot8
+  xpos 753
+  ypos 778
+ }
+set Nd8baf000 [stack 0]
+ Dot {
+  name Dot10
+  xpos 1080
+  ypos 778
+ }
+set Nd8baec00 [stack 0]
+ Dot {
+  name Dot12
+  xpos 1393
+  ypos 778
+ }
+set Nd8bae800 [stack 0]
+ Dot {
+  name Dot15
+  xpos 1702
+  ypos 778
+ }
+ Grade {
+  white {0 1 1 0}
+  name Grade5
+  xpos 1668
+  ypos 839
+ }
+push $Nd8b82000
+ Dot {
+  name Dot1
+  xpos -30
+  ypos 722
+ }
+set Nd860dc00 [stack 0]
+ Dot {
+  name Dot3
+  xpos 295
+  ypos 722
+ }
+set Nd860d800 [stack 0]
+ Dot {
+  name Dot4
+  xpos 630
+  ypos 722
+ }
+set Nd860d400 [stack 0]
+ Dot {
+  name Dot7
+  xpos 957
+  ypos 722
+ }
+set Nd860d000 [stack 0]
+ Dot {
+  name Dot9
+  xpos 1270
+  ypos 722
+ }
+set Nd860cc00 [stack 0]
+ Dot {
+  name Dot11
+  xpos 1579
+  ypos 722
+ }
+ Difference {
+  inputs 2
+  gain {{CONTROL.tolerance*10}}
+  name Difference6
+  xpos 1545
+  ypos 833
+ }
+ Invert {
+  channels alpha
+  name Invert6
+  xpos 1545
+  ypos 887
+ }
+push $Nd8bae800
+ Grade {
+  white {1 0 1 0}
+  name Grade4
+  xpos 1359
+  ypos 839
+ }
+push $Nd860cc00
+ Difference {
+  inputs 2
+  gain {{CONTROL.tolerance*10}}
+  name Difference5
+  xpos 1236
+  ypos 833
+ }
+ Invert {
+  channels alpha
+  name Invert5
+  xpos 1236
+  ypos 887
+ }
+push $Nd8baec00
+ Grade {
+  white {1 1 0 0}
+  name Grade3
+  xpos 1046
+  ypos 839
+ }
+push $Nd860d000
+ Difference {
+  inputs 2
+  gain {{CONTROL.tolerance*10}}
+  name Difference4
+  xpos 923
+  ypos 833
+ }
+ Invert {
+  channels alpha
+  name Invert4
+  xpos 923
+  ypos 887
+ }
+push $Nd8baf000
+ Grade {
+  white {0 0 1 0}
+  name Grade2
+  xpos 719
+  ypos 839
+ }
+push $Nd860d400
+ Difference {
+  inputs 2
+  gain {{CONTROL.tolerance*10}}
+  name Difference2
+  xpos 596
+  ypos 833
+ }
+ Invert {
+  channels alpha
+  name Invert2
+  xpos 596
+  ypos 887
+ }
+push $Nd8baf400
+ Grade {
+  white {0 1 0 0}
+  name Grade1
+  xpos 384
+  ypos 839
+ }
+push $Nd860d800
+ Difference {
+  inputs 2
+  gain {{CONTROL.tolerance*10}}
+  name Difference1
+  xpos 261
+  ypos 833
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos 261
+  ypos 887
+ }
+push $Nd8baf800
+ Grade {
+  white {1 0 0 0}
+  name Grade14
+  xpos 59
+  ypos 834
+ }
+push $Nd860dc00
+ Difference {
+  inputs 2
+  gain {{CONTROL.tolerance*10}}
+  name Difference3
+  xpos -64
+  ypos 828
+ }
+ Invert {
+  channels alpha
+  name Invert3
+  xpos -64
+  ypos 881
+ }
+ Multiply {
+  channels rgba
+  value {{enable_m01}}
+  name Multiply1
+  xpos -64
+  ypos 940
+ }
+ Dot {
+  name Dot13
+  xpos -30
+  ypos 1010
+ }
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge1
+  xpos 261
+  ypos 995
+  disable {{enable_m02==0}}
+ }
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge2
+  xpos 596
+  ypos 995
+  disable {{enable_m03==0}}
+ }
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge3
+  xpos 923
+  ypos 995
+  disable {{enable_m04==0}}
+ }
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge4
+  xpos 1236
+  ypos 995
+  disable {{enable_m05==0}}
+ }
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge5
+  xpos 1545
+  ypos 995
+  disable {{enable_m06==0}}
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos 1545
+  ypos 1136
+ }
+ Group {
+  name ErodeSmooth1
+  tile_color 0xcc804eff
+  xpos 1545
+  ypos 1218
+  addUserKnob {20 ErodeSmooth}
+  addUserKnob {4 type l Type M {linear smooth smooth0 smooth1 "" "" "" ""}}
+  addUserKnob {7 range l "<font color=skyblue>Range</font color>" R 0.1 0.9}
+  range 0.1
+  addUserKnob {41 size l Blur T Blur1.size}
+  addUserKnob {7 tighten l Tighten R 0 2}
+  tighten 1.055
+  addUserKnob {26 ""}
+  addUserKnob {26 "" l mask T ""}
+  addUserKnob {41 maskChannelInput l "" -STARTLINE T Merge1.maskChannelInput}
+  addUserKnob {41 inject -STARTLINE T Merge1.inject}
+  addUserKnob {41 invert_mask l invert -STARTLINE T Merge1.invert_mask}
+  addUserKnob {41 fringe -STARTLINE T Merge1.fringe}
+  addUserKnob {41 mix T Merge1.mix}
+  addUserKnob {20 info}
+  addUserKnob {26 author l Author: T "Tony Lyons"}
+  addUserKnob {26 Desc l Description: T ErodeSmooth}
+ }
+  Input {
+   inputs 0
+   name Inputmask
+   xpos 521
+   ypos 344
+   number 1
+  }
+  Input {
+   inputs 0
+   name Input
+   xpos 380
+   ypos 199
+  }
+set Nd86d7c00 [stack 0]
+  Blur {
+   channels rgba
+   size 5
+   name Blur1
+   label "\[value size]"
+   xpos 229
+   ypos 193
+  }
+  Grade {
+   channels rgba
+   blackpoint {{((.5*tighten)+.25)*range}}
+   whitepoint {{1-((.5*tighten)+.25)*(1-range)}}
+   white_clamp true
+   name Grade9
+   xpos 229
+   ypos 229
+  }
+set Nd86d7400 [stack 0]
+  ColorLookup {
+   lut {master {curve C k 0 s0 1 s0}
+     red {}
+     green {}
+     blue {}
+     alpha {}}
+   name ColorLookupSmooth
+   xpos 229
+   ypos 292
+   disable {{"type == 1 ? 0 : 1"}}
+  }
+  ColorLookup {
+   lut {master {curve C k 0 s0 L 1}
+     red {}
+     green {}
+     blue {}
+     alpha {}}
+   name ColorLookupSmooth0
+   xpos 229
+   ypos 318
+   disable {{"type == 2 ? 0 : 1"}}
+  }
+  ColorLookup {
+   lut {master {curve L 0 C k 1 s0}
+     red {}
+     green {}
+     blue {}
+     alpha {}}
+   name ColorLookupSmooth1
+   xpos 229
+   ypos 344
+   disable {{"type == 3 ? 0 : 1"}}
+  }
+push $Nd86d7c00
+  Merge2 {
+   inputs 2+1
+   operation copy
+   name Merge1
+   label "\[ expr \{ \[value mix] == 1 ? \" \" : \[concat Mix: \[value mix]] \}]"
+   xpos 380
+   ypos 344
+  }
+  Output {
+   name Output1
+   xpos 380
+   ypos 409
+  }
+push $Nd86d7400
+  Viewer {
+   frame_range 1-87
+   name Viewer1
+   xpos 339
+   ypos 229
+  }
+ end_group
+ Invert {
+  channels alpha
+  name Invert7
+  xpos 1545
+  ypos 1284
+  disable {{invertMask==0}}
+ }
+ Dot {
+  name Dot23
+  xpos 1579
+  ypos 1409
+ }
+set Nd8723800 [stack 0]
+ Dot {
+  name Dot18
+  xpos 1579
+  ypos 1697
+ }
+push $Nd8723800
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle23
+  label "\[value in]"
+  xpos -228
+  ypos 1400
+ }
+set Nd8723000 [stack 0]
+ FilterErode {
+  channels rgba
+  size 5
+  name FilterErode1
+  xpos -119
+  ypos 1473
+ }
+push $Nd8723000
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge2
+  xpos -228
+  ypos 1525
+ }
+push $Nd8b82400
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos -429
+  ypos 1525
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -429
+  ypos 1688
+ }
+ Output {
+  name Output1
+  xpos -429
+  ypos 1887
+ }
+ NoOp {
+  inputs 0
+  name CONTROL
+  xpos 718
+  ypos 600
+  addUserKnob {20 User}
+  addUserKnob {7 tolerance R 0 10}
+  tolerance 9
+ }
+end_group

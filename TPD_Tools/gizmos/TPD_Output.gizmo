@@ -1,0 +1,85 @@
+Group {
+ name TPD_Output
+ tile_color 0xffe500ff
+ label "\[value project]_\[value dept]_\[value taskShort]_\[value seq]\[value shot]_v\[value version]"
+ note_font Verdana
+ addUserKnob {20 TPD_Output}
+ addUserKnob {4 task M {Training "Lighting - Still" "Lighting - Anim" "Lighting - Texture" Compositing "" "" "" ""}}
+ task "Lighting - Still"
+ addUserKnob {1 artist}
+ artist "My Name"
+ addUserKnob {26 ""}
+ addUserKnob {1 seq}
+ seq SC
+ addUserKnob {1 shot}
+ shot 000
+ addUserKnob {1 version}
+ version 001
+ addUserKnob {1 date}
+ date 00/00/00
+ addUserKnob {26 textInfo l "     " T mm/dd/yy}
+ addUserKnob {26 ""}
+ addUserKnob {22 exportWrite l "Export Write Node" T "b       = nuke.thisNode()\nb.end()\nb.knob('selected').setValue(True)\n\nproject = b.knob('project').value()\ndept    = b.knob('dept').value()\ntask    = b.knob('taskShort').value()\nseq     = b.knob('seq').value()\nshot    = b.knob('shot').value()\nversion = b.knob('version').value()\n\n\nfilename = str(project+\"_\"+dept+\"_\"+task+\"_\"+seq+shot+\"_v\"+version)\n\nw = nuke.createNode('Write', inpanel=True)\n\ncount = 1\nwhile nuke.exists('TPD_Write'+str(count)):\n    count+=1\nw.knob('name').setValue('TPD_Write'+str(count))\n\nif b.knob('task').value()=='Lighting - Still':\n    w.knob('file').setValue(  '../renders/stills/\{\}.%04d.png'.format(filename)  )\n\nelif  b.knob('task').value()=='Lighting - Anim':\n    w.knob('file').setValue(  '../renders/lighting/\{\}.mov'.format(filename)  )\n    w.knob('file_type').setValue('mov')\n    w.knob('meta_codec').setValue(2)\n    \nelif  b.knob('task').value()=='Lighting - Texture':\n    w.knob('file').setValue(  '../renders/texture/\{\}.mov'.format(filename)  )\n    w.knob('file_type').setValue('mov')\n    w.knob('meta_codec').setValue(2)\n    \nelif  b.knob('task').value()=='Compositing':\n    w.knob('file').setValue(  '../renders/comp/\{\}.mov'.format(filename)  )\n    w.knob('file_type').setValue('mov')\n    w.knob('meta_codec').setValue(2)\n\nelif b.knob('task').value()=='Training':\n    w.knob('file').setValue(  '../renders/stills/\{\}.%04d.png'.format(filename)  )" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {26 info l "     " T "<br><b><i>TPD_Output V1.0.1</i></b> by Noah Catan\n<br><br>Last Updated 06.22.2021"}
+ addUserKnob {20 otherSettings l Other}
+ addUserKnob {1 project}
+ project PDOG
+ addUserKnob {1 dept}
+ dept VFX
+ addUserKnob {4 taskShort +INVISIBLE M {TRN STL LGT TEX CMP "" "" "" "" "" ""}}
+ taskShort {{task}}
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -606
+  ypos 588
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  kerning_toolbar 0.02600000054
+  message "\[value project] | \[value dept] - \[value task] | \[value seq]\[value shot] | \[value artist] | v\[value version] | \[value date] | \[value frame]"
+  old_message {{80 68 79 71 32 124 32 86 70 88 32 45 32 76 105 103 104 116 105 110 103 32 45 32 83 116 105 108 108 32 124 32 83 67 48 48 48 32 124 32 77 121 32 78 97 109 101 32 124 32 118 48 48 49 32 124 32 48 48 47 48 48 47 48 48 32 124 32 49 48 57}
+    }
+  old_expression_markers {{0 3 7 9 13 28 32 33 34 36 40 46 51 53 57 64 68 70}
+    }
+  box {20 0 {width} 69}
+  yjustify center
+  transforms {{0 2}
+    }
+  kern_values {{34 0.026 0 0.026 1 0.026 2 0.026 3 0.026 4 0.026 5 0.026 6 0.026 7 0.026 8 0.026 9 0.026 10 0.02600000054 11 0.02600000054 12 0.026 13 0.026 14 0.026 15 0.026 16 0.026 17 0.026 18 0.026 19 0.026 20 0.026 21 0.026 22 0.026 23 0.026 24 0.026 25 0.026 26 0.026 27 0.026 28 0.026 29 0.026 30 0.026 31 0.026 32 0.02600000054 33 0.02600000054 35 0.026 36 0.026 37 0.026 38 0.026 39 0.026 40 0.026 41 0.026 42 0.026 43 0.026 44 0.026 45 0.026 46 0.026 47 0.026 48 0.026 49 0.026 50 0.026 51 0.026 52 0.026 53 0.026 54 0.02600000054 55 0.02600000054 56 0.02600000054 57 0.02600000054 58 0.02600000054 59 0.02600000054 60 0.02600000054 61 0.02600000054 62 0.02600000054 63 0.02600000054 63 0.02600000054 64 0.02600000054 65 0.02600000054 66 0.02600000054 67 0.02600000054 68 0.02600000054 69 0.02600000054 70 0.02600000054 0 0.004 1 0.004 2 0.004 3 0.004 4 0.004 5 0.004 6 0.004 7 0.004 8 0.004 9 0.004 12 0.004 13 0.004 14 0.004 15 0.004 29 0.004 30 0.004 31 0.004 35 0.004 36 0.004 37 0.004 38 0.004 39 0.004 40 0.004 41 0.004 42 0.004 43 0.004 44 0.004 45 0.004 46 0.004 47 0.004 48 0.004 49 0.004 50 0.004 51 0.004 52 0.004 53 0.004}
+    }
+  tracking_values {{0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 12 0 13 0 14 0 15 0 29 0 30 0 31 0 34 0 35 0 36 0 37 0 38 0 39 0 40 0 41 0 42 0 43 0 44 0 45 0 46 0 47 0 48 0 49 0 50 0 51 0 52 0 53 0 0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 12 0 13 0 14 0 15 0 29 0 30 0 31 0 34 0 35 0 36 0 37 0 38 0 39 0 40 0 41 0 42 0 43 0 44 0 45 0 46 0 47 0 48 0 49 0 50 0 51 0 52 0 53 0}
+    }
+  baseline_values {{0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 12 0 13 0 14 0 15 0 29 0 30 0 31 0 34 0 35 0 36 0 37 0 38 0 39 0 40 0 41 0 42 0 43 0 44 0 45 0 46 0 47 0 48 0 49 0 50 0 51 0 52 0 53 0 0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 12 0 13 0 14 0 15 0 29 0 30 0 31 0 34 0 35 0 36 0 37 0 38 0 39 0 40 0 41 0 42 0 43 0 44 0 45 0 46 0 47 0 48 0 49 0 50 0 51 0 52 0 53 0}
+    }
+  cursor_position 58
+  font {{ Verdana : Regular : verdana.ttf : 0 }}
+  global_font_scale 0.45
+  kerning 0.02600000054
+  center {1024 778}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1090}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 778 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  background_opacity 0.7
+  background_border_x 25
+  name Text1
+  selected true
+  xpos -606
+  ypos 661
+ }
+ Output {
+  name Output1
+  xpos -606
+  ypos 731
+ }
+end_group

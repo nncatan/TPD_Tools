@@ -1,25 +1,23 @@
 Group {
  name TPD_Roto
+ inputs 2
  onCreate "n = nuke.thisNode()\nk = n\['viewer_toolbox']\nk.setFlag(int('0x00000002', 0)) # start viewer group\nk.setFlag(int('0x00000000', 0))# position in left toolbar"
  tile_color 0xb58538ff
- label "\[value lightPass] | v1.1.3\n\[value mask1]\n\n\[knob tile_color \[value node_colors]]"
+ label "\[value lightPass] | v1.2.0\n\[value description]\n\[knob tile_color \[value node_colors]]"
  note_font Verdana
  addUserKnob {20 Roto}
+ addUserKnob {1 description}
+ addUserKnob {41 lightPass l "light pass" T CONTROL.lightPass}
+ addUserKnob {4 node_colors -STARTLINE +INVISIBLE M {3045406975 3043309567 3040557055 3040306687 3040320511 1615377919 1045476863 1031321087 "" "" "" "" "" ""}}
+ node_colors {{lightPass x4 0}}
+ addUserKnob {26 ""}
  addUserKnob {41 color l value T TPD_ROTO_IN_GRP.color}
  addUserKnob {41 opacity T TPD_ROTO_IN_GRP.opacity}
- addUserKnob {26 ""}
- addUserKnob {41 lightPass l "light pass" T CONTROL.lightPass}
- addUserKnob {4 node_colors -STARTLINE +INVISIBLE M {3045406975 3043309567 3040557055 3040306687 3040320511 2553787903 1615377919 1045476863 1031321087}}
- node_colors {{lightPass x4 0}}
- addUserKnob {41 mask1 l "mask 1" T MASK1.in}
- addUserKnob {41 mask2 l "mask 2" T MASK2.in}
- addUserKnob {41 mask3 l "mask 3" -STARTLINE T MASK3.in}
- addUserKnob {41 mask4 l "mask 4" -STARTLINE T MASK4.in}
  addUserKnob {26 ""}
  addUserKnob {22 refreshRoto l <b><i>Refresh</i></b> T TPD_Roto.Reload_TPD_Roto() +STARTLINE}
  addUserKnob {41 key l "        spline key" -STARTLINE T TPD_ROTO_IN_GRP.key}
  addUserKnob {41 curves l "" +STARTLINE T TPD_ROTO_IN_GRP.curves}
- addUserKnob {26 info l " " T "<b><i>TPD_Roto V1.1.3</i></b> by Noah Catan\n<br><br>Last Updated 02.28.2021"}
+ addUserKnob {26 info l " " T "<b><i>TPD_Roto V1.2.0</i></b> by Noah Catan\n<br><br>Last Updated 06.07.2021"}
  addUserKnob {20 viewer_toolbox n 1}
  addUserKnob {41 toolbox l "" +STARTLINE T TPD_ROTO_IN_GRP.toolbox}
  addUserKnob {20 endGroup n -1}
@@ -32,121 +30,24 @@ Group {
 }
  Input {
   inputs 0
-  name Input1
+  name mask
+  label "\[value number]"
+  xpos -77
+  ypos -246
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
   label "\[value number]"
   xpos -202
-  ypos -338
+  ypos -325
  }
-set Nc43ee800 [stack 0]
- Shuffle {
-  in none
-  red black
-  green black
-  blue black
-  name MASK4
-  label "\[value in]"
-  xpos -84
-  ypos -264
- }
- Remove {
-  operation keep
-  channels alpha
-  name Remove4
-  xpos -84
-  ypos -228
- }
-push $Nc43ee800
- Shuffle {
-  in none
-  red black
-  green black
-  blue black
-  name MASK3
-  label "\[value in]"
-  xpos 8
-  ypos -264
- }
- Remove {
-  operation keep
-  channels alpha
-  name Remove3
-  xpos 8
-  ypos -228
- }
-push $Nc43ee800
- Shuffle {
-  in none
-  red black
-  green black
-  blue black
-  name MASK2
-  label "\[value in]"
-  xpos 105
-  ypos -263
- }
- Remove {
-  operation keep
-  channels alpha
-  name Remove2
-  xpos 105
-  ypos -227
- }
-push $Nc43ee800
- Shuffle {
-  in none
-  red black
-  green black
-  blue black
-  name MASK1
-  label "\[value in]"
-  xpos 200
-  ypos -264
- }
- Remove {
-  operation keep
-  channels alpha
-  name Remove1
-  xpos 200
-  ypos -228
- }
- Merge2 {
-  inputs 2
-  operation disjoint-over
-  Achannels alpha
-  Bchannels alpha
-  output alpha
-  name Merge2
-  xpos 105
-  ypos -171
-  disable {{parent.MASK2.in==0||parent.MASK1.in==0}}
- }
- Merge2 {
-  inputs 2
-  operation disjoint-over
-  Achannels alpha
-  Bchannels alpha
-  output alpha
-  name Merge4
-  xpos 8
-  ypos -171
-  disable {{parent.MASK3.in==0||parent.MASK2.disable==1}}
- }
- Merge2 {
-  inputs 2
-  operation disjoint-over
-  Achannels alpha
-  Bchannels alpha
-  output alpha
-  name Merge5
-  xpos -84
-  ypos -171
-  disable {{parent.MASK4.in==0||parent.MASK3.disable==1}}
- }
-push $Nc43ee800
+add_layer {LGHT_KEY_LIGHT LGHT_KEY_LIGHT.alpha}
  Roto {
-  output alpha
+  inputs 1+1
+  output LGHT_KEY_LIGHT
   cliptype bbox
-  replace true
   curves {{{v x3f99999a}
   {f 0}
   {n
@@ -185,76 +86,27 @@ push $Nc43ee800
   name TPD_ROTO_IN_GRP
   onCreate "n = nuke.thisNode()\n\nprefs = nuke.toNode('preferences').knob('maxPanels')\nprefs.setValue(prefs.value()+1)\n\nnuke.show(n)\nn.hideControlPanel()\n\nprefs.setValue(prefs.value()-1)"
   xpos -202
-  ypos -264
- }
- Merge2 {
-  inputs 2
-  operation multiply
-  bbox B
-  Achannels alpha
-  Bchannels alpha
-  output alpha
-  name Merge3
-  xpos -202
-  ypos -171
-  disable {{parent.MASK1.in==0}}
+  ypos -246
  }
  Clamp {
-  channels alpha
+  channels LGHT_KEY_LIGHT
   name Clamp1
   xpos -202
   ypos -135
  }
- Dot {
-  name Dot6
-  xpos -168
-  ypos -52
- }
-set Nc446ec00 [stack 0]
-push $Nc446ec00
-add_layer {LGHT_KEY_LIGHT LGHT_KEY_LIGHT.alpha}
- Shuffle {
-  in LGHT_KEY_LIGHT
-  red black
-  green black
-  blue black
-  name SHUFFLE_PASS
-  label "in: \[value in]"
-  xpos -82
-  ypos -61
- }
- Merge2 {
-  inputs 2
-  operation disjoint-over
-  bbox B
-  Achannels alpha
-  Bchannels alpha
-  output alpha
-  name Merge1
-  xpos -82
- }
-push $Nc446ec00
- ShuffleCopy {
-  inputs 2
-  alpha alpha2
-  black alpha
-  out2 LGHT_KEY_LIGHT
-  name SHUFFLE_OUTPUT
-  label "out2: \[value out2]"
-  xpos -202
- }
  Output {
   name Output1
   xpos -202
-  ypos 68
+  ypos -60
  }
  NoOp {
   inputs 0
   name CONTROL
-  knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() == \"lightPass\":\n    if 'LGHT_\{\}'.format(k.value().upper()) == nuke.toNode('SHUFFLE_PASS').knob('in').value():\n        pass\n    else:\n        nuke.toNode('SHUFFLE_PASS').knob('in').setValue('LGHT_\{\}'.format(k.value().upper()))\n        nuke.toNode('SHUFFLE_OUTPUT').knob('out2').setValue('LGHT_\{\}'.format(k.value().upper()))"
-  xpos -317
-  ypos -53
+  knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nl = 'LGHT_\{\}'.format(k.value().upper())\n\nif k.name() == \"lightPass\":\n    if l == nuke.toNode('TPD_ROTO_IN_GRP').knob('output').value():\n        pass\n    else:\n        nuke.toNode('TPD_ROTO_IN_GRP').knob('output').setValue(l)\n        nuke.toNode('Clamp1').knob('channels').setValue(l)\n        "
+  selected true
+  xpos -321
+  ypos -242
   addUserKnob {20 User}
-  addUserKnob {4 lightPass l "light pass" M {Key_Light AO Secondary Ambient Custom Translucent SSS_Skin SSS_Rest Specular Rim_Light}}
+  addUserKnob {4 lightPass l "light pass" M {Key_Light AO Secondary Ambient Custom Translucent Specular Rim_Light "" "" ""}}
  }
 end_group

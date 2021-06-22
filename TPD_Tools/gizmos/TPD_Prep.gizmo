@@ -1,0 +1,65 @@
+Group {
+ name TPD_Prep
+ tile_color 0xffe500ff
+ addUserKnob {20 TPD_Prep}
+ addUserKnob {41 dip_channel l "DIP channel" T Shuffle17.in}
+ addUserKnob {41 ColorMatteChannel l "ColorMatte channel" T Shuffle1.in}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {20 group l "" +STARTLINE n 1}
+ group 0
+ addUserKnob {41 colorspace_in l colorspace T Colorspace1.colorspace_in}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 info l "    " T "<br><b><i>TPD_Prep V1.0.1</i></b> by Noah Catan\n<br><br>Last Updated 06.22.2021"}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -606
+  ypos -249
+ }
+ Colorspace {
+  channels all
+  colorspace_in sRGB
+  name Colorspace1
+  label "\[value colorspace_in] > \[value colorspace_out]"
+  xpos -606
+  ypos -209
+ }
+add_layer {DIP DIP.red DIP.green DIP.blue DIP.alpha}
+ Shuffle {
+  in tpd_dip
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 DIP
+  name Shuffle17
+  label "\[value in]"
+  xpos -606
+  ypos -161
+ }
+ Shuffle {
+  in tpd_colormatte
+  in2 rgba
+  red red2
+  green green2
+  blue blue2
+  alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 tpd_colormatte
+  name Shuffle1
+  label "\[value in]"
+  selected true
+  xpos -606
+  ypos -125
+ }
+ Output {
+  name Output1
+  xpos -606
+  ypos -56
+ }
+end_group

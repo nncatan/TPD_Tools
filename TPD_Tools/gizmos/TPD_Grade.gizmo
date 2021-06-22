@@ -1,0 +1,83 @@
+Group {
+ name TPD_Grade
+ inputs 2
+ tile_color 0x7b93b8ff
+ label "\[value lgt_pass.in]"
+ note_font Verdana
+ addUserKnob {20 User}
+ addUserKnob {41 lgtpass l "lgt pass" T lgt_pass.in}
+ addUserKnob {26 ""}
+ addUserKnob {41 white l gain T Grade13.white}
+ addUserKnob {41 multiply T Grade13.multiply}
+ addUserKnob {41 gamma T Grade13.gamma}
+ addUserKnob {26 ""}
+ addUserKnob {26 info l "     " T "<br><b><i>TPD_Grade V1.0.0</i></b> by Noah Catan\n<br><br>Last Updated 06.07.2021"}
+}
+ Input {
+  inputs 0
+  name mask
+  xpos -251
+  ypos 712
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -574
+  ypos 591
+ }
+ Dot {
+  name Dot21
+  xpos -540
+  ypos 631
+ }
+set Na5156800 [stack 0]
+ Dot {
+  name Dot22
+  xpos -350
+  ypos 631
+ }
+ Shuffle {
+  in LGHT_AMBIENT_DONE
+  name lgt_pass
+  label "\[value in]"
+  xpos -384
+  ypos 661
+ }
+set Na5156000 [stack 0]
+ Grade {
+  inputs 1+1
+  name Grade13
+  xpos -384
+  ypos 712
+ }
+set Na5197c00 [stack 0]
+ Viewer {
+  frame_range 1-87
+  name Viewer1
+  xpos -773
+  ypos 834
+ }
+push $Na5197c00
+push $Na5156000
+push $Na5156800
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge2
+  xpos -574
+  ypos 667
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge3
+  xpos -574
+  ypos 712
+ }
+ Output {
+  name Output1
+  xpos -574
+  ypos 776
+ }
+end_group

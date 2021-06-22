@@ -3,35 +3,39 @@
 #  by Noah Catan
 #
 #  TPD_DIPSetup.py
-#  Version: 1.1.0
-#  Last Updated: 02.23.2021
+#  Version: 1.1.3
+#  Last Updated: 05.25.2021
 # --------------------------------------------------------
 
 
 import nuke, nukescripts
 
-version = 'v1.1.0'
+version = 'v1.1.3'
 layers = []
 grade_list = []
+m_layers = []
    
 def setup(DIP):
 	print "Setup Start"
 	channels = DIP.channels()
 	global layers
 	layers = sorted( list( set([c.split('.')[0] for c in channels]) ) )
-	m_layers = []
+	global m_layers
+	#m_layers = []
 
 	for layer in layers:
 		if "m_" in layer:
 			m_layers.append(layer)
 			print str("Added "+layer)
-		else:
+		'''else:
 			layers.remove(layer)
-			print str("Removed "+layer)
+			print str("Removed "+layer)'''
 
 	if len(m_layers)<1:
 		nuke.message('No layers starting with "m_" found...')
 		return
+
+	print m_layers
 
 	if 'DIP' not in nuke.layers():
 		nuke.Layer( 'DIP', [ 'DIP.red', 'DIP.green', 'DIP.blue', 'DIP.alpha' ] )
@@ -99,7 +103,7 @@ def nodeTree(node):
 	dot1 = nuke.nodes.Dot(xpos=0+n.xpos(),ypos=302+n.ypos(),inputs=[n])
 	n = dot
 	
-	for l in layers:
+	for l in m_layers:
 		print str("Adding layer "+l)
 		x,y = n.xpos(), n.ypos()
 	
@@ -109,28 +113,30 @@ def nodeTree(node):
 		shuffle1['in'].setValue(str(l))
 		
 
-		if layers.index(l)<1:
+		if m_layers.index(l)<1:
 			dot3 = nuke.nodes.Dot(xpos=0+x,ypos=100+y,inputs=[shuffle1])
 			dot4 = nuke.nodes.Dot(xpos=0+x,ypos=150+y,inputs=[dot3])
 			grade = nuke.nodes.Grade(xpos=-34+x,ypos=220+y,inputs=[dot4],channels="alpha")
 			grade_list.append(grade)
 			shuffleCopy = nuke.nodes.ShuffleCopy(xpos=-34+x,ypos=300+y,inputs=[dot1, grade])
 			shuffleCopy['out'].setValue(str(l))
+			shuffleCopy['out'].setExpression('{}.in'.format(shuffle1.name()))
 			shuffleCopy['red'].setValue('red')
 			shuffleCopy['green'].setValue('green')
 			shuffleCopy['blue'].setValue('blue')
 			shuffleCopy['alpha'].setValue('alpha')
 
-		elif layers.index(l)==1:
+		elif m_layers.index(l)==1:
 			merge1 = nuke.nodes.Merge2(xpos=-34+x,ypos=147+y,inputs=[shuffle1, dot4])
 			merge1['operation'].setValue('stencil')
-			merge2 = nuke.nodes.Merge2(xpos=41+x,ypos=97+y,inputs=[shuffle1, dot3])
+			merge2 = nuke.nodes.Merge2(xpos=41+x,ypos=97+y,inputs=[dot3,shuffle1])
 			merge2['operation'].setValue('disjoint-over')
 			dot5 = nuke.nodes.Dot(xpos=75+x,ypos=150+y,inputs=[merge2])
 			grade = nuke.nodes.Grade(xpos=-34+x,ypos=220+y,inputs=[merge1],channels="alpha")
 			grade_list.append(grade)
 			shuffleCopy1 = nuke.nodes.ShuffleCopy(xpos=-34+x,ypos=300+y,inputs=[shuffleCopy, grade])
 			shuffleCopy1['out'].setValue(str(l))
+			shuffleCopy1['out'].setExpression('{}.in'.format(shuffle1.name()))
 			shuffleCopy1['red'].setValue('red')
 			shuffleCopy1['green'].setValue('green')
 			shuffleCopy1['blue'].setValue('blue')
@@ -138,13 +144,14 @@ def nodeTree(node):
 			n1, n2, n3 = dot5, merge2, shuffleCopy1
 			
 
-		elif layers.index(l)==len(layers)-1:
+		elif m_layers.index(l)==len(m_layers)-1:
 			merge1 = nuke.nodes.Merge2(xpos=-34+x,ypos=147+y,inputs=[shuffle1, n1])
 			merge1['operation'].setValue('stencil')
 			grade = nuke.nodes.Grade(xpos=-34+x,ypos=220+y,inputs=[merge1],channels="alpha")
 			grade_list.append(grade)
 			shuffleCopy1 = nuke.nodes.ShuffleCopy(xpos=-34+x,ypos=300+y,inputs=[n3, grade])
 			shuffleCopy1['out'].setValue(str(l))
+			shuffleCopy1['out'].setExpression('{}.in'.format(shuffle1.name()))
 			shuffleCopy1['red'].setValue('red')
 			shuffleCopy1['green'].setValue('green')
 			shuffleCopy1['blue'].setValue('blue')
@@ -164,13 +171,14 @@ def nodeTree(node):
 		else:
 			merge1 = nuke.nodes.Merge2(xpos=-34+x,ypos=147+y,inputs=[shuffle1, n1])
 			merge1['operation'].setValue('stencil')
-			merge2 = nuke.nodes.Merge2(xpos=41+x,ypos=97+y,inputs=[shuffle1, n2])
+			merge2 = nuke.nodes.Merge2(xpos=41+x,ypos=97+y,inputs=[n2,shuffle1])
 			merge2['operation'].setValue('disjoint-over')
 			dot5 = nuke.nodes.Dot(xpos=75+x,ypos=150+y,inputs=[merge2])
 			grade = nuke.nodes.Grade(xpos=-34+x,ypos=220+y,inputs=[merge1],channels="alpha")
 			grade_list.append(grade)
 			shuffleCopy1 = nuke.nodes.ShuffleCopy(xpos=-34+x,ypos=300+y,inputs=[n3, grade])
 			shuffleCopy1['out'].setValue(str(l))
+			shuffleCopy1['out'].setExpression('{}.in'.format(shuffle1.name()))
 			shuffleCopy1['red'].setValue('red')
 			shuffleCopy1['green'].setValue('green')
 			shuffleCopy1['blue'].setValue('blue')
@@ -182,11 +190,8 @@ def nodeTree(node):
 
 def start():
 	node = nuke.selectedNode()
-	if node.Class()=='Read':
-		setup(node)
-		nukescripts.autocrop(layer='a')
-	else:
-		nuke.message('Must select one Read node')
-		pass
+	setup(node)
+	nukescripts.autocrop(layer='a')
 
-nuke.menu('Nodes').addCommand('TPD_Tools/TPD_DIP_Prep', 'TPD_DIPSetup.start()', shortcut=None)
+
+nuke.menu('Nodes').addCommand('TPD_Tools/Experimental/TPD_DIP_Prep', 'TPD_DIPSetup.start()', shortcut=None)

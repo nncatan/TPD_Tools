@@ -1,35 +1,55 @@
 Group {
- name TPD_ColorPalette
+ name ColorPalette
+ inputs 4
  tile_color 0x325b84ff
+ label v1.2.2
  note_font "Verdana Bold Italic"
  note_font_size 15
  addUserKnob {20 ColorPalette l "Color Palette"}
  addUserKnob {41 chip l Shadow T CTRL_SHADOW.chip}
- addUserKnob {41 which l "" -STARTLINE T Dissolve1.which}
- addUserKnob {41 chip_10 l "Key Light" T CTRL_KEYLIGHT.chip}
- addUserKnob {41 which_1 l "" -STARTLINE T Dissolve2.which}
- addUserKnob {41 chip_1 l AO T CTRL_AO.chip}
- addUserKnob {41 mix_9 l "" -STARTLINE T AO_KEYMIX.mix}
- addUserKnob {41 chip_9 l Secondary T CTRL_SECONDARY.chip}
- addUserKnob {41 mix_1 l "" -STARTLINE T SECONDARY_KEYMIX.mix}
- addUserKnob {41 chip_8 l Ambient T CTRL_AMBIENT.chip}
- addUserKnob {41 mix_2 l "" -STARTLINE T AMBIENT_KEYMIX.mix}
- addUserKnob {41 chip_7 l Custom T CTRL_CUSTOM.chip}
- addUserKnob {41 mix_3 l "" -STARTLINE T CUSTOM_KEYMIX.mix}
- addUserKnob {41 chip_6 l Translucent T CTRL_TRANSLUCENT.chip}
- addUserKnob {41 mix_4 l "" -STARTLINE T TRANSLUCENT_KEYMIX.mix}
- addUserKnob {41 chip_5 l "SSS Skin" T CTRL_SSSSKIN.chip}
- addUserKnob {41 mix_5 l "" -STARTLINE T SSS_SKIN_KEYMIX.mix}
- addUserKnob {41 chip_4 l "SSS Rest" T CTRL_SSSREST.chip}
- addUserKnob {41 mix_6 l "" -STARTLINE T SSS_REST_KEYMIX.mix}
- addUserKnob {41 chip_3 l Specular T CTRL_SPECULAR.chip}
- addUserKnob {41 mix_7 l "" -STARTLINE T SPECULAR_KEYMIX.mix}
- addUserKnob {41 chip_2 l "Rim Light" T CTRL_RIMLIGHT.chip}
- addUserKnob {41 mix_8 l "" -STARTLINE T RIM_LIGHT_KEYMIX.mix}
+ addUserKnob {7 shadowMix l "" -STARTLINE}
+ shadowMix 1
+ addUserKnob {41 chip_1 l "Key Light" T CTRL_KEY_LIGHT.chip}
+ addUserKnob {7 keylightMix l "" -STARTLINE}
+ keylightMix 1
+ addUserKnob {41 chip_10 l AO T CTRL_AO.chip}
+ addUserKnob {7 aoMix l "" -STARTLINE}
+ aoMix 1
+ addUserKnob {41 chip_4 l Secondary T CTRL_SECONDARY.chip}
+ addUserKnob {7 secondaryMix l "" -STARTLINE}
+ secondaryMix 1
+ addUserKnob {41 chip_5 l Ambient T CTRL_AMBIENT.chip}
+ addUserKnob {7 ambientMix l "" -STARTLINE}
+ ambientMix 1
+ addUserKnob {41 chip_6 l Custom T CTRL_CUSTOM.chip}
+ addUserKnob {7 customMix l "" -STARTLINE}
+ customMix 1
+ addUserKnob {41 chip_7 l Translucent T CTRL_TRANSLUCENT.chip}
+ addUserKnob {7 translucentMix l "" -STARTLINE}
+ translucentMix 1
+ addUserKnob {41 chip_2 l "SSS Skin" T CTRL_SSS_SKIN.chip}
+ addUserKnob {7 sssskinMix l "" -STARTLINE}
+ sssskinMix 1
+ addUserKnob {41 chip_3 l "SSS Rest" T CTRL_SSS_REST.chip}
+ addUserKnob {7 sssrestMix l "" -STARTLINE}
+ sssrestMix 1
+ addUserKnob {41 chip_8 l Specular T CTRL_SPECULAR.chip}
+ addUserKnob {7 specularMix l "" -STARTLINE}
+ specularMix 1
+ addUserKnob {41 chip_9 l "Rim Light" T CTRL_RIM_LIGHT.chip}
+ addUserKnob {7 rimlightMix l "" -STARTLINE}
+ rimlightMix 1
  addUserKnob {26 text_3 l "    "}
- addUserKnob {26 text_2 l "    " T "<br>\n<b><i>TPD_ColorPalette V1.1.0</i></b> by Noah Catan\n<br><br>Last Updated 02.23.2021"}
+ addUserKnob {26 text_2 l "    " T "<br>\n<b><i>TPD_ColorPalette V1.2.2</i></b> by Noah Catan\n<br><br>Last Updated 06.22.2021"}
+ addUserKnob {20 framehold l "Frame Hold"}
+ addUserKnob {6 enable_framehold l "enable framehold" +STARTLINE}
+ addUserKnob {41 first_frame l "frame held" T FrameHold.first_frame}
+ addUserKnob {26 ""}
+ addUserKnob {22 export_framehold l " export framehold " T "n = nuke.thisNode()\nx, y = n.xpos(), n.ypos()\nf = nuke.toNode('FrameHold')\n\nn.end()\n\ncopy.copy(f)" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {22 keyCurrentFrame l " key current frame " T "f = nuke.toNode('FrameHold').knob('first_frame')\nif f.isAnimated()==True:\n    f.setValueAt(nuke.frame(),nuke.frame())\nelse:\n    f.setAnimated()\n    f.setValueAt(nuke.frame(),nuke.frame())\n    \nkeys = f.animation(0).keys()\nfor key in keys:\n    key.interpolation = nuke.CONSTANT" +STARTLINE}
  addUserKnob {20 breakdownTab l Breakdown}
- addUserKnob {4 breakdown l "    breakdown" M {Result "Contact Sheet" "Key Light" Secondary Ambient Custom Translucent "SSS Skin" "SSS Rest" Specular "Rim Light" AO Pre-Lighting "Lighting Pass" "" "" "" "" "" "" ""}}
+ addUserKnob {4 breakdown l "    breakdown" M {Result "Contact Sheet" Pre-Lighting "Lighting Pass" Shadow "Key Light" Secondary Ambient Custom Translucent SSS Specular "Rim Light" AO "" "" "" "" "" "" "" "" "" ""}}
  addUserKnob {26 text_4 l "" -STARTLINE T "    "}
  addUserKnob {6 text_1 l "show text" -STARTLINE}
  text_1 true
@@ -39,1090 +59,489 @@ Group {
  NoOp {
   inputs 0
   name CTRL_CUSTOM
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 1226
-  ypos 18
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos 403
+  ypos 154
   addUserKnob {20 User}
   addUserKnob {40 chip l Custom -STARTLINE}
   chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
  NoOp {
   inputs 0
   name CTRL_TRANSLUCENT
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 1575
-  ypos 17
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos 761
+  ypos 155
   addUserKnob {20 User}
   addUserKnob {40 chip l Translucent -STARTLINE}
   chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
- }
- NoOp {
-  inputs 0
-  name CTRL_SSSSKIN
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 1916
-  ypos 19
-  addUserKnob {20 User}
-  addUserKnob {40 chip l "SSS Skin" -STARTLINE}
-  chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
- }
- NoOp {
-  inputs 0
-  name CTRL_SSSREST
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 2270
-  ypos 19
-  addUserKnob {20 User}
-  addUserKnob {40 chip l "SSS Rest" -STARTLINE}
-  chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
  NoOp {
   inputs 0
   name CTRL_SPECULAR
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 2627
-  ypos 18
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos 1110
+  ypos 154
   addUserKnob {20 User}
   addUserKnob {40 chip l Specular -STARTLINE}
   chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
  NoOp {
   inputs 0
-  name CTRL_RIMLIGHT
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 2976
-  ypos 20
+  name CTRL_RIM_LIGHT
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos 1454
+  ypos 162
   addUserKnob {20 User}
   addUserKnob {40 chip l "Rim Light" -STARTLINE}
   chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
- }
- NoOp {
-  inputs 0
-  name CTRL_SECONDARY
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 524
-  ypos 21
-  addUserKnob {20 User}
-  addUserKnob {40 chip l Secondary -STARTLINE}
-  chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
  NoOp {
   inputs 0
   name CTRL_AO
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 3330
-  ypos 18
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos 1893
+  ypos 167
   addUserKnob {20 User}
   addUserKnob {40 chip l AO -STARTLINE}
   chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ NoOp {
+  inputs 0
+  name CTRL_KEY_LIGHT
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos -1706
+  ypos 157
+  addUserKnob {20 User}
+  addUserKnob {40 chip l "Key Light" -STARTLINE}
+  chip 0xffffffff
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {1 1 1}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ NoOp {
+  inputs 0
+  name CTRL_SSS_SKIN
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos -1336
+  ypos 146
+  addUserKnob {20 User}
+  addUserKnob {40 chip l "SSS Skin" -STARTLINE}
+  chip 0xff
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ NoOp {
+  inputs 0
+  name CTRL_SSS_REST
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos -981
+  ypos 151
+  addUserKnob {20 User}
+  addUserKnob {40 chip l "SSS Rest" -STARTLINE}
+  chip 0xff
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ NoOp {
+  inputs 0
+  name CTRL_SECONDARY
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos -331
+  ypos 151
+  addUserKnob {20 User}
+  addUserKnob {40 chip l Secondary -STARTLINE}
+  chip 0xff
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
  NoOp {
   inputs 0
   name CTRL_AMBIENT
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 878
-  ypos 17
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos 53
+  ypos 150
   addUserKnob {20 User}
   addUserKnob {40 chip l Ambient -STARTLINE}
   chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
- }
- NoOp {
-  inputs 0
-  name CTRL_KEYLIGHT
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 112
-  ypos 17
-  addUserKnob {20 User}
-  addUserKnob {40 chip l "Key Light" -STARTLINE}
-  chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
- }
- NoOp {
-  inputs 0
-  name CTRL_SHADOW
-  knobChanged "chip = nuke.thisNode()\['chip']\nr = nuke.thisNode()\['r']\ng = nuke.thisNode()\['g']\nb = nuke.thisNode()\['b']\na = nuke.thisNode()\['a']\n\nhex = '%08x' % chip.value()\nr.setValue(float(int(hex\[0:2],16))/255.0)\ng.setValue(float(int(hex\[2:4],16))/255.0)\nb.setValue(float(int(hex\[4:6],16))/255.0)\na.setValue(float(int(hex\[6:8],16))/255.0)"
-  xpos 18
-  ypos 17
-  addUserKnob {20 User}
-  addUserKnob {40 chip l Shadow -STARTLINE}
-  chip 0xff
-  addUserKnob {7 r}
-  addUserKnob {7 g}
-  addUserKnob {7 b}
-  addUserKnob {7 a}
-  a 1
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
  Input {
   inputs 0
-  name Input1
-  xpos -207
-  ypos -9
+  name tex_mask
+  label "\[value number]"
+  xpos -2543
+  ypos 386
+  number 3
  }
- Dot {
-  name Dot1
-  xpos -173
-  ypos 91
+ Input {
+  inputs 0
+  name texture
+  label "\[value number]"
+  xpos -2420
+  ypos 324
+  number 1
  }
-set Na7234400 [stack 0]
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge5
+  xpos -2420
+  ypos 392
+ }
  Dot {
   name Dot2
-  xpos 344
-  ypos 91
+  xpos -2386
+  ypos 608
  }
-set Nb28bf400 [stack 0]
- Dot {
-  name Dot3
-  xpos 694
-  ypos 91
- }
-set Nb28bec00 [stack 0]
  Dot {
   name Dot4
-  xpos 1044
-  ypos 91
+  xpos -2273
+  ypos 608
  }
-set Naf57cc00 [stack 0]
- Dot {
-  name Dot5
-  xpos 1394
-  ypos 91
- }
-set Naf57d800 [stack 0]
- Dot {
-  name Dot6
-  xpos 1744
-  ypos 91
- }
-set Naf57d400 [stack 0]
- Dot {
-  name Dot7
-  xpos 2094
-  ypos 91
- }
-set Naf57dc00 [stack 0]
- Dot {
-  name Dot8
-  xpos 2444
-  ypos 91
- }
-set Naf57d000 [stack 0]
- Dot {
-  name Dot9
-  xpos 2794
-  ypos 91
- }
-set N99535800 [stack 0]
-add_layer {LGHT_RIM_LIGHT LGHT_RIM_LIGHT.alpha}
-add_layer {DIP DIP.red DIP.green DIP.blue DIP.alpha}
- Remove {
-  operation keep
-  channels LGHT_RIM_LIGHT
-  channels2 DIP
-  name Remove10
-  xpos 2760
-  ypos 109
+set N28b9b800 [stack 0]
+ Input {
+  inputs 0
+  name Input
+  label "\[value number]"
+  xpos -2422
+  ypos -120
  }
  Dot {
-  name DOT2_RIM_LIGHT
-  xpos 2794
-  ypos 172
+  name Dot135
+  xpos -2388
+  ypos 95
  }
-set N2435ac00 [stack 0]
- Shuffle {
-  in LGHT_RIM_LIGHT
-  red black
-  green black
-  blue black
-  name SHUFFLE_RIM_LIGHT
-  label "\[value in]"
-  xpos 2760
-  ypos 248
- }
-push $N2435ac00
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle9
-  label "\[value in]"
-  xpos 2884
-  ypos 163
- }
-set N2435b400 [stack 0]
- Grade {
-  white {{parent.CTRL_RIMLIGHT.r} {parent.CTRL_RIMLIGHT.g} {parent.CTRL_RIMLIGHT.b} {parent.CTRL_RIMLIGHT.a}}
-  name RIM_LIGHT_LIGHT
-  label LIGHT
-  xpos 2976
-  ypos 204
- }
-push $N2435b400
- Grade {
-  white {0 0 0 0}
-  name RIM_LIGHT_SHADOW
-  label SHADOW
-  xpos 2884
-  ypos 204
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name RIM_LIGHT_KEYMIX
-  xpos 2884
-  ypos 254
- }
-set Nbecb800 [stack 0]
-push $Naf57d000
-add_layer {LGHT_SPECULAR LGHT_SPECULAR.alpha}
- Remove {
-  operation keep
-  channels LGHT_SPECULAR
-  channels2 DIP
-  name Remove9
-  xpos 2410
-  ypos 109
- }
+set N28b9b000 [stack 0]
  Dot {
-  name DOT2_SPECULAR
-  xpos 2444
-  ypos 172
- }
-set Nbecb000 [stack 0]
- Shuffle {
-  in LGHT_SPECULAR
-  red black
-  green black
-  blue black
-  name SHUFFLE_SPECULAR
-  label "\[value in]"
-  xpos 2410
-  ypos 248
- }
-push $Nbecb000
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle8
-  label "\[value in]"
-  xpos 2534
-  ypos 163
- }
-set Nbeca400 [stack 0]
- Grade {
-  white {{parent.CTRL_SPECULAR.r} {parent.CTRL_SPECULAR.g} {parent.CTRL_SPECULAR.b} {parent.CTRL_SPECULAR.a}}
-  name SPECULAR_LIGHT
-  label LIGHT
-  xpos 2626
-  ypos 204
- }
-push $Nbeca400
- Grade {
-  white {0 0 0 0}
-  name SPECULAR_SHADOW
-  label SHADOW
-  xpos 2534
-  ypos 204
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name SPECULAR_KEYMIX
-  xpos 2534
-  ypos 254
- }
-set N1f628000 [stack 0]
-push $Naf57dc00
-add_layer {LGHT_SSS_REST LGHT_SSS_REST.alpha}
- Remove {
-  operation keep
-  channels LGHT_SSS_REST
-  channels2 DIP
-  name Remove8
-  xpos 2060
-  ypos 109
- }
- Dot {
-  name DOT2_SSS_REST
-  xpos 2094
-  ypos 172
- }
-set N1f628800 [stack 0]
- Shuffle {
-  in LGHT_SSS_REST
-  red black
-  green black
-  blue black
-  name SHUFFLE_SSS_REST
-  label "\[value in]"
-  xpos 2060
-  ypos 248
- }
-push $N1f628800
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle7
-  label "\[value in]"
-  xpos 2184
-  ypos 163
- }
-set N1f629000 [stack 0]
- Grade {
-  white {{parent.CTRL_SSSREST.r} {parent.CTRL_SSSREST.g} {parent.CTRL_SSSREST.b} {parent.CTRL_SSSREST.a}}
-  name SSS_REST_LIGHT
-  label LIGHT
-  xpos 2276
-  ypos 205
- }
-push $N1f629000
- Grade {
-  white {0 0 0 0}
-  name SSS_REST_SHADOW
-  label SHADOW
-  xpos 2184
-  ypos 204
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name SSS_REST_KEYMIX
-  xpos 2184
-  ypos 254
- }
-set N312b000 [stack 0]
-push $Naf57d400
-add_layer {LGHT_SSS_SKIN LGHT_SSS_SKIN.alpha}
- Remove {
-  operation keep
-  channels LGHT_SSS_SKIN
-  channels2 DIP
-  name Remove7
-  xpos 1710
-  ypos 109
- }
- Dot {
-  name DOT2_SSS_SKIN
-  xpos 1744
-  ypos 172
- }
-set N312a800 [stack 0]
- Shuffle {
-  in LGHT_SSS_SKIN
-  red black
-  green black
-  blue black
-  name SHUFFLE_SSS_SKIN
-  label "\[value in]"
-  xpos 1710
-  ypos 248
- }
-push $N312a800
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle6
-  label "\[value in]"
-  xpos 1834
-  ypos 163
- }
-set N420a800 [stack 0]
- Grade {
-  white {{parent.CTRL_SSSSKIN.r} {parent.CTRL_SSSSKIN.g} {parent.CTRL_SSSSKIN.b} {parent.CTRL_SSSSKIN.a}}
-  name SSS_SKIN_LIGHT
-  label LIGHT
-  xpos 1925
-  ypos 205
- }
-push $N420a800
- Grade {
-  white {0 0 0 0}
-  name SSS_SKIN_SHADOW
-  label SHADOW
-  xpos 1834
-  ypos 204
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name SSS_SKIN_KEYMIX
-  xpos 1834
-  ypos 254
- }
-set N420b800 [stack 0]
-push $Naf57d800
-add_layer {LGHT_TRANSLUCENT LGHT_TRANSLUCENT.alpha}
- Remove {
-  operation keep
-  channels LGHT_TRANSLUCENT
-  channels2 DIP
-  name Remove6
-  xpos 1360
-  ypos 109
- }
- Dot {
-  name DOT2_TRANSLUCENT
-  xpos 1394
-  ypos 172
- }
-set N420b000 [stack 0]
- Shuffle {
-  in LGHT_TRANSLUCENT
-  red black
-  green black
-  blue black
-  name SHUFFLE_TRANSLUCENT
-  label "\[value in]"
-  xpos 1360
-  ypos 248
- }
-push $N420b000
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle5
-  label "\[value in]"
-  xpos 1484
-  ypos 163
- }
-set N9aee8400 [stack 0]
- Grade {
-  white {{parent.CTRL_TRANSLUCENT.r} {parent.CTRL_TRANSLUCENT.g} {parent.CTRL_TRANSLUCENT.b} {parent.CTRL_TRANSLUCENT.a}}
-  name TRANSLUCENT_LIGHT
-  label LIGHT
-  xpos 1576
-  ypos 204
- }
-push $N9aee8400
- Grade {
-  white {0 0 0 0}
-  name TRANSLUCENT_SHADOW
-  label SHADOW
-  xpos 1484
-  ypos 204
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name TRANSLUCENT_KEYMIX
-  xpos 1484
-  ypos 254
- }
-set N3bd4d800 [stack 0]
-push $Naf57cc00
-add_layer {LGHT_CUSTOM LGHT_CUSTOM.alpha}
- Remove {
-  operation keep
-  channels LGHT_CUSTOM
-  channels2 DIP
-  name Remove5
-  xpos 1010
-  ypos 109
- }
- Dot {
-  name DOT2_CUSTOM
-  xpos 1044
-  ypos 172
- }
-set N9c80bc00 [stack 0]
- Shuffle {
-  in LGHT_CUSTOM
-  red black
-  green black
-  blue black
-  name SHUFFLE_CUSTOM
-  label "\[value in]"
-  xpos 1010
-  ypos 248
- }
-push $N9c80bc00
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle4
-  label "\[value in]"
-  xpos 1134
-  ypos 163
- }
-set N9c80b400 [stack 0]
- Grade {
-  white {{parent.CTRL_CUSTOM.r} {parent.CTRL_CUSTOM.g} {parent.CTRL_CUSTOM.b} {parent.CTRL_CUSTOM.a}}
-  name CUSTOM_LIGHT
-  label LIGHT
-  xpos 1228
-  ypos 205
- }
-push $N9c80b400
- Grade {
-  white {0 0 0 0}
-  name CUSTOM_SHADOW
-  label SHADOW
-  xpos 1134
-  ypos 204
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name CUSTOM_KEYMIX
-  xpos 1134
-  ypos 276
- }
-set N99f4e800 [stack 0]
-push $Nb28bec00
-add_layer {LGHT_AMBIENT LGHT_AMBIENT.alpha}
- Remove {
-  operation keep
-  channels LGHT_AMBIENT
-  channels2 DIP
-  name Remove4
-  xpos 660
-  ypos 109
- }
- Dot {
-  name DOT2_AMBIENT
-  xpos 694
-  ypos 172
- }
-set N2e7ea000 [stack 0]
- Shuffle {
-  in LGHT_AMBIENT
-  red black
-  green black
-  blue black
-  name SHUFFLE_AMBIENT
-  label "\[value in]"
-  xpos 660
-  ypos 248
- }
-push $N2e7ea000
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle3
-  label "\[value in]"
-  xpos 784
-  ypos 163
- }
-set N1e279c00 [stack 0]
- Grade {
-  white {{parent.CTRL_AMBIENT.r} {parent.CTRL_AMBIENT.g} {parent.CTRL_AMBIENT.b} {parent.CTRL_AMBIENT.a}}
-  name AMBIENT_LIGHT
-  label LIGHT
-  xpos 879
-  ypos 205
- }
-push $N1e279c00
- Grade {
-  white {0 0 0 0}
-  name AMBIENT_SHADOW
-  label SHADOW
-  xpos 784
-  ypos 204
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name AMBIENT_KEYMIX
-  xpos 784
-  ypos 254
- }
-set N1e279000 [stack 0]
-push $Nb28bf400
-add_layer {LGHT_SECONDARY LGHT_SECONDARY.alpha}
- Remove {
-  operation keep
-  channels LGHT_SECONDARY
-  channels2 DIP
-  name Remove3
-  xpos 310
-  ypos 109
- }
- Dot {
-  name DOT2_SECONDARY
-  xpos 344
-  ypos 172
- }
-set N1e278800 [stack 0]
- Shuffle {
-  in LGHT_SECONDARY
-  red black
-  green black
-  blue black
-  name SHUFFLE_SECONDARY
-  label "\[value in]"
-  xpos 310
-  ypos 248
- }
-push $N1e278800
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle2
-  label "\[value in]"
-  xpos 434
-  ypos 163
- }
-set N1e278000 [stack 0]
- Grade {
-  white {{parent.CTRL_SECONDARY.r} {parent.CTRL_SECONDARY.g} {parent.CTRL_SECONDARY.b} {parent.CTRL_SECONDARY.a}}
-  name SECONDARY_LIGHT
-  label LIGHT
-  xpos 526
-  ypos 204
- }
-push $N1e278000
- Grade {
-  white {0 0 0 0}
-  name SECONDARY_SHADOW
-  label SHADOW
-  xpos 434
-  ypos 205
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name SECONDARY_KEYMIX
-  xpos 434
-  ypos 254
- }
-set Nd331400 [stack 0]
- Dot {
-  name Dot12
-  xpos 468
-  ypos 493
- }
- Merge2 {
-  inputs 2
-  operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name SECONDARY_MERGE
-  xpos 784
-  ypos 490
- }
- Merge2 {
-  inputs 2
-  operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name CUSTOM_MERGE
-  xpos 1134
-  ypos 490
- }
- Merge2 {
-  inputs 2
-  operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name TRANSLUCENT_MERGE
-  xpos 1484
-  ypos 490
- }
- Merge2 {
-  inputs 2
-  operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name SSS_SKIN_MERGE
-  xpos 1834
-  ypos 490
- }
- Merge2 {
-  inputs 2
-  operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name SSS_REST_MERGE
-  xpos 2184
-  ypos 490
- }
- Merge2 {
-  inputs 2
-  operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name AMBIENT_MERGE
-  xpos 2534
-  ypos 490
- }
- Merge2 {
-  inputs 2
-  operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name RIM_LIGHT_MERGE
-  xpos 2884
-  ypos 490
- }
-set Nb5829400 [stack 0]
- Dot {
-  name Dot18
-  xpos 2918
-  ypos 561
- }
-push $N99535800
- Dot {
-  name Dot10
-  xpos 3144
-  ypos 91
- }
-set Nb5828c00 [stack 0]
-add_layer {LGHT_AO LGHT_AO.alpha}
- Remove {
-  operation keep
-  channels LGHT_AO
-  channels2 DIP
-  name Remove11
-  xpos 3110
-  ypos 109
- }
- Dot {
-  name DOT2_AO
-  xpos 3144
-  ypos 172
- }
-set Nb5828400 [stack 0]
- Shuffle {
-  in LGHT_AO
-  red black
-  green black
-  blue black
-  name SHUFFLE_AO
-  label "\[value in]"
-  xpos 3110
-  ypos 255
- }
-push $Nb5828400
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle10
-  label "\[value in]"
-  xpos 3234
-  ypos 163
- }
-set N161cbc00 [stack 0]
- Grade {
-  white {{parent.CTRL_AO.r} {parent.CTRL_AO.g} {parent.CTRL_AO.b} {parent.CTRL_AO.a}}
-  name AO_LIGHT
-  label LIGHT
-  xpos 3330
-  ypos 208
- }
-push $N161cbc00
- Grade {
-  white {1 1 1 1}
-  name AO_SHADOW
-  label SHADOW
-  xpos 3234
-  ypos 208
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name AO_KEYMIX
-  xpos 3234
-  ypos 261
- }
-set N161cb000 [stack 0]
-push $Na7234400
+  name Dot100
+  xpos -2222
+  ypos 95
+ }
+set N28b9ac00 [stack 0]
 add_layer {LGHT_KEY_LIGHT LGHT_KEY_LIGHT.alpha}
+add_layer {DIP DIP.red DIP.green DIP.blue DIP.alpha}
+add_layer {texMask texMask.red texMask.green texMask.blue texMask.alpha}
  Remove {
   operation keep
   channels LGHT_KEY_LIGHT
   channels2 DIP
-  name Remove2
-  xpos -207
-  ypos 109
+  channels3 texMask
+  name Remove21
+  xpos -2256
+  ypos 143
  }
  Dot {
-  name DOT2_KEY_LIGHT
-  xpos -173
-  ypos 172
+  name Dot101
+  xpos -2222
+  ypos 225
  }
-set N161ca800 [stack 0]
+set N28b9a400 [stack 0]
  Shuffle {
   in LGHT_KEY_LIGHT
   red black
   green black
   blue black
-  name SHUFFLE_KEY_LIGHT
+  name SHUFFLE_KEY_LIGHT1
   label "\[value in]"
-  xpos -207
-  ypos 283
- }
-push $N161ca800
- Dot {
-  name Dot16
-  xpos -44
-  ypos 172
- }
-set N161ca000 [stack 0]
- Shuffle {
-  in DIP
-  red white
-  green white
-  blue white
-  name Shuffle1
-  label "\[value in]"
-  xpos 66
-  ypos 163
- }
-set N9560fc00 [stack 0]
- Grade {
-  white {{parent.CTRL_SHADOW.r} {parent.CTRL_SHADOW.g} {parent.CTRL_SHADOW.b} {parent.CTRL_SHADOW.a}}
-  name KEY_LIGHT_SHADOW
-  label SHADOW
-  xpos 19
-  ypos 209
- }
-push $N161ca000
- Shuffle {
-  red white
-  green white
-  blue white
-  alpha white
-  name Shuffle12
-  label white
-  xpos -78
-  ypos 204
+  xpos -2256
+  ypos 323
  }
  Dot {
-  name Dot21
-  xpos -44
-  ypos 248
+  name Dot1
+  xpos -2222
+  ypos 382
  }
- Dissolve {
-  inputs 2
-  channels rgb
-  which 1
-  name Dissolve1
-  xpos 19
-  ypos 245
+set N28bb9c00 [stack 0]
+ Invert {
+  channels alpha
+  name Invert3
+  xpos -2256
+  ypos 419
+  disable true
  }
-push $N9560fc00
- Grade {
-  white {{parent.CTRL_KEYLIGHT.r} {parent.CTRL_KEYLIGHT.g} {parent.CTRL_KEYLIGHT.b} {parent.CTRL_KEYLIGHT.a}}
-  name KEY_LIGHT_LIGHT
-  label LIGHT
-  xpos 114
-  ypos 211
- }
-push $N9560fc00
- Dot {
-  name Dot19
-  xpos 224
-  ypos 172
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup1
+  xpos -2256
+  ypos 473
  }
  Dot {
-  name Dot20
-  xpos 224
-  ypos 250
+  name Dot8
+  xpos -2222
+  ypos 529
  }
- Dissolve {
-  inputs 2
-  channels rgb
-  which 1
-  name Dissolve2
-  xpos 114
-  ypos 247
- }
- Keymix {
-  inputs 3
-  channels rgb
-  name KEY_LIGHT_KEYMIX
-  xpos 19
-  ypos 289
- }
-set N1738d800 [stack 0]
- Dot {
-  name Dot15
-  xpos 53
-  ypos 438
- }
+set N28bb9000 [stack 0]
  Merge2 {
   inputs 2
-  operation multiply
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name AO_MERGE
-  xpos 3234
-  ypos 435
+  operation mask
+  name Merge1
+  xpos -2256
+  ypos 642
  }
-set N1738d000 [stack 0]
- Merge2 {
-  inputs 2
-  operation plus
-  name Merge2
-  xpos 3234
-  ypos 558
- }
- Premult {
-  name Premult12
-  xpos 3234
-  ypos 582
- }
- Text2 {
-  font_size_toolbar 100
-  font_width_toolbar 100
-  font_height_toolbar 100
-  message "Full Lighting Pass"
-  old_message {{70 117 108 108 32 76 105 103 104 116 105 110 103 32 80 97 115 115}
-    }
-  box {0 {height-200} 900 {height}}
-  transforms {{0 2}
-    }
-  cursor_position 18
-  font {{ Arial : Regular : arial.ttf : 0 }}
-  global_font_scale {{parent.Text1.global_font_scale}}
-  center {960 540}
-  cursor_initialised true
-  autofit_bbox false
-  initial_cursor_position {{0 1080}
-    }
-  group_animations {{0} imported: 0 selected: items: "root transform/"}
-  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
-    }
-  enable_shadows true
-  name Text13
-  xpos 3234
-  ypos 606
-  disable {{!parent.text_1}}
- }
-set N1738c400 [stack 0]
-push $Nb5828c00
+push $N28b9ac00
  Dot {
-  name Dot11
-  xpos 3528
-  ypos 91
+  name Dot121
+  xpos -679
+  ypos 95
  }
+set N28bb8800 [stack 0]
+ Dot {
+  name Dot109
+  xpos -444
+  ypos 95
+ }
+set N28bb8400 [stack 0]
+ Dot {
+  name Dot110
+  xpos -63
+  ypos 95
+ }
+set N28bb8000 [stack 0]
+ Dot {
+  name Dot111
+  xpos 289
+  ypos 95
+ }
+set N2905dc00 [stack 0]
+ Dot {
+  name Dot112
+  xpos 642
+  ypos 95
+ }
+set N2905d800 [stack 0]
+ Dot {
+  name Dot106
+  xpos 988
+  ypos 95
+ }
+set N2905d400 [stack 0]
+ Dot {
+  name Dot107
+  xpos 1334
+  ypos 95
+ }
+set N2905d000 [stack 0]
+ Dot {
+  name Dot108
+  xpos 1693
+  ypos 95
+ }
+set N2905cc00 [stack 0]
+add_layer {LGHT_AO LGHT_AO.alpha}
  Remove {
   operation keep
-  channels rgba
+  channels LGHT_AO
   channels2 DIP
-  name Remove12
-  xpos 3494
-  ypos 109
+  channels3 texMask
+  name Remove22
+  xpos 1659
+  ypos 141
  }
  Shuffle {
-  in DIP
-  name Shuffle11
+  in LGHT_AO
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT18
   label "\[value in]"
-  xpos 3494
-  ypos 163
+  xpos 1659
+  ypos 390
  }
-set N9e705800 [stack 0]
- Dot {
-  name Dot17
-  xpos 3741
-  ypos 308
+set N2905c400 [stack 0]
+push $N28b9b000
+ Shuffle {
+  in DIP
+  red white
+  green white
+  blue white
+  name SHUFFLE_KEY_LIGHT20
+  label "\[value in]"
+  xpos -2422
+  ypos 146
  }
- Text2 {
-  font_size_toolbar 100
-  font_width_toolbar 100
-  font_height_toolbar 100
-  message Pre-Lighting
-  old_message {{80 114 101 45 76 105 103 104 116 105 110 103}
-    }
-  box {0 {height-200} 900 {height}}
-  transforms {{0 2}
-    }
-  cursor_position 12
-  font {{ Arial : Regular : arial.ttf : 0 }}
-  global_font_scale {{parent.Text1.global_font_scale}}
-  center {960 540}
-  cursor_initialised true
-  autofit_bbox false
-  initial_cursor_position {{0 1080}
-    }
-  group_animations {{0} imported: 0 selected: items: "root transform/"}
-  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
-    }
-  enable_shadows true
-  name Text3
-  xpos 3707
-  ypos 326
-  disable {{!parent.text_1}}
- }
-set N9e705000 [stack 0]
-push $N161cb000
  Premult {
-  name Premult3
-  xpos 3330
-  ypos 317
+  name Premult14
+  xpos -2422
+  ypos 182
+ }
+ Unpremult {
+  name Unpremult3
+  xpos -2422
+  ypos 206
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle38
+  label "\[value in]"
+  xpos -2422
+  ypos 230
+ }
+ Dot {
+  name Dot120
+  xpos -2388
+  ypos 275
+ }
+ Dot {
+  name Dot129
+  xpos -2072
+  ypos 275
+ }
+set N2907ac00 [stack 0]
+ Dot {
+  name Dot102
+  xpos -1670
+  ypos 275
+ }
+set N2907a800 [stack 0]
+ Dot {
+  name Dot119
+  xpos -1299
+  ypos 275
+ }
+set N2907a400 [stack 0]
+ Dot {
+  name Dot133
+  xpos -1158
+  ypos 275
+ }
+set N2907a000 [stack 0]
+ Dot {
+  name Dot127
+  xpos -946
+  ypos 275
+ }
+set N2909dc00 [stack 0]
+ Dot {
+  name Dot104
+  xpos -294
+  ypos 275
+ }
+set N2909d800 [stack 0]
+ Dot {
+  name Dot113
+  xpos 87
+  ypos 275
+ }
+set N2909d400 [stack 0]
+ Dot {
+  name Dot114
+  xpos 439
+  ypos 275
+ }
+set N2909d000 [stack 0]
+ Dot {
+  name Dot115
+  xpos 792
+  ypos 275
+ }
+set N2909cc00 [stack 0]
+ Dot {
+  name Dot116
+  xpos 1138
+  ypos 275
+ }
+set N2909c800 [stack 0]
+ Dot {
+  name Dot117
+  xpos 1484
+  ypos 275
+ }
+set N2909c400 [stack 0]
+ Dot {
+  name Dot118
+  xpos 1843
+  ypos 275
+ }
+set N2909c000 [stack 0]
+ Grade {
+  white {{parent.CTRL_AO.color_rgb} {parent.CTRL_AO.color_rgb} {parent.CTRL_AO.color_rgb} {parent.CTRL_AO.color_rgb}}
+  name AO_LIGHT1
+  label LIGHT
+  xpos 1897
+  ypos 330
+ }
+push $N2909c000
+ Keymix {
+  inputs 3
+  channels rgba
+  name Keymix3
+  xpos 1809
+  ypos 396
+ }
+ Multiply {
+  channels rgba
+  value {{parent.aoMix}}
+  name Multiply12
+  xpos 1809
+  ypos 420
+ }
+add_layer {LGHT_AO_DONE LGHT_AO_DONE.red LGHT_AO_DONE.green LGHT_AO_DONE.blue LGHT_AO_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_AO_DONE
+  out2 rgba
+  name Shuffle31
+  label "\[value out]"
+  xpos 1809
+  ypos 502
+ }
+set N290b1000 [stack 0]
+ Dot {
+  name Dot147
+  xpos 1972
+  ypos 511
+ }
+ Dot {
+  name Dot157
+  xpos 1972
+  ypos 807
+ }
+set N290b0800 [stack 0]
+ Premult {
+  name Premult25
+  xpos 1938
+  ypos 1175
  }
  Text2 {
   font_size_toolbar 100
@@ -1147,16 +566,85 @@ push $N161cb000
     }
   enable_shadows true
   name Text4
-  xpos 3330
-  ypos 341
+  label "\[value message]"
+  xpos 1938
+  ypos 1199
   disable {{!parent.text_1}}
  }
-set N9e704800 [stack 0]
-push $Nbecb800
+set N290b0000 [stack 0]
+push $N2905d000
+add_layer {LGHT_RIM_LIGHT LGHT_RIM_LIGHT.alpha}
+ Remove {
+  operation keep
+  channels LGHT_RIM_LIGHT
+  channels2 DIP
+  channels3 texMask
+  name Remove23
+  xpos 1300
+  ypos 141
+ }
+ Shuffle {
+  in LGHT_RIM_LIGHT
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT16
+  label "\[value in]"
+  xpos 1300
+  ypos 390
+ }
+set N290e7800 [stack 0]
+push $N2909c400
+ Grade {
+  white {{parent.CTRL_RIM_LIGHT.color_rgb} {parent.CTRL_RIM_LIGHT.color_rgb} {parent.CTRL_RIM_LIGHT.color_rgb} {parent.CTRL_RIM_LIGHT.color_rgb}}
+  name RIM_LIGHT_LIGHT1
+  label LIGHT
+  xpos 1450
+  ypos 338
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge40
+  xpos 1450
+  ypos 396
+ }
+ Multiply {
+  channels rgba
+  value {{parent.rimlightMix}}
+  name Multiply13
+  xpos 1450
+  ypos 420
+ }
+add_layer {LGHT_RIM_LIGHT_DONE LGHT_RIM_LIGHT_DONE.red LGHT_RIM_LIGHT_DONE.green LGHT_RIM_LIGHT_DONE.blue LGHT_RIM_LIGHT_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_RIM_LIGHT_DONE
+  out2 rgba
+  name Shuffle32
+  label "\[value out]"
+  xpos 1450
+  ypos 501
+ }
+set N290e6800 [stack 0]
+ Dot {
+  name Dot146
+  xpos 1621
+  ypos 510
+ }
+ Dot {
+  name Dot156
+  xpos 1621
+  ypos 808
+ }
+set N290e6000 [stack 0]
  Premult {
-  name Premult4
-  xpos 2980
-  ypos 317
+  name Premult24
+  xpos 1587
+  ypos 1174
  }
  Text2 {
   font_size_toolbar 100
@@ -1181,16 +669,85 @@ push $Nbecb800
     }
   enable_shadows true
   name Text5
-  xpos 2980
-  ypos 341
+  label "\[value message]"
+  xpos 1587
+  ypos 1198
   disable {{!parent.text_1}}
  }
-set N9e704000 [stack 0]
-push $N1f628000
+set N29119800 [stack 0]
+push $N2905d400
+add_layer {LGHT_SPECULAR LGHT_SPECULAR.alpha}
+ Remove {
+  operation keep
+  channels LGHT_SPECULAR
+  channels2 DIP
+  channels3 texMask
+  name Remove24
+  xpos 954
+  ypos 141
+ }
+ Shuffle {
+  in LGHT_SPECULAR
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT14
+  label "\[value in]"
+  xpos 954
+  ypos 390
+ }
+set N29119000 [stack 0]
+push $N2909c800
+ Grade {
+  white {{parent.CTRL_SPECULAR.color_rgb} {parent.CTRL_SPECULAR.color_rgb} {parent.CTRL_SPECULAR.color_rgb} {parent.CTRL_SPECULAR.color_rgb}}
+  name SPECULAR_LIGHT1
+  label LIGHT
+  xpos 1104
+  ypos 338
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge38
+  xpos 1104
+  ypos 396
+ }
+ Multiply {
+  channels rgba
+  value {{parent.specularMix}}
+  name Multiply14
+  xpos 1104
+  ypos 420
+ }
+add_layer {LGHT_SPECULAR_DONE LGHT_SPECULAR_DONE.red LGHT_SPECULAR_DONE.green LGHT_SPECULAR_DONE.blue LGHT_SPECULAR_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_SPECULAR_DONE
+  out2 rgba
+  name Shuffle33
+  label "\[value out]"
+  xpos 1104
+  ypos 501
+ }
+set N29118000 [stack 0]
+ Dot {
+  name Dot145
+  xpos 1254
+  ypos 510
+ }
+ Dot {
+  name Dot155
+  xpos 1254
+  ypos 806
+ }
+set N23c8f800 [stack 0]
  Premult {
-  name Premult5
-  xpos 2630
-  ypos 317
+  name Premult23
+  xpos 1220
+  ypos 1178
  }
  Text2 {
   font_size_toolbar 100
@@ -1215,62 +772,228 @@ push $N1f628000
     }
   enable_shadows true
   name Text6
-  xpos 2630
-  ypos 341
+  label "\[value message]"
+  xpos 1220
+  ypos 1202
   disable {{!parent.text_1}}
  }
-set N9f6f1800 [stack 0]
-push $N312b000
+set N23c8f000 [stack 0]
+ Input {
+  inputs 0
+  name skin
+  label "\[value number]"
+  xpos -1109
+  ypos -90
+  number 2
+ }
+ Dot {
+  name Dot134
+  xpos -1075
+  ypos 345
+ }
+push $N2907a000
+ Switch {
+  inputs 2
+  which {{"\[exists input2]"}}
+  name Switch13
+  xpos -1192
+  ypos 342
+ }
+ Dot {
+  name Dot132
+  xpos -1158
+  ypos 478
+ }
+set N23c8e000 [stack 0]
+ Invert {
+  channels alpha
+  name Invert2
+  xpos -1111
+  ypos 469
+ }
+push $N28b9a400
+ Dot {
+  name Dot103
+  xpos -1871
+  ypos 225
+ }
+set N23cb3800 [stack 0]
+ Dot {
+  name Dot128
+  xpos -1446
+  ypos 225
+ }
+ Shuffle {
+  in LGHT_KEY_LIGHT
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT19
+  label "\[value in]"
+  xpos -1480
+  ypos 356
+ }
+ Expression {
+  expr3 4*(1-a)*a
+  name Expression1
+  label fringe
+  xpos -1480
+  ypos 392
+ }
+ Dot {
+  name Dot130
+  xpos -1349
+  ypos 401
+ }
+set N23cb2800 [stack 0]
+ Dot {
+  name Dot131
+  xpos -1011
+  ypos 401
+ }
+push $N2909dc00
+ Grade {
+  white {{parent.CTRL_SSS_REST.color_rgb} {parent.CTRL_SSS_REST.color_rgb} {parent.CTRL_SSS_REST.color_rgb} {parent.CTRL_SSS_REST.color_rgb}}
+  name SSS_REST_LIGHT1
+  label LIGHT
+  xpos -980
+  ypos 324
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge47
+  xpos -980
+  ypos 443
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge50
+  xpos -980
+  ypos 475
+ }
+ Multiply {
+  channels rgba
+  value {{parent.sssrestMix}}
+  name Multiply21
+  xpos -980
+  ypos 499
+ }
+add_layer {LGHT_SSS_REST_DONE LGHT_SSS_REST_DONE.red LGHT_SSS_REST_DONE.green LGHT_SSS_REST_DONE.blue LGHT_SSS_REST_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_SSS_REST_DONE
+  out2 rgba
+  name Shuffle37
+  label "\[value out]"
+  xpos -980
+  ypos 530
+ }
+set N23cdd000 [stack 0]
+ Dot {
+  name Dot140
+  xpos -841
+  ypos 539
+ }
+ Dot {
+  name Dot105
+  xpos -841
+  ypos 798
+ }
+set N23cdc800 [stack 0]
  Premult {
-  name Premult6
-  xpos 2280
-  ypos 317
+  name Premult18
+  xpos -875
+  ypos 1160
+ }
+push $N23c8e000
+push $N23cb2800
+push $N2907a400
+ Grade {
+  white {{parent.CTRL_SSS_SKIN.color_rgb} {parent.CTRL_SSS_SKIN.color_rgb} {parent.CTRL_SSS_SKIN.color_rgb} {parent.CTRL_SSS_SKIN.color_rgb}}
+  name SSS_SKIN_LIGHT1
+  label LIGHT
+  xpos -1333
+  ypos 329
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge42
+  xpos -1333
+  ypos 440
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge49
+  xpos -1333
+  ypos 475
+ }
+ Multiply {
+  channels rgba
+  value {{parent.sssskinMix}}
+  name Multiply20
+  xpos -1333
+  ypos 499
+ }
+add_layer {LGHT_SSS_SKIN_DONE LGHT_SSS_SKIN_DONE.red LGHT_SSS_SKIN_DONE.green LGHT_SSS_SKIN_DONE.blue LGHT_SSS_SKIN_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_SSS_SKIN_DONE
+  out2 rgba
+  name Shuffle36
+  label "\[value out]"
+  xpos -1333
+  ypos 533
+ }
+set N23d0d000 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1187
+  ypos 542
+ }
+ Dot {
+  name Dot122
+  xpos -1187
+  ypos 798
+ }
+set N23d0c800 [stack 0]
+ Premult {
+  name Premult17
+  xpos -1221
+  ypos 1163
+ }
+ Dot {
+  name Dot139
+  xpos -1187
+  ypos 1187
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge51
+  xpos -875
+  ypos 1184
  }
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
   font_height_toolbar 100
-  message "SSS Rest"
-  old_message {{83 83 83 32 82 101 115 116}
+  message SSS
+  old_message {{83 83 83}
     }
   box {0 {height-200} 900 {height}}
   transforms {{0 2}
     }
-  cursor_position 8
-  font {{ Arial : Regular : arial.ttf : 0 }}
-  global_font_scale {{parent.Text1.global_font_scale}}
-  center {960 540}
-  cursor_initialised true
-  autofit_bbox false
-  initial_cursor_position {{0 1080}
-    }
-  group_animations {{0} imported: 0 selected: items: "root transform/"}
-  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
-    }
-  enable_shadows true
-  name Text7
-  xpos 2280
-  ypos 341
-  disable {{!parent.text_1}}
- }
-set N9f6f1000 [stack 0]
-push $N420b800
- Premult {
-  name Premult7
-  xpos 1930
-  ypos 317
- }
- Text2 {
-  font_size_toolbar 100
-  font_width_toolbar 100
-  font_height_toolbar 100
-  message "SSS Skin"
-  old_message {{83 83 83 32 83 107 105 110}
-    }
-  box {0 {height-200} 900 {height}}
-  transforms {{0 2}
-    }
-  cursor_position 8
+  cursor_position 3
   font {{ Arial : Regular : arial.ttf : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
@@ -1283,16 +1006,85 @@ push $N420b800
     }
   enable_shadows true
   name Text8
-  xpos 1930
-  ypos 341
+  label "\[value message]"
+  xpos -875
+  ypos 1208
   disable {{!parent.text_1}}
  }
-set N9f6f0800 [stack 0]
-push $N3bd4d800
+set N23d3d800 [stack 0]
+push $N2905d800
+add_layer {LGHT_TRANSLUCENT LGHT_TRANSLUCENT.alpha}
+ Remove {
+  operation keep
+  channels LGHT_TRANSLUCENT
+  channels2 DIP
+  channels3 texMask
+  name Remove25
+  xpos 608
+  ypos 141
+ }
+ Shuffle {
+  in LGHT_TRANSLUCENT
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT12
+  label "\[value in]"
+  xpos 608
+  ypos 390
+ }
+set N23d3d000 [stack 0]
+push $N2909cc00
+ Grade {
+  white {{parent.CTRL_TRANSLUCENT.color_rgb} {parent.CTRL_TRANSLUCENT.color_rgb} {parent.CTRL_TRANSLUCENT.color_rgb} {parent.CTRL_TRANSLUCENT.color_rgb}}
+  name TRANSLUCENT_LIGHT1
+  label LIGHT
+  xpos 758
+  ypos 325
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge35
+  xpos 758
+  ypos 396
+ }
+ Multiply {
+  channels rgba
+  value {{parent.translucentMix}}
+  name Multiply15
+  xpos 758
+  ypos 420
+ }
+add_layer {LGHT_TRANSLUCENT_DONE LGHT_TRANSLUCENT_DONE.red LGHT_TRANSLUCENT_DONE.green LGHT_TRANSLUCENT_DONE.blue LGHT_TRANSLUCENT_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_TRANSLUCENT_DONE
+  out2 rgba
+  name Shuffle34
+  label "\[value out]"
+  xpos 758
+  ypos 499
+ }
+set N23d3c000 [stack 0]
+ Dot {
+  name Dot144
+  xpos 915
+  ypos 508
+ }
+ Dot {
+  name Dot154
+  xpos 915
+  ypos 803
+ }
+set N29f17800 [stack 0]
  Premult {
-  name Premult8
-  xpos 1580
-  ypos 317
+  name Premult22
+  xpos 881
+  ypos 1172
  }
  Text2 {
   font_size_toolbar 100
@@ -1317,16 +1109,85 @@ push $N3bd4d800
     }
   enable_shadows true
   name Text9
-  xpos 1580
-  ypos 341
+  label "\[value message]"
+  xpos 881
+  ypos 1196
   disable {{!parent.text_1}}
  }
-set N9f6f0000 [stack 0]
-push $N99f4e800
+set N29f17000 [stack 0]
+push $N2905dc00
+add_layer {LGHT_CUSTOM LGHT_CUSTOM.alpha}
+ Remove {
+  operation keep
+  channels LGHT_CUSTOM
+  channels2 DIP
+  channels3 texMask
+  name Remove26
+  xpos 255
+  ypos 141
+ }
+ Shuffle {
+  in LGHT_CUSTOM
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT10
+  label "\[value in]"
+  xpos 255
+  ypos 390
+ }
+set N29f16800 [stack 0]
+push $N2909d000
+ Grade {
+  white {{parent.CTRL_CUSTOM.color_rgb} {parent.CTRL_CUSTOM.color_rgb} {parent.CTRL_CUSTOM.color_rgb} {parent.CTRL_CUSTOM.color_rgb}}
+  name CUSTOM_LIGHT1
+  label LIGHT
+  xpos 405
+  ypos 324
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge29
+  xpos 405
+  ypos 396
+ }
+ Multiply {
+  channels rgba
+  value {{parent.customMix}}
+  name Multiply16
+  xpos 405
+  ypos 420
+ }
+add_layer {LGHT_CUSTOM_DONE LGHT_CUSTOM_DONE.red LGHT_CUSTOM_DONE.green LGHT_CUSTOM_DONE.blue LGHT_CUSTOM_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_CUSTOM_DONE
+  out2 rgba
+  name Shuffle30
+  label "\[value out]"
+  xpos 405
+  ypos 497
+ }
+set N29f4d800 [stack 0]
+ Dot {
+  name Dot143
+  xpos 560
+  ypos 506
+ }
+ Dot {
+  name Dot153
+  xpos 560
+  ypos 804
+ }
+set N29f4d000 [stack 0]
  Premult {
-  name Premult9
-  xpos 1230
-  ypos 317
+  name Premult21
+  xpos 526
+  ypos 1170
  }
  Text2 {
   font_size_toolbar 100
@@ -1351,16 +1212,85 @@ push $N99f4e800
     }
   enable_shadows true
   name Text10
-  xpos 1230
-  ypos 341
+  label "\[value message]"
+  xpos 526
+  ypos 1194
   disable {{!parent.text_1}}
  }
-set Na7543800 [stack 0]
-push $N1e279000
+set N29f4c800 [stack 0]
+push $N28bb8000
+add_layer {LGHT_AMBIENT LGHT_AMBIENT.alpha}
+ Remove {
+  operation keep
+  channels LGHT_AMBIENT
+  channels2 DIP
+  channels3 texMask
+  name Remove27
+  xpos -97
+  ypos 141
+ }
+ Shuffle {
+  in LGHT_AMBIENT
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT7
+  label "\[value in]"
+  xpos -97
+  ypos 390
+ }
+set N29f4c000 [stack 0]
+push $N2909d400
+ Grade {
+  white {{parent.CTRL_AMBIENT.color_rgb} {parent.CTRL_AMBIENT.color_rgb} {parent.CTRL_AMBIENT.color_rgb} {parent.CTRL_AMBIENT.color_rgb}}
+  name AMBIENT_LIGHT1
+  label LIGHT
+  xpos 53
+  ypos 345
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge27
+  xpos 53
+  ypos 396
+ }
+ Multiply {
+  channels rgba
+  value {{parent.ambientMix}}
+  name Multiply17
+  xpos 53
+  ypos 420
+ }
+add_layer {LGHT_AMBIENT_DONE LGHT_AMBIENT_DONE.red LGHT_AMBIENT_DONE.green LGHT_AMBIENT_DONE.blue LGHT_AMBIENT_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_AMBIENT_DONE
+  out2 rgba
+  name Shuffle29
+  label "\[value out]"
+  xpos 53
+  ypos 499
+ }
+set N29f87000 [stack 0]
+ Dot {
+  name Dot142
+  xpos 208
+  ypos 508
+ }
+ Dot {
+  name Dot152
+  xpos 208
+  ypos 806
+ }
+set N29f86800 [stack 0]
  Premult {
-  name Premult10
-  xpos 880
-  ypos 317
+  name Premult20
+  xpos 174
+  ypos 1172
  }
  Text2 {
   font_size_toolbar 100
@@ -1385,16 +1315,85 @@ push $N1e279000
     }
   enable_shadows true
   name Text11
-  xpos 880
-  ypos 341
+  label "\[value message]"
+  xpos 174
+  ypos 1196
   disable {{!parent.text_1}}
  }
-set Na7543000 [stack 0]
-push $Nd331400
+set N29f86000 [stack 0]
+push $N28bb8400
+add_layer {LGHT_SECONDARY LGHT_SECONDARY.alpha}
+ Remove {
+  operation keep
+  channels LGHT_SECONDARY
+  channels2 DIP
+  channels3 texMask
+  name Remove28
+  xpos -478
+  ypos 141
+ }
+ Shuffle {
+  in LGHT_SECONDARY
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT6
+  label "\[value in]"
+  xpos -478
+  ypos 404
+ }
+set N29fbd800 [stack 0]
+push $N2909d800
+ Grade {
+  white {{parent.CTRL_SECONDARY.color_rgb} {parent.CTRL_SECONDARY.color_rgb} {parent.CTRL_SECONDARY.color_rgb} {parent.CTRL_SECONDARY.color_rgb}}
+  name SECONDARY_LIGHT1
+  label LIGHT
+  xpos -328
+  ypos 344
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge25
+  xpos -328
+  ypos 410
+ }
+ Multiply {
+  channels rgba
+  value {{parent.secondaryMix}}
+  name Multiply18
+  xpos -328
+  ypos 434
+ }
+add_layer {LGHT_SECONDARY_DONE LGHT_SECONDARY_DONE.red LGHT_SECONDARY_DONE.green LGHT_SECONDARY_DONE.blue LGHT_SECONDARY_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_SECONDARY_DONE
+  out2 rgba
+  name Shuffle28
+  label "\[value out]"
+  xpos -328
+  ypos 513
+ }
+set N29fbc800 [stack 0]
+ Dot {
+  name Dot141
+  xpos -171
+  ypos 522
+ }
+ Dot {
+  name Dot151
+  xpos -171
+  ypos 803
+ }
+set N29fbc000 [stack 0]
  Premult {
-  name Premult11
-  xpos 533
-  ypos 328
+  name Premult19
+  xpos -205
+  ypos 1186
  }
  Text2 {
   font_size_toolbar 100
@@ -1419,16 +1418,79 @@ push $Nd331400
     }
   enable_shadows true
   name Text2
-  xpos 533
-  ypos 352
+  label "\[value message]"
+  xpos -205
+  ypos 1210
   disable {{!parent.text_1}}
  }
-set Na7542800 [stack 0]
-push $N1738d800
+set N2ba41800 [stack 0]
+push $N23cb3800
+ Shuffle {
+  in LGHT_KEY_LIGHT
+  red black
+  green black
+  blue black
+  name SHUFFLE_KEY_LIGHT3
+  label "\[value in]"
+  xpos -1905
+  ypos 320
+ }
+ Dot {
+  name Dot7
+  xpos -1871
+  ypos 385
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -1814
+  ypos 376
+ }
+push $N2907a800
+ Grade {
+  white {{parent.CTRL_KEY_LIGHT.color_rgb} {parent.CTRL_KEY_LIGHT.color_rgb} {parent.CTRL_KEY_LIGHT.color_rgb} {parent.CTRL_KEY_LIGHT.color_rgb}}
+  name KEY_LIGHT_LIGHT1
+  label LIGHT
+  xpos -1704
+  ypos 329
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge23
+  xpos -1704
+  ypos 382
+ }
+ Multiply {
+  channels rgba
+  value {{parent.keylightMix}}
+  name Multiply19
+  xpos -1704
+  ypos 428
+ }
+add_layer {LGHT_KEY_LIGHT_DONE LGHT_KEY_LIGHT_DONE.red LGHT_KEY_LIGHT_DONE.green LGHT_KEY_LIGHT_DONE.blue LGHT_KEY_LIGHT_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_KEY_LIGHT_DONE
+  out2 rgba
+  name Shuffle26
+  label "\[value out]"
+  xpos -1704
+  ypos 452
+ }
+set N2ba81c00 [stack 0]
+ Dot {
+  name Dot137
+  xpos -1562
+  ypos 461
+ }
  Premult {
-  name Premult2
-  xpos 109
-  ypos 332
+  name Premult16
+  xpos -1596
+  ypos 1179
  }
  Text2 {
   font_size_toolbar 100
@@ -1453,65 +1515,739 @@ push $N1738d800
     }
   enable_shadows true
   name Text1
-  xpos 109
-  ypos 356
+  label "\[value message]"
+  xpos -1596
+  ypos 1203
   disable {{!parent.text_1}}
  }
-set Na7542000 [stack 0]
-push $N9e705800
- Unpremult {
-  name Unpremult1
-  xpos 3494
-  ypos 199
+set N2ba81000 [stack 0]
+push $N28bb9c00
+push $N2907ac00
+ Grade {
+  white {{parent.CTRL_SHADOW.color_rgb} {parent.CTRL_SHADOW.color_rgb} {parent.CTRL_SHADOW.color_rgb} {parent.CTRL_SHADOW.color_rgb}}
+  name KEY_LIGHT_SHADOW1
+  label SHADOW
+  xpos -2106
+  ypos 323
  }
-set Naed61c00 [stack 0]
- Dot {
-  name Dot13
-  xpos 3618
-  ypos 202
- }
- Dot {
-  name Dot14
-  xpos 3618
-  ypos 616
- }
-push $Nb5829400
-push $N1738d000
-push $Naed61c00
  Merge2 {
   inputs 2
-  operation multiply
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name Merge1
-  xpos 3494
-  ypos 435
+  operation mask
+  name Merge17
+  xpos -2106
+  ypos 379
+ }
+ Multiply {
+  channels rgba
+  value {{parent.shadowMix}}
+  name Multiply11
+  xpos -2106
+  ypos 412
+ }
+add_layer {LGHT_SHADOW_DONE LGHT_SHADOW_DONE.red LGHT_SHADOW_DONE.green LGHT_SHADOW_DONE.blue LGHT_SHADOW_DONE.alpha}
+ Shuffle {
+  in2 DIP
+  black red
+  white green
+  red2 blue
+  out LGHT_SHADOW_DONE
+  out2 rgba
+  name Shuffle25
+  label "\[value out]"
+  xpos -2106
+  ypos 436
+ }
+ Remove {
+  operation keep
+  channels rgba
+  channels2 LGHT_SHADOW_DONE
+  name Remove29
+  xpos -2106
+  ypos 472
+ }
+set N2babdc00 [stack 0]
+ Dot {
+  name Dot136
+  xpos -1969
+  ypos 475
+ }
+ Premult {
+  name Premult15
+  xpos -2003
+  ypos 1174
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message Shadow
+  old_message {{83 104 97 100 111 119}
+    }
+  box {0 {height-200} 900 {height}}
+  transforms {{0 2}
+    }
+  cursor_position 6
+  font {{ Arial : Regular : arial.ttf : 0 }}
+  global_font_scale {{parent.Text1.global_font_scale}}
+  center {960 540}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1080}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
+    }
+  enable_shadows true
+  name Text14
+  label "\[value message]"
+  xpos -2003
+  ypos 1198
+  disable {{!parent.text_1}}
+ }
+set N2babd000 [stack 0]
+push $N290b0800
+push $N290e6000
+push $N23c8f800
+push $N29f17800
+push $N29f4d000
+push $N29f86800
+push $N29fbc000
+push $N28bb8800
+ Shuffle {
+  in DIP
+  name SHUFFLE_KEY_LIGHT2
+  label "\[value in]"
+  xpos -713
+  ypos 148
+ }
+ Unpremult {
+  name Unpremult2
+  xpos -713
+  ypos 184
+ }
+ Dot {
+  name Dot158
+  xpos -679
+  ypos 525
+ }
+set N2babc400 [stack 0]
+ Dot {
+  name Dot159
+  xpos -576
+  ypos 525
+ }
+push $N23cdc800
+push $N23d0c800
+push $N28b9b800
+ Dot {
+  name Dot6
+  xpos -1909
+  ypos 608
+ }
+set N2baedc00 [stack 0]
+push $N28bb9000
+ Dot {
+  name Dot5
+  xpos -1871
+  ypos 529
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge3
+  xpos -1905
+  ypos 640
+ }
+push $N2ba81c00
+ Colorspace {
+  colorspace_out HSV
+  name Colorspace1
+  label "\[value colorspace_in] > \[value colorspace_out]"
+  xpos -1704
+  ypos 573
+ }
+ Grade {
+  inputs 1+1
+  channels {-rgba.red -rgba.green rgba.blue none}
+  white 1.02
+  name Grade2
+  xpos -1704
+  ypos 634
+ }
+ Colorspace {
+  colorspace_in HSV
+  name Colorspace2
+  label "\[value colorspace_in] > \[value colorspace_out]"
+  xpos -1704
+  ypos 676
+ }
+push $N2babdc00
+ Dot {
+  name Dot123
+  xpos -2072
+  ypos 738
  }
  Merge2 {
   inputs 2
   operation plus
-  Achannels rgb
-  Bchannels rgb
-  output rgb
-  name SPECULAR_MERGE
-  xpos 3494
-  ypos 490
+  also_merge LGHT_KEY_LIGHT_DONE
+  name Merge24
+  xpos -1704
+  ypos 735
+ }
+set N2baec000 [stack 0]
+ Dot {
+  name Dot99
+  xpos -1670
+  ypos 840
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge45
+  xpos -1135
+  ypos 837
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge53
+  xpos -789
+  ypos 837
+ }
+ Copy {
+  inputs 2
+  channels DIP
+  name Copy4
+  xpos -610
+  ypos 825
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge54
+  xpos -118
+  ypos 837
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge55
+  xpos 246
+  ypos 837
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge56
+  xpos 619
+  ypos 837
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge57
+  xpos 996
+  ypos 837
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge58
+  xpos 1311
+  ypos 837
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge59
+  xpos 1677
+  ypos 837
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge60
+  xpos 2064
+  ypos 837
+ }
+ Shuffle {
+  in2 DIP
+  alpha alpha2
+  name Shuffle39
+  label "\[value in]"
+  xpos 2064
+  ypos 1138
+ }
+ Premult {
+  name Premult26
+  xpos 2064
+  ypos 1174
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message "Full Lighting Pass"
+  old_message {{70 117 108 108 32 76 105 103 104 116 105 110 103 32 80 97 115 115}
+    }
+  box {0 {height-200} 900 {height}}
+  transforms {{0 2}
+    }
+  cursor_position 18
+  font {{ Arial : Regular : arial.ttf : 0 }}
+  global_font_scale {{parent.Text1.global_font_scale}}
+  center {960 540}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1080}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
+    }
+  enable_shadows true
+  name Text13
+  label "\[value message]"
+  xpos 2064
+  ypos 1198
+  disable {{!parent.text_1}}
+ }
+set N2bb5a800 [stack 0]
+push $N2905cc00
+ Dot {
+  name Dot124
+  xpos 2447
+  ypos 95
+ }
+ Shuffle {
+  in DIP
+  name Shuffle35
+  label "\[value in]"
+  xpos 2413
+  ypos 145
+ }
+set N2bb5a000 [stack 0]
+ Dot {
+  name Dot160
+  xpos 2258
+  ypos 154
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message Pre-Lighting
+  old_message {{80 114 101 45 76 105 103 104 116 105 110 103}
+    }
+  box {0 {height-200} 900 {height}}
+  transforms {{0 2}
+    }
+  cursor_position 12
+  font {{ Arial : Regular : arial.ttf : 0 }}
+  global_font_scale {{parent.Text1.global_font_scale}}
+  center {960 540}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1080}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 960 540 0 0 1 1 0 0 0 0}
+    }
+  enable_shadows true
+  name Text3
+  label "\[value message]"
+  xpos 2224
+  ypos 1240
+  disable {{!parent.text_1}}
+ }
+set N23a11800 [stack 0]
+push $N2bb5a000
+push $N2baedc00
+ Dot {
+  name Dot9
+  xpos -495
+  ypos 608
+ }
+set N23a11400 [stack 0]
+ Dot {
+  name Dot10
+  xpos -114
+  ypos 608
+ }
+set N23a11000 [stack 0]
+ Dot {
+  name Dot11
+  xpos 238
+  ypos 608
+ }
+set N23a10c00 [stack 0]
+ Dot {
+  name Dot12
+  xpos 591
+  ypos 608
+ }
+set N23a10800 [stack 0]
+ Dot {
+  name Dot13
+  xpos 937
+  ypos 608
+ }
+set N23a10400 [stack 0]
+ Dot {
+  name Dot14
+  xpos 1283
+  ypos 608
+ }
+set N23a10000 [stack 0]
+ Dot {
+  name Dot15
+  xpos 1642
+  ypos 608
+ }
+push $N2905c400
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup8
+  xpos 1659
+  ypos 521
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge21
+  xpos 1659
+  ypos 642
+ }
+push $N290b1000
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge22
+  xpos 1809
+  ypos 642
+  disable true
+ }
+push $N23a10000
+push $N290e7800
+ Invert {
+  channels alpha
+  name Invert10
+  xpos 1300
+  ypos 510
+  disable true
+ }
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup7
+  xpos 1300
+  ypos 546
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge19
+  xpos 1300
+  ypos 642
+ }
+push $N290e6800
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge20
+  xpos 1450
+  ypos 642
+  disable true
+ }
+push $N23a10400
+push $N29119000
+ Invert {
+  channels alpha
+  name Invert9
+  xpos 954
+  ypos 510
+  disable true
+ }
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup6
+  xpos 954
+  ypos 546
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge16
+  xpos 954
+  ypos 641
+ }
+push $N29118000
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge18
+  xpos 1104
+  ypos 641
+  disable true
+ }
+push $N23a10800
+push $N23d3d000
+ Invert {
+  channels alpha
+  name Invert8
+  xpos 608
+  ypos 518
+  disable true
+ }
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup5
+  xpos 608
+  ypos 554
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge14
+  xpos 608
+  ypos 641
+ }
+push $N23d3c000
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge15
+  xpos 758
+  ypos 641
+  disable true
+ }
+push $N23a10c00
+push $N29f16800
+ Invert {
+  channels alpha
+  name Invert7
+  xpos 255
+  ypos 500
+  disable true
+ }
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup4
+  xpos 255
+  ypos 536
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge12
+  xpos 255
+  ypos 641
+ }
+push $N29f4d800
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge13
+  xpos 405
+  ypos 641
+  disable true
+ }
+push $N23a11000
+push $N29f4c000
+ Invert {
+  channels alpha
+  name Invert6
+  xpos -97
+  ypos 508
+  disable true
+ }
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup3
+  xpos -97
+  ypos 544
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge10
+  xpos -97
+  ypos 641
+ }
+push $N29f87000
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge11
+  xpos 53
+  ypos 641
+  disable true
+ }
+push $N23a11400
+push $N29fbd800
+ Invert {
+  channels alpha
+  name Invert5
+  xpos -478
+  ypos 506
+  disable true
+ }
+ ColorLookup {
+  lut {master {}
+    red {}
+    green {}
+    blue {}
+    alpha {curve L 0.1942449808 s0 x0.5 1 s0 0.1942449808 s0}}
+  name ColorLookup2
+  xpos -478
+  ypos 542
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge8
+  xpos -478
+  ypos 641
+ }
+push $N29fbc800
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge9
+  xpos -328
+  ypos 642
+  disable true
+ }
+push $N2babc400
+push $N23cdd000
+push $N23d0d000
+push $N2baec000
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_SSS_SKIN_DONE
+  name Merge44
+  xpos -1333
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_SSS_REST_DONE
+  name Merge48
+  xpos -980
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge46
+  xpos -713
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_SECONDARY_DONE
+  name Merge26
+  xpos -328
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_AMBIENT_DONE
+  name Merge28
+  xpos 53
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_CUSTOM_DONE
+  name Merge30
+  xpos 405
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_TRANSLUCENT_DONE
+  name Merge36
+  xpos 758
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_SPECULAR_DONE
+  name Merge39
+  xpos 1104
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  also_merge LGHT_RIM_LIGHT_DONE
+  name Merge41
+  xpos 1450
+  ypos 735
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  also_merge LGHT_AO_DONE
+  name Merge43
+  xpos 1809
+  ypos 735
  }
  Copy {
   inputs 2
   from0 rgba.alpha
   to0 rgba.alpha
-  name Copy1
-  xpos 3494
-  ypos 607
+  name Copy3
+  xpos 2413
+  ypos 729
  }
  Premult {
-  name Premult1
-  xpos 3494
-  ypos 652
+  name Premult13
+  xpos 2413
+  ypos 765
  }
-set Naed60400 [stack 0]
+ Dot {
+  name Dot150
+  xpos 2447
+  ypos 1137
+ }
+ Dot {
+  name Dot148
+  xpos 2447
+  ypos 1313
+ }
+set N23b69800 [stack 0]
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -1535,22 +2271,23 @@ set Naed60400 [stack 0]
     }
   enable_shadows true
   name Text12
-  xpos 3384
-  ypos 652
+  label "\[value message]"
+  xpos 2297
+  ypos 1304
   disable {{!parent.text_1}}
  }
-push $N9e705000
-push $N1738c400
-push $N9e704800
-push $N9e704000
-push $N9f6f1800
-push $N9f6f1000
-push $N9f6f0800
-push $N9f6f0000
-push $Na7543800
-push $Na7543000
-push $Na7542800
-push $Na7542000
+push $N23a11800
+push $N2bb5a800
+push $N290b0000
+push $N29119800
+push $N23c8f000
+push $N29f17000
+push $N29f4c800
+push $N29f86000
+push $N2ba41800
+push $N23d3d800
+push $N2ba81000
+push $N2babd000
  ContactSheet {
   inputs 13
   width {{width*columns}}
@@ -1560,29 +2297,83 @@ push $Na7542000
   startframe 1
   endframe 1
   name ContactSheet1
-  xpos 1862
-  ypos 676
-  hide_input true
+  xpos -2003
+  ypos 1786
  }
-push $Naed60400
+push $N23b69800
  Switch {
   inputs 14
   which {{parent.breakdown}}
   name Switch1
-  xpos 3494
-  ypos 676
-  hide_input true
+  xpos 2413
+  ypos 1786
  }
- Remove {
-  operation keep
-  channels rgba
-  name Remove1
-  xpos 3494
-  ypos 700
+ FrameHold {
+  first_frame 1
+  name FrameHold
+  xpos 2413
+  ypos 1869
+  disable {{enable_framehold==0}}
  }
+set N874c6b00 [stack 0]
  Output {
   name Output1
-  xpos 3494
-  ypos 740
+  xpos 2413
+  ypos 1955
+ }
+push $N874c6b00
+ Viewer {
+  frame_range 1-87
+  name Viewer1
+  xpos 2789
+  ypos 2024
+ }
+ Roto {
+  inputs 0
+  output alpha
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 0}
+    {t x44800000 x44428000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}}}}}
+  toolbox {createBezier {
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1024 778}
+  name Roto1
+  xpos 2192
+  ypos 1940
+ }
+ NoOp {
+  inputs 0
+  name CTRL_SHADOW
+  knobChanged "chip = nuke.thisNode()\['chip']\nrgb = nuke.thisNode()\['color_rgb']\n\nhex = '%08x' % chip.value()\nrgb.setValue(\[float(int(hex\[0:2],16))/255.0, float(int(hex\[2:4],16))/255.0, float(int(hex\[4:6],16))/255.0])\n"
+  xpos -2099
+  ypos 158
+  addUserKnob {20 User}
+  addUserKnob {40 chip l Shadow -STARTLINE}
+  chip 0xff
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 color_rgb}
+  color_rgb {0 0 0}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
 end_group
