@@ -10,3 +10,7 @@ Drag the *init.py* script and the *TPD_Tools* folder into your .nuke folder.
 If you already have an *init.py*, add this to it:
 
 > nuke.pluginAddPath('./TPD_Tools')
+
+### UPDATING
+
+To update to a newer version of TPD_Tools, delete the TPD_Tools folder in .nuke and replace it with a newer TPD_Tools folder.
