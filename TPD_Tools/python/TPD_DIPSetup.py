@@ -3,8 +3,8 @@
 #  by Noah Catan
 #
 #  TPD_DIPSetup.py
-#  Version: 1.1.3
-#  Last Updated: 05.25.2021
+#  Version: 1.1.4
+#  Last Updated: 06.24.2021
 # --------------------------------------------------------
 
 
@@ -16,7 +16,7 @@ grade_list = []
 m_layers = []
    
 def setup(DIP):
-	print "Setup Start"
+	print("Setup Start")
 	channels = DIP.channels()
 	global layers
 	layers = sorted( list( set([c.split('.')[0] for c in channels]) ) )
@@ -26,7 +26,7 @@ def setup(DIP):
 	for layer in layers:
 		if "m_" in layer:
 			m_layers.append(layer)
-			print str("Added "+layer)
+			print(str("Added "+layer))
 		'''else:
 			layers.remove(layer)
 			print str("Removed "+layer)'''
@@ -35,13 +35,13 @@ def setup(DIP):
 		nuke.message('No layers starting with "m_" found...')
 		return
 
-	print m_layers
+	print(m_layers)
 
 	if 'DIP' not in nuke.layers():
 		nuke.Layer( 'DIP', [ 'DIP.red', 'DIP.green', 'DIP.blue', 'DIP.alpha' ] )
 		"DIP layer not found. Creating DIP layer."
 	else:
-		print "DIP layer found."
+		print("DIP layer found.")
 
 		   
 	nukescripts.clear_selection_recursive()
@@ -50,7 +50,7 @@ def setup(DIP):
 	grp.setName('TPD_DIP_Prep')
 	grp['xpos'].setValue(DIP.xpos())
 	grp['ypos'].setValue(85+DIP.ypos())
-	print 'Created Group node'
+	print('Created Group node')
 	
 	with grp:
 		input1 = nuke.nodes.Input()
@@ -96,7 +96,7 @@ def nodeTree(node):
 		Creates the node tree inside the group.
 		Each layer will cut out its alpha from the next layer, i.e. 'm_01_xxxx' will cut a hole through 'm_02_xxxx' and so on.
 	"""
-	print 'Starting nodeTree function'        
+	print('Starting nodeTree function')
 	n = node
 	n1, n2, n3 = None, None, None
 	dot = nuke.nodes.Dot(xpos=150+n.xpos(),ypos=0+n.ypos(), inputs=[n])
@@ -104,7 +104,7 @@ def nodeTree(node):
 	n = dot
 	
 	for l in m_layers:
-		print str("Adding layer "+l)
+		print(str("Adding layer "+l))
 		x,y = n.xpos(), n.ypos()
 	
 		dot2 = nuke.nodes.Dot(xpos=150+x,ypos=0+y, inputs=[n])

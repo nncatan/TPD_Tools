@@ -3,8 +3,8 @@
 #  by Noah Catan
 #
 #  TPD_UpdateDIP.py
-#  Version: 1.0.1
-#  Last Updated: 06.21.2021
+#  Version: 1.0.2
+#  Last Updated: 06.24.2021
 # --------------------------------------------------------
 
 import nuke, nukescripts
@@ -12,7 +12,7 @@ import random
 
 title   = 'TPD_UpdateDIP'
 author  = 'Noah Catan'
-version = 'v1.0.0'
+version = 'v1.0.2'
 
 m_layers = []
 
@@ -77,7 +77,7 @@ def createGroup(node):
         
         # Create DIP layer if it doesn't exist
         if 'DIP' not in nuke.layers():
-		  nuke.Layer( 'DIP', [ 'DIP.red', 'DIP.green', 'DIP.blue', 'DIP.alpha' ] )
+            nuke.Layer( 'DIP', [ 'DIP.red', 'DIP.green', 'DIP.blue', 'DIP.alpha' ] )
         
         # Create Shuffle; shuffle rgba into DIP
         shuffle = nuke.nodes.Shuffle(xpos=input.xpos(),ypos=input.ypos()+75, inputs=[colorspace], out='DIP')

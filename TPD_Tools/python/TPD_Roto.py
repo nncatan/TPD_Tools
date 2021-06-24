@@ -3,8 +3,8 @@
 #  by Noah Catan
 #
 #  TDP_Roto.py
-#  Version: 1.0.3
-#  Last Updated: 12.09.2020
+#  Version: 1.0.4
+#  Last Updated: 06.24.2021
 # -------------------------------------------------------------
 
 import nuke

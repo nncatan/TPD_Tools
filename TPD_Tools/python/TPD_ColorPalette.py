@@ -3,8 +3,8 @@
 #  by Noah Catan
 #
 #  TDP_ColorPalette.py
-#  Version: 1.1.0
-#  Last Updated: 12.28.2020
+#  Version: 1.1.1
+#  Last Updated: 06.24.2021
 # -------------------------------------------------------------
 
 import nuke
@@ -51,7 +51,7 @@ def check_for_layers():
 	layers = []
 	for i in nuke.layers():
 		layers.append(i)
-	print layers
+	print(layers)
 
 	layerExists = False
 
@@ -61,20 +61,20 @@ def check_for_layers():
 		for layer in layers:
 			if lpass == layer:
 				layerExists = True
-				print str(str(layer) + ' layer already exists.')
+				print(str(str(layer) + ' layer already exists.'))
 		
 		if layerExists == False:
 			create_lp_layer(lp)
-			print str("Creating " + str(lpass) + ' layer.')
+			print(str("Creating " + str(lpass) + ' layer.'))
 
 	for layer in layers:
 		if layer == 'DIP':
 			layerExists == True
-			print 'DIP layer already exists.'
+			print('DIP layer already exists.')
 
 	if layerExists == False:
 		create_rgba_layer('DIP')
-		print "Creating DIP layer."
+		print("Creating DIP layer.")
 
 
 
@@ -83,11 +83,11 @@ def check_for_layers():
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 def TPD_ColorPalette():
-	print 'Checking for LGHT layers.'
+	print('Checking for LGHT layers.')
 	check_for_layers()
-	print 'Check complete.'
+	print('Check complete.')
 	nuke.createNode('TPD_ColorPalette')
-	print 'TPD_ColorPalette node created.'
+	print('TPD_ColorPalette node created.')
 
 
 nuke.menu('Nodes').addCommand('TPD_Tools/TPD_ColorPalette', 'TPD_ColorPalette.TPD_ColorPalette()', shortcut='shift+alt+o')

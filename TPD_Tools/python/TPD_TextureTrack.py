@@ -3,12 +3,12 @@
 #  by Noah Catan
 #
 #  TPD_DIPSetup.py
-#  Version: 1.0.2
-#  Last Updated: 04.12.2021
+#  Version: 1.0.3
+#  Last Updated: 06.24.2021
 # --------------------------------------------------------
 
 import nuke, nukescripts
-version = 'v1.0.2'
+version = 'v1.0.3'
 layers = []
 m_layers = []
 knobList = []
@@ -30,7 +30,7 @@ def textureTrackSetup(DIP):
 	for layer in layers:
 		if "m_" in layer:
 			m_layers.append(layer)
-			print "Added " +str(layer)
+			print("Added " +str(layer))
 
 	if len(m_layers)<1:
 		nuke.message('No layers starting with "m_" found...')
@@ -41,7 +41,7 @@ def textureTrackSetup(DIP):
 		nuke.Layer( 'DIP', [ 'DIP.red', 'DIP.green', 'DIP.blue', 'DIP.alpha' ] )
 		"DIP layer not found. Creating DIP layer."
 	else:
-		print "DIP layer found."
+		print("DIP layer found.")
 
 	# Clear selection
 	#nukescripts.clear_selection_recursive()
@@ -57,7 +57,7 @@ def textureTrackSetup(DIP):
 	grp['xpos'].setValue(DIP.xpos())
 	grp['ypos'].setValue(85+DIP.ypos())
 	grp.setInput(0,DIP)
-	print 'Created Group node'
+	print('Created Group node')
 
 	
 	text = nuke.Text_Knob('title',' ','<i>TPD_TextureTrack</i></b> {}<br>by Noah Catan<br><br><b>'.format(version))
@@ -115,7 +115,7 @@ def create_nodeTree(node):
 	n1 = texInput
 
 	for l in m_layers:
-		print str("Adding layer "+l)
+		print(str("Adding layer "+l))
 		x,y = n.xpos(), n.ypos()
 
 		dot1 = nuke.nodes.Dot(xpos=x+350,ypos=y+0,inputs=[n])
@@ -128,7 +128,7 @@ def create_nodeTree(node):
 		try:
 			nukescripts.autocrop(layer='a')
 		except:
-			print "oops"
+			print("oops")
 			return
 
 		autocrop = shuffle.dependent()[0]
