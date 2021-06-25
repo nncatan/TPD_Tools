@@ -2,7 +2,7 @@ Group {
  name ColorPalette
  inputs 4
  tile_color 0x325b84ff
- label v1.2.2
+ label v1.2.3
  note_font "Verdana Bold Italic"
  note_font_size 15
  addUserKnob {20 ColorPalette l "Color Palette"}
@@ -40,7 +40,7 @@ Group {
  addUserKnob {7 rimlightMix l "" -STARTLINE}
  rimlightMix 1
  addUserKnob {26 text_3 l "    "}
- addUserKnob {26 text_2 l "    " T "<br>\n<b><i>TPD_ColorPalette V1.2.2</i></b> by Noah Catan\n<br><br>Last Updated 06.22.2021"}
+ addUserKnob {26 text_2 l "    " T "<br>\n<b><i>TPD_ColorPalette V1.2.3</i></b> by Noah Catan\n<br><br>Last Updated 06.25.2021"}
  addUserKnob {20 framehold l "Frame Hold"}
  addUserKnob {6 enable_framehold l "enable framehold" +STARTLINE}
  addUserKnob {41 first_frame l "frame held" T FrameHold.first_frame}
@@ -230,7 +230,7 @@ Group {
   xpos -2273
   ypos 608
  }
-set N28b9b800 [stack 0]
+set N24abf000 [stack 0]
  Input {
   inputs 0
   name Input
@@ -243,13 +243,13 @@ set N28b9b800 [stack 0]
   xpos -2388
   ypos 95
  }
-set N28b9b000 [stack 0]
+set N24abec00 [stack 0]
  Dot {
   name Dot100
   xpos -2222
   ypos 95
  }
-set N28b9ac00 [stack 0]
+set N24abf400 [stack 0]
 add_layer {LGHT_KEY_LIGHT LGHT_KEY_LIGHT.alpha}
 add_layer {DIP DIP.red DIP.green DIP.blue DIP.alpha}
 add_layer {texMask texMask.red texMask.green texMask.blue texMask.alpha}
@@ -267,7 +267,7 @@ add_layer {texMask texMask.red texMask.green texMask.blue texMask.alpha}
   xpos -2222
   ypos 225
  }
-set N28b9a400 [stack 0]
+set N24abd400 [stack 0]
  Shuffle {
   in LGHT_KEY_LIGHT
   red black
@@ -283,7 +283,7 @@ set N28b9a400 [stack 0]
   xpos -2222
   ypos 382
  }
-set N28bb9c00 [stack 0]
+set N24abd000 [stack 0]
  Invert {
   channels alpha
   name Invert3
@@ -306,7 +306,7 @@ set N28bb9c00 [stack 0]
   xpos -2222
   ypos 529
  }
-set N28bb9000 [stack 0]
+set N24ac1800 [stack 0]
  Merge2 {
   inputs 2
   operation mask
@@ -314,55 +314,55 @@ set N28bb9000 [stack 0]
   xpos -2256
   ypos 642
  }
-push $N28b9ac00
+push $N24abf400
  Dot {
   name Dot121
   xpos -679
   ypos 95
  }
-set N28bb8800 [stack 0]
+set Nbfcb400 [stack 0]
  Dot {
   name Dot109
   xpos -444
   ypos 95
  }
-set N28bb8400 [stack 0]
+set Nbfcb000 [stack 0]
  Dot {
   name Dot110
   xpos -63
   ypos 95
  }
-set N28bb8000 [stack 0]
+set Nbfcac00 [stack 0]
  Dot {
   name Dot111
   xpos 289
   ypos 95
  }
-set N2905dc00 [stack 0]
+set Nbfca800 [stack 0]
  Dot {
   name Dot112
   xpos 642
   ypos 95
  }
-set N2905d800 [stack 0]
+set Nbfca400 [stack 0]
  Dot {
   name Dot106
   xpos 988
   ypos 95
  }
-set N2905d400 [stack 0]
+set Nbfca000 [stack 0]
  Dot {
   name Dot107
   xpos 1334
   ypos 95
  }
-set N2905d000 [stack 0]
+set N24ab5000 [stack 0]
  Dot {
   name Dot108
   xpos 1693
   ypos 95
  }
-set N2905cc00 [stack 0]
+set N24ab4c00 [stack 0]
 add_layer {LGHT_AO LGHT_AO.alpha}
  Remove {
   operation keep
@@ -383,8 +383,8 @@ add_layer {LGHT_AO LGHT_AO.alpha}
   xpos 1659
   ypos 390
  }
-set N2905c400 [stack 0]
-push $N28b9b000
+set N24ab6000 [stack 0]
+push $N24abec00
  Shuffle {
   in DIP
   red white
@@ -424,73 +424,73 @@ push $N28b9b000
   xpos -2072
   ypos 275
  }
-set N2907ac00 [stack 0]
+set N24aab800 [stack 0]
  Dot {
   name Dot102
   xpos -1670
   ypos 275
  }
-set N2907a800 [stack 0]
+set N24aaac00 [stack 0]
  Dot {
   name Dot119
   xpos -1299
   ypos 275
  }
-set N2907a400 [stack 0]
+set N24aaa000 [stack 0]
  Dot {
   name Dot133
   xpos -1158
   ypos 275
  }
-set N2907a000 [stack 0]
+set N24aab400 [stack 0]
  Dot {
   name Dot127
   xpos -946
   ypos 275
  }
-set N2909dc00 [stack 0]
+set N24aab000 [stack 0]
  Dot {
   name Dot104
   xpos -294
   ypos 275
  }
-set N2909d800 [stack 0]
+set N24aaa800 [stack 0]
  Dot {
   name Dot113
   xpos 87
   ypos 275
  }
-set N2909d400 [stack 0]
+set N24ab9800 [stack 0]
  Dot {
   name Dot114
   xpos 439
   ypos 275
  }
-set N2909d000 [stack 0]
+set N24ab9c00 [stack 0]
  Dot {
   name Dot115
   xpos 792
   ypos 275
  }
-set N2909cc00 [stack 0]
+set N24ab9400 [stack 0]
  Dot {
   name Dot116
   xpos 1138
   ypos 275
  }
-set N2909c800 [stack 0]
+set N24ab9000 [stack 0]
  Dot {
   name Dot117
   xpos 1484
   ypos 275
  }
-set N2909c400 [stack 0]
+set N24ab8c00 [stack 0]
  Dot {
   name Dot118
   xpos 1843
   ypos 275
  }
-set N2909c000 [stack 0]
+set N24aba000 [stack 0]
  Grade {
   white {{parent.CTRL_AO.color_rgb} {parent.CTRL_AO.color_rgb} {parent.CTRL_AO.color_rgb} {parent.CTRL_AO.color_rgb}}
   name AO_LIGHT1
@@ -498,7 +498,7 @@ set N2909c000 [stack 0]
   xpos 1897
   ypos 330
  }
-push $N2909c000
+push $N24aba000
  Keymix {
   inputs 3
   channels rgba
@@ -526,7 +526,7 @@ add_layer {LGHT_AO_DONE LGHT_AO_DONE.red LGHT_AO_DONE.green LGHT_AO_DONE.blue LG
   xpos 1809
   ypos 502
  }
-set N290b1000 [stack 0]
+set N24abb400 [stack 0]
  Dot {
   name Dot147
   xpos 1972
@@ -537,7 +537,7 @@ set N290b1000 [stack 0]
   xpos 1972
   ypos 807
  }
-set N290b0800 [stack 0]
+set N24a8e000 [stack 0]
  Premult {
   name Premult25
   xpos 1938
@@ -554,7 +554,7 @@ set N290b0800 [stack 0]
   transforms {{0 2}
     }
   cursor_position 2
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -571,8 +571,8 @@ set N290b0800 [stack 0]
   ypos 1199
   disable {{!parent.text_1}}
  }
-set N290b0000 [stack 0]
-push $N2905d000
+set N24a8ec00 [stack 0]
+push $N24ab5000
 add_layer {LGHT_RIM_LIGHT LGHT_RIM_LIGHT.alpha}
  Remove {
   operation keep
@@ -593,8 +593,8 @@ add_layer {LGHT_RIM_LIGHT LGHT_RIM_LIGHT.alpha}
   xpos 1300
   ypos 390
  }
-set N290e7800 [stack 0]
-push $N2909c400
+set N24a8e400 [stack 0]
+push $N24ab8c00
  Grade {
   white {{parent.CTRL_RIM_LIGHT.color_rgb} {parent.CTRL_RIM_LIGHT.color_rgb} {parent.CTRL_RIM_LIGHT.color_rgb} {parent.CTRL_RIM_LIGHT.color_rgb}}
   name RIM_LIGHT_LIGHT1
@@ -629,7 +629,7 @@ add_layer {LGHT_RIM_LIGHT_DONE LGHT_RIM_LIGHT_DONE.red LGHT_RIM_LIGHT_DONE.green
   xpos 1450
   ypos 501
  }
-set N290e6800 [stack 0]
+set N24ac3400 [stack 0]
  Dot {
   name Dot146
   xpos 1621
@@ -640,7 +640,7 @@ set N290e6800 [stack 0]
   xpos 1621
   ypos 808
  }
-set N290e6000 [stack 0]
+set N24ac2c00 [stack 0]
  Premult {
   name Premult24
   xpos 1587
@@ -657,7 +657,7 @@ set N290e6000 [stack 0]
   transforms {{0 2}
     }
   cursor_position 9
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -674,8 +674,8 @@ set N290e6000 [stack 0]
   ypos 1198
   disable {{!parent.text_1}}
  }
-set N29119800 [stack 0]
-push $N2905d400
+set N24ab5400 [stack 0]
+push $Nbfca000
 add_layer {LGHT_SPECULAR LGHT_SPECULAR.alpha}
  Remove {
   operation keep
@@ -696,8 +696,8 @@ add_layer {LGHT_SPECULAR LGHT_SPECULAR.alpha}
   xpos 954
   ypos 390
  }
-set N29119000 [stack 0]
-push $N2909c800
+set N24ab4000 [stack 0]
+push $N24ab9000
  Grade {
   white {{parent.CTRL_SPECULAR.color_rgb} {parent.CTRL_SPECULAR.color_rgb} {parent.CTRL_SPECULAR.color_rgb} {parent.CTRL_SPECULAR.color_rgb}}
   name SPECULAR_LIGHT1
@@ -732,7 +732,7 @@ add_layer {LGHT_SPECULAR_DONE LGHT_SPECULAR_DONE.red LGHT_SPECULAR_DONE.green LG
   xpos 1104
   ypos 501
  }
-set N29118000 [stack 0]
+set N3a337000 [stack 0]
  Dot {
   name Dot145
   xpos 1254
@@ -743,7 +743,7 @@ set N29118000 [stack 0]
   xpos 1254
   ypos 806
  }
-set N23c8f800 [stack 0]
+set N3a336800 [stack 0]
  Premult {
   name Premult23
   xpos 1220
@@ -760,7 +760,7 @@ set N23c8f800 [stack 0]
   transforms {{0 2}
     }
   cursor_position 8
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -777,7 +777,7 @@ set N23c8f800 [stack 0]
   ypos 1202
   disable {{!parent.text_1}}
  }
-set N23c8f000 [stack 0]
+set N3a336000 [stack 0]
  Input {
   inputs 0
   name skin
@@ -791,7 +791,7 @@ set N23c8f000 [stack 0]
   xpos -1075
   ypos 345
  }
-push $N2907a000
+push $N24aab400
  Switch {
   inputs 2
   which {{"\[exists input2]"}}
@@ -804,20 +804,20 @@ push $N2907a000
   xpos -1158
   ypos 478
  }
-set N23c8e000 [stack 0]
+set N3a36f000 [stack 0]
  Invert {
   channels alpha
   name Invert2
   xpos -1111
   ypos 469
  }
-push $N28b9a400
+push $N24abd400
  Dot {
   name Dot103
   xpos -1871
   ypos 225
  }
-set N23cb3800 [stack 0]
+set N3a36e800 [stack 0]
  Dot {
   name Dot128
   xpos -1446
@@ -845,13 +845,13 @@ set N23cb3800 [stack 0]
   xpos -1349
   ypos 401
  }
-set N23cb2800 [stack 0]
+set N3b06f800 [stack 0]
  Dot {
   name Dot131
   xpos -1011
   ypos 401
  }
-push $N2909dc00
+push $N24aab000
  Grade {
   white {{parent.CTRL_SSS_REST.color_rgb} {parent.CTRL_SSS_REST.color_rgb} {parent.CTRL_SSS_REST.color_rgb} {parent.CTRL_SSS_REST.color_rgb}}
   name SSS_REST_LIGHT1
@@ -893,7 +893,7 @@ add_layer {LGHT_SSS_REST_DONE LGHT_SSS_REST_DONE.red LGHT_SSS_REST_DONE.green LG
   xpos -980
   ypos 530
  }
-set N23cdd000 [stack 0]
+set N3b06e000 [stack 0]
  Dot {
   name Dot140
   xpos -841
@@ -904,15 +904,15 @@ set N23cdd000 [stack 0]
   xpos -841
   ypos 798
  }
-set N23cdc800 [stack 0]
+set N3b09f800 [stack 0]
  Premult {
   name Premult18
   xpos -875
   ypos 1160
  }
-push $N23c8e000
-push $N23cb2800
-push $N2907a400
+push $N3a36f000
+push $N3b06f800
+push $N24aaa000
  Grade {
   white {{parent.CTRL_SSS_SKIN.color_rgb} {parent.CTRL_SSS_SKIN.color_rgb} {parent.CTRL_SSS_SKIN.color_rgb} {parent.CTRL_SSS_SKIN.color_rgb}}
   name SSS_SKIN_LIGHT1
@@ -954,7 +954,7 @@ add_layer {LGHT_SSS_SKIN_DONE LGHT_SSS_SKIN_DONE.red LGHT_SSS_SKIN_DONE.green LG
   xpos -1333
   ypos 533
  }
-set N23d0d000 [stack 0]
+set N3b09e000 [stack 0]
  Dot {
   name Dot3
   xpos -1187
@@ -965,7 +965,7 @@ set N23d0d000 [stack 0]
   xpos -1187
   ypos 798
  }
-set N23d0c800 [stack 0]
+set N3b0d1800 [stack 0]
  Premult {
   name Premult17
   xpos -1221
@@ -994,7 +994,7 @@ set N23d0c800 [stack 0]
   transforms {{0 2}
     }
   cursor_position 3
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1011,8 +1011,8 @@ set N23d0c800 [stack 0]
   ypos 1208
   disable {{!parent.text_1}}
  }
-set N23d3d800 [stack 0]
-push $N2905d800
+set N3b0d0800 [stack 0]
+push $Nbfca400
 add_layer {LGHT_TRANSLUCENT LGHT_TRANSLUCENT.alpha}
  Remove {
   operation keep
@@ -1033,8 +1033,8 @@ add_layer {LGHT_TRANSLUCENT LGHT_TRANSLUCENT.alpha}
   xpos 608
   ypos 390
  }
-set N23d3d000 [stack 0]
-push $N2909cc00
+set N3b0d0000 [stack 0]
+push $N24ab9400
  Grade {
   white {{parent.CTRL_TRANSLUCENT.color_rgb} {parent.CTRL_TRANSLUCENT.color_rgb} {parent.CTRL_TRANSLUCENT.color_rgb} {parent.CTRL_TRANSLUCENT.color_rgb}}
   name TRANSLUCENT_LIGHT1
@@ -1069,7 +1069,7 @@ add_layer {LGHT_TRANSLUCENT_DONE LGHT_TRANSLUCENT_DONE.red LGHT_TRANSLUCENT_DONE
   xpos 758
   ypos 499
  }
-set N23d3c000 [stack 0]
+set N3b103000 [stack 0]
  Dot {
   name Dot144
   xpos 915
@@ -1080,7 +1080,7 @@ set N23d3c000 [stack 0]
   xpos 915
   ypos 803
  }
-set N29f17800 [stack 0]
+set N3b102800 [stack 0]
  Premult {
   name Premult22
   xpos 881
@@ -1097,7 +1097,7 @@ set N29f17800 [stack 0]
   transforms {{0 2}
     }
   cursor_position 11
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1114,8 +1114,8 @@ set N29f17800 [stack 0]
   ypos 1196
   disable {{!parent.text_1}}
  }
-set N29f17000 [stack 0]
-push $N2905dc00
+set N3b102000 [stack 0]
+push $Nbfca800
 add_layer {LGHT_CUSTOM LGHT_CUSTOM.alpha}
  Remove {
   operation keep
@@ -1136,8 +1136,8 @@ add_layer {LGHT_CUSTOM LGHT_CUSTOM.alpha}
   xpos 255
   ypos 390
  }
-set N29f16800 [stack 0]
-push $N2909d000
+set N3b13b800 [stack 0]
+push $N24ab9c00
  Grade {
   white {{parent.CTRL_CUSTOM.color_rgb} {parent.CTRL_CUSTOM.color_rgb} {parent.CTRL_CUSTOM.color_rgb} {parent.CTRL_CUSTOM.color_rgb}}
   name CUSTOM_LIGHT1
@@ -1172,7 +1172,7 @@ add_layer {LGHT_CUSTOM_DONE LGHT_CUSTOM_DONE.red LGHT_CUSTOM_DONE.green LGHT_CUS
   xpos 405
   ypos 497
  }
-set N29f4d800 [stack 0]
+set N3b13a800 [stack 0]
  Dot {
   name Dot143
   xpos 560
@@ -1183,7 +1183,7 @@ set N29f4d800 [stack 0]
   xpos 560
   ypos 804
  }
-set N29f4d000 [stack 0]
+set N3b13a000 [stack 0]
  Premult {
   name Premult21
   xpos 526
@@ -1200,7 +1200,7 @@ set N29f4d000 [stack 0]
   transforms {{0 2}
     }
   cursor_position 6
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1217,8 +1217,8 @@ set N29f4d000 [stack 0]
   ypos 1194
   disable {{!parent.text_1}}
  }
-set N29f4c800 [stack 0]
-push $N28bb8000
+set N3b16d800 [stack 0]
+push $Nbfcac00
 add_layer {LGHT_AMBIENT LGHT_AMBIENT.alpha}
  Remove {
   operation keep
@@ -1239,8 +1239,8 @@ add_layer {LGHT_AMBIENT LGHT_AMBIENT.alpha}
   xpos -97
   ypos 390
  }
-set N29f4c000 [stack 0]
-push $N2909d400
+set N3b16d000 [stack 0]
+push $N24ab9800
  Grade {
   white {{parent.CTRL_AMBIENT.color_rgb} {parent.CTRL_AMBIENT.color_rgb} {parent.CTRL_AMBIENT.color_rgb} {parent.CTRL_AMBIENT.color_rgb}}
   name AMBIENT_LIGHT1
@@ -1275,7 +1275,7 @@ add_layer {LGHT_AMBIENT_DONE LGHT_AMBIENT_DONE.red LGHT_AMBIENT_DONE.green LGHT_
   xpos 53
   ypos 499
  }
-set N29f87000 [stack 0]
+set N3b16c000 [stack 0]
  Dot {
   name Dot142
   xpos 208
@@ -1286,7 +1286,7 @@ set N29f87000 [stack 0]
   xpos 208
   ypos 806
  }
-set N29f86800 [stack 0]
+set N3b1ad800 [stack 0]
  Premult {
   name Premult20
   xpos 174
@@ -1303,7 +1303,7 @@ set N29f86800 [stack 0]
   transforms {{0 2}
     }
   cursor_position 7
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1320,8 +1320,8 @@ set N29f86800 [stack 0]
   ypos 1196
   disable {{!parent.text_1}}
  }
-set N29f86000 [stack 0]
-push $N28bb8400
+set N3b1ad000 [stack 0]
+push $Nbfcb000
 add_layer {LGHT_SECONDARY LGHT_SECONDARY.alpha}
  Remove {
   operation keep
@@ -1342,8 +1342,8 @@ add_layer {LGHT_SECONDARY LGHT_SECONDARY.alpha}
   xpos -478
   ypos 404
  }
-set N29fbd800 [stack 0]
-push $N2909d800
+set N3b1ac800 [stack 0]
+push $N24aaa800
  Grade {
   white {{parent.CTRL_SECONDARY.color_rgb} {parent.CTRL_SECONDARY.color_rgb} {parent.CTRL_SECONDARY.color_rgb} {parent.CTRL_SECONDARY.color_rgb}}
   name SECONDARY_LIGHT1
@@ -1378,7 +1378,7 @@ add_layer {LGHT_SECONDARY_DONE LGHT_SECONDARY_DONE.red LGHT_SECONDARY_DONE.green
   xpos -328
   ypos 513
  }
-set N29fbc800 [stack 0]
+set N3b1eb800 [stack 0]
  Dot {
   name Dot141
   xpos -171
@@ -1389,7 +1389,7 @@ set N29fbc800 [stack 0]
   xpos -171
   ypos 803
  }
-set N29fbc000 [stack 0]
+set N3b1eb000 [stack 0]
  Premult {
   name Premult19
   xpos -205
@@ -1406,7 +1406,7 @@ set N29fbc000 [stack 0]
   transforms {{0 2}
     }
   cursor_position 9
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1423,8 +1423,8 @@ set N29fbc000 [stack 0]
   ypos 1210
   disable {{!parent.text_1}}
  }
-set N2ba41800 [stack 0]
-push $N23cb3800
+set N3b1ea800 [stack 0]
+push $N3a36e800
  Shuffle {
   in LGHT_KEY_LIGHT
   red black
@@ -1446,7 +1446,7 @@ push $N23cb3800
   xpos -1814
   ypos 376
  }
-push $N2907a800
+push $N24aaac00
  Grade {
   white {{parent.CTRL_KEY_LIGHT.color_rgb} {parent.CTRL_KEY_LIGHT.color_rgb} {parent.CTRL_KEY_LIGHT.color_rgb} {parent.CTRL_KEY_LIGHT.color_rgb}}
   name KEY_LIGHT_LIGHT1
@@ -1481,7 +1481,7 @@ add_layer {LGHT_KEY_LIGHT_DONE LGHT_KEY_LIGHT_DONE.red LGHT_KEY_LIGHT_DONE.green
   xpos -1704
   ypos 452
  }
-set N2ba81c00 [stack 0]
+set N3b218c00 [stack 0]
  Dot {
   name Dot137
   xpos -1562
@@ -1503,7 +1503,7 @@ set N2ba81c00 [stack 0]
   transforms {{0 2}
     }
   cursor_position 9
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.text_size}}
   center {960 540}
   cursor_initialised true
@@ -1520,9 +1520,9 @@ set N2ba81c00 [stack 0]
   ypos 1203
   disable {{!parent.text_1}}
  }
-set N2ba81000 [stack 0]
-push $N28bb9c00
-push $N2907ac00
+set N3b218000 [stack 0]
+push $N24abd000
+push $N24aab800
  Grade {
   white {{parent.CTRL_SHADOW.color_rgb} {parent.CTRL_SHADOW.color_rgb} {parent.CTRL_SHADOW.color_rgb} {parent.CTRL_SHADOW.color_rgb}}
   name KEY_LIGHT_SHADOW1
@@ -1565,7 +1565,7 @@ add_layer {LGHT_SHADOW_DONE LGHT_SHADOW_DONE.red LGHT_SHADOW_DONE.green LGHT_SHA
   xpos -2106
   ypos 472
  }
-set N2babdc00 [stack 0]
+set N3b256c00 [stack 0]
  Dot {
   name Dot136
   xpos -1969
@@ -1587,7 +1587,7 @@ set N2babdc00 [stack 0]
   transforms {{0 2}
     }
   cursor_position 6
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1604,15 +1604,15 @@ set N2babdc00 [stack 0]
   ypos 1198
   disable {{!parent.text_1}}
  }
-set N2babd000 [stack 0]
-push $N290b0800
-push $N290e6000
-push $N23c8f800
-push $N29f17800
-push $N29f4d000
-push $N29f86800
-push $N29fbc000
-push $N28bb8800
+set N3b256000 [stack 0]
+push $N24a8e000
+push $N24ac2c00
+push $N3a336800
+push $N3b102800
+push $N3b13a000
+push $N3b1ad800
+push $N3b1eb000
+push $Nbfcb400
  Shuffle {
   in DIP
   name SHUFFLE_KEY_LIGHT2
@@ -1630,22 +1630,22 @@ push $N28bb8800
   xpos -679
   ypos 525
  }
-set N2babc400 [stack 0]
+set N3b29b400 [stack 0]
  Dot {
   name Dot159
   xpos -576
   ypos 525
  }
-push $N23cdc800
-push $N23d0c800
-push $N28b9b800
+push $N3b09f800
+push $N3b0d1800
+push $N24abf000
  Dot {
   name Dot6
   xpos -1909
   ypos 608
  }
-set N2baedc00 [stack 0]
-push $N28bb9000
+set N3b29ac00 [stack 0]
+push $N24ac1800
  Dot {
   name Dot5
   xpos -1871
@@ -1658,7 +1658,7 @@ push $N28bb9000
   xpos -1905
   ypos 640
  }
-push $N2ba81c00
+push $N3b218c00
  Colorspace {
   colorspace_out HSV
   name Colorspace1
@@ -1681,7 +1681,7 @@ push $N2ba81c00
   xpos -1704
   ypos 676
  }
-push $N2babdc00
+push $N3b256c00
  Dot {
   name Dot123
   xpos -2072
@@ -1695,7 +1695,7 @@ push $N2babdc00
   xpos -1704
   ypos 735
  }
-set N2baec000 [stack 0]
+set N3b2c1000 [stack 0]
  Dot {
   name Dot99
   xpos -1670
@@ -1795,7 +1795,7 @@ set N2baec000 [stack 0]
   transforms {{0 2}
     }
   cursor_position 18
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1812,8 +1812,8 @@ set N2baec000 [stack 0]
   ypos 1198
   disable {{!parent.text_1}}
  }
-set N2bb5a800 [stack 0]
-push $N2905cc00
+set N3b337800 [stack 0]
+push $N24ab4c00
  Dot {
   name Dot124
   xpos 2447
@@ -1826,7 +1826,7 @@ push $N2905cc00
   xpos 2413
   ypos 145
  }
-set N2bb5a000 [stack 0]
+set N3b337000 [stack 0]
  Dot {
   name Dot160
   xpos 2258
@@ -1843,7 +1843,7 @@ set N2bb5a000 [stack 0]
   transforms {{0 2}
     }
   cursor_position 12
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -1860,51 +1860,51 @@ set N2bb5a000 [stack 0]
   ypos 1240
   disable {{!parent.text_1}}
  }
-set N23a11800 [stack 0]
-push $N2bb5a000
-push $N2baedc00
+set N3b336800 [stack 0]
+push $N3b337000
+push $N3b29ac00
  Dot {
   name Dot9
   xpos -495
   ypos 608
  }
-set N23a11400 [stack 0]
+set N3b336400 [stack 0]
  Dot {
   name Dot10
   xpos -114
   ypos 608
  }
-set N23a11000 [stack 0]
+set N3b336000 [stack 0]
  Dot {
   name Dot11
   xpos 238
   ypos 608
  }
-set N23a10c00 [stack 0]
+set N3b371c00 [stack 0]
  Dot {
   name Dot12
   xpos 591
   ypos 608
  }
-set N23a10800 [stack 0]
+set N3b371800 [stack 0]
  Dot {
   name Dot13
   xpos 937
   ypos 608
  }
-set N23a10400 [stack 0]
+set N3b371400 [stack 0]
  Dot {
   name Dot14
   xpos 1283
   ypos 608
  }
-set N23a10000 [stack 0]
+set N3b371000 [stack 0]
  Dot {
   name Dot15
   xpos 1642
   ypos 608
  }
-push $N2905c400
+push $N24ab6000
  ColorLookup {
   lut {master {}
     red {}
@@ -1922,7 +1922,7 @@ push $N2905c400
   xpos 1659
   ypos 642
  }
-push $N290b1000
+push $N24abb400
  Merge2 {
   inputs 2
   operation stencil
@@ -1931,8 +1931,8 @@ push $N290b1000
   ypos 642
   disable true
  }
-push $N23a10000
-push $N290e7800
+push $N3b371000
+push $N24a8e400
  Invert {
   channels alpha
   name Invert10
@@ -1957,7 +1957,7 @@ push $N290e7800
   xpos 1300
   ypos 642
  }
-push $N290e6800
+push $N24ac3400
  Merge2 {
   inputs 2
   operation stencil
@@ -1966,8 +1966,8 @@ push $N290e6800
   ypos 642
   disable true
  }
-push $N23a10400
-push $N29119000
+push $N3b371400
+push $N24ab4000
  Invert {
   channels alpha
   name Invert9
@@ -1992,7 +1992,7 @@ push $N29119000
   xpos 954
   ypos 641
  }
-push $N29118000
+push $N3a337000
  Merge2 {
   inputs 2
   operation stencil
@@ -2001,8 +2001,8 @@ push $N29118000
   ypos 641
   disable true
  }
-push $N23a10800
-push $N23d3d000
+push $N3b371800
+push $N3b0d0000
  Invert {
   channels alpha
   name Invert8
@@ -2027,7 +2027,7 @@ push $N23d3d000
   xpos 608
   ypos 641
  }
-push $N23d3c000
+push $N3b103000
  Merge2 {
   inputs 2
   operation stencil
@@ -2036,8 +2036,8 @@ push $N23d3c000
   ypos 641
   disable true
  }
-push $N23a10c00
-push $N29f16800
+push $N3b371c00
+push $N3b13b800
  Invert {
   channels alpha
   name Invert7
@@ -2062,7 +2062,7 @@ push $N29f16800
   xpos 255
   ypos 641
  }
-push $N29f4d800
+push $N3b13a800
  Merge2 {
   inputs 2
   operation stencil
@@ -2071,8 +2071,8 @@ push $N29f4d800
   ypos 641
   disable true
  }
-push $N23a11000
-push $N29f4c000
+push $N3b336000
+push $N3b16d000
  Invert {
   channels alpha
   name Invert6
@@ -2097,7 +2097,7 @@ push $N29f4c000
   xpos -97
   ypos 641
  }
-push $N29f87000
+push $N3b16c000
  Merge2 {
   inputs 2
   operation stencil
@@ -2106,8 +2106,8 @@ push $N29f87000
   ypos 641
   disable true
  }
-push $N23a11400
-push $N29fbd800
+push $N3b336400
+push $N3b1ac800
  Invert {
   channels alpha
   name Invert5
@@ -2132,7 +2132,7 @@ push $N29fbd800
   xpos -478
   ypos 641
  }
-push $N29fbc800
+push $N3b1eb800
  Merge2 {
   inputs 2
   operation stencil
@@ -2141,10 +2141,10 @@ push $N29fbc800
   ypos 642
   disable true
  }
-push $N2babc400
-push $N23cdd000
-push $N23d0d000
-push $N2baec000
+push $N3b29b400
+push $N3b06e000
+push $N3b09e000
+push $N3b2c1000
  Merge2 {
   inputs 2
   operation plus
@@ -2247,7 +2247,7 @@ push $N2baec000
   xpos 2447
   ypos 1313
  }
-set N23b69800 [stack 0]
+set N3b48c800 [stack 0]
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -2259,7 +2259,7 @@ set N23b69800 [stack 0]
   transforms {{0 2}
     }
   cursor_position 6
-  font {{ Arial : Regular : arial.ttf : 0 }}
+  font {{ Courier : Regular : Courier.pfa : 0 }}
   global_font_scale {{parent.Text1.global_font_scale}}
   center {960 540}
   cursor_initialised true
@@ -2276,18 +2276,18 @@ set N23b69800 [stack 0]
   ypos 1304
   disable {{!parent.text_1}}
  }
-push $N23a11800
-push $N2bb5a800
-push $N290b0000
-push $N29119800
-push $N23c8f000
-push $N29f17000
-push $N29f4c800
-push $N29f86000
-push $N2ba41800
-push $N23d3d800
-push $N2ba81000
-push $N2babd000
+push $N3b336800
+push $N3b337800
+push $N24a8ec00
+push $N24ab5400
+push $N3a336000
+push $N3b102000
+push $N3b16d800
+push $N3b1ad000
+push $N3b1ea800
+push $N3b0d0800
+push $N3b218000
+push $N3b256000
  ContactSheet {
   inputs 13
   width {{width*columns}}
@@ -2300,7 +2300,7 @@ push $N2babd000
   xpos -2003
   ypos 1786
  }
-push $N23b69800
+push $N3b48c800
  Switch {
   inputs 14
   which {{parent.breakdown}}
@@ -2315,13 +2315,13 @@ push $N23b69800
   ypos 1869
   disable {{enable_framehold==0}}
  }
-set N874c6b00 [stack 0]
+set N24b81600 [stack 0]
  Output {
   name Output1
   xpos 2413
   ypos 1955
  }
-push $N874c6b00
+push $N24b81600
  Viewer {
   frame_range 1-87
   name Viewer1
