@@ -1,508 +1,323 @@
+add_layer {aliased aliased.red aliased.green aliased.blue aliased.alpha}
+add_layer {antiAliased antiAliased.red antiAliased.green antiAliased.blue antiAliased.alpha}
 Group {
  name TPD_ColorMatte
  tile_color 0x3b9f00ff
- label "\[value desc]"
- note_font Verdana
- addUserKnob {20 User}
- addUserKnob {41 colormatte_channel l channel T Shuffle21.in}
+ gl_color 0xfd00fdff
+ label "\[value desc] | v1.1.3"
+ addUserKnob {20 tpdColorMatte l "TPD ColorMatte"}
+ addUserKnob {26 info l "     " T "<b><i>TPD_ColorMatte V1.1.4</i></b> by Noah Catan\n<br><br>Last Updated 07.24.2021"}
+ addUserKnob {26 text_2 l "       "}
  addUserKnob {1 desc}
- addUserKnob {26 ""}
- addUserKnob {6 enable_m01 l enable +STARTLINE}
- enable_m01 true
- addUserKnob {41 matte01 l "matte 01  " -STARTLINE T Grade14.white}
- addUserKnob {6 enable_m02 l enable +STARTLINE}
- addUserKnob {41 matte02 l "matte 02  " -STARTLINE T Grade1.white}
- addUserKnob {6 enable_m03 l enable +STARTLINE}
- addUserKnob {41 matte03 l "matte 03  " -STARTLINE T Grade2.white}
- addUserKnob {6 enable_m04 l enable +STARTLINE}
- addUserKnob {41 matte04 l "matte 04  " -STARTLINE T Grade3.white}
- addUserKnob {6 enable_m05 l enable +STARTLINE}
- addUserKnob {41 matte05 l "matte 05  " -STARTLINE T Grade4.white}
- addUserKnob {6 enable_m06 l enable +STARTLINE}
- addUserKnob {41 matte06 l "matte 06  " -STARTLINE T Grade5.white}
- addUserKnob {6 invertMask l "invert mask" +STARTLINE}
- addUserKnob {26 ""}
- addUserKnob {20 edge_treatment l "edge treatment" n 1}
- edge_treatment 0
- addUserKnob {26 text l "      " T " "}
- addUserKnob {41 tolerance T CONTROL.tolerance}
- addUserKnob {41 range T ErodeSmooth1.range}
- addUserKnob {41 size l blur T ErodeSmooth1.size}
- addUserKnob {41 tighten T ErodeSmooth1.tighten}
+ addUserKnob {26 text_4 l "      "}
+ addUserKnob {41 id_aliased l "id aliased" T Shuffle1.in}
+ addUserKnob {41 id_antialiased l "id antialiased" T Shuffle3.in}
+ addUserKnob {26 text_3 l "     "}
+ addUserKnob {12 picker1 l "     picker"}
+ addUserKnob {6 pickid_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 text_1 l "      " T "      "}
+ addUserKnob {22 sID l "   <b><i><font color= \"yellow\">Select ID   " T "cmNode = nuke.thisNode()\n\nclampDist = 150\n\n# Get ID Count, set it to 1 if less than 1\nidCount = cmNode.knob(\"idCount\").value()\nif idCount <1:\n    idCount = 1\n\nwith cmNode:\n    \n    #---------- SAMPLE PICKER VALUES ------------\n    \n    # Assign PickerCTRL node and it's pos knob\n    pCtrl = nuke.toNode(\"PickerCTRL\")\n    pos   = pCtrl.knob(\"pos\")\n    \n    # Sample pCTRL's rgb values\n    r = pCtrl.sample(\"red\", pos.x(), pos.y())\n    g = pCtrl.sample(\"green\", pos.x(), pos.y())\n    b = pCtrl.sample(\"blue\", pos.x(), pos.y())\n    \n    # Set col knob to sampled rgb values\n    pCtrl.knob(\"col\").setValue(\[r, g, b])\n    \n    \n    \n    #---------- CREATE ID PASS ALPHAS ------------\n    \n    # Assign superdots and id value\n    sdot    = nuke.toNode(\"superdot\")\n    sdot1   = nuke.toNode(\"superdot1\")\n    idValue = cmNode.knob(\"pickid\").value()\n    \n    # Set xpos and ypos\n    xp = sdot.xpos()+(clampDist*idCount)\n    yp = sdot.ypos()+100\n    \n    # Create Clamp node, set values and inputs\n    clamp = nuke.nodes.Clamp(xpos=xp, ypos=yp, inputs=\[sdot])\n    clamp.knob(\"channels\").setValue(\"rgba\")\n    clamp.knob(\"minimum\").setValue(idValue+\[0])\n    clamp.knob(\"maximum\").setValue(idValue+\[0])   \n    clamp.knob(\"maximum\").setExpression(\"minimum\")\n    clamp.knob(\"selected\").setValue(True)\n    \n    # Assign Id and Id Disable names\n    nameId =\"IDPass\"+str(int(idCount))\n    nameIdDisable =nameId+\"Disable\"\n    \n    # Create Link Knobs for the Clamp's rgb values\n    link = nuke.Link_Knob(nameId, nameId)\n    link.makeLink(clamp.name(), \"minimum\")\n    cmNode.addKnob(link)\n    \n    # Create ID Disable Knob\n    idDisable = nuke.Boolean_Knob(nameIdDisable, \"disable\")\n    cmNode.addKnob(idDisable)\n    \n    \n    # Create Difference node, set values and inputs\n    diff = nuke.nodes.Difference(xpos=xp, ypos=yp+100, inputs=\[clamp, sdot1])\n    diff.knob(\"gain\").setValue(90)\n    diff.knob(\"selected\").setValue(True)\n    \n    # Create Invert node\n    invert = nuke.nodes.Invert(xpos=xp, ypos=yp+150, inputs=\[diff])\n    invert.knob(\"channels\").setValue(\"rgba\")\n    \n    # Create Switch node\n    switch = nuke.nodes.Switch(xpos=xp, ypos=yp+200,inputs=\[invert])\n    switch.knob(\"which\").setExpression(nameIdDisable) # Link Switch to ID Disable knob\n    \n    \n    # Connect Switch to Big Merge\n    bigmerge = nuke.toNode('BIG_MERGE')\n    bigmerge.setInput(bigmerge.inputs() if bigmerge.inputs()!=2 else 3, switch)\n \n   \n# Set ID Count\nidCount+=1\ncmNode.knob(\"idCount\").setValue(idCount)" +STARTLINE}
+ addUserKnob {18 pickid l "pick id" +INVISIBLE}
+ pickid {{PickerCTRL.col} {PickerCTRL.col} {PickerCTRL.col}}
+ addUserKnob {6 pickid_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {3 idCount l "id count" +INVISIBLE}
+ idCount 1
+ addUserKnob {26 text_5 l "     "}
+ addUserKnob {6 anti_alias l anti-alias +STARTLINE}
+ anti_alias true
+ addUserKnob {20 erodeSmoothGrp l "erode smooth" n 1}
+ addUserKnob {6 erodeSmooth l "erode smooth" +STARTLINE}
+ erodeSmooth true
+ addUserKnob {7 range R 0.1 0.9}
+ range 0.154
+ addUserKnob {7 blur R 0 100}
+ blur 3.2
+ addUserKnob {7 tighten R 0 2}
+ tighten 1
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 extra n 1}
+ extra 0
+ addUserKnob {7 dilate}
+ addUserKnob {7 pickerGamma l gamma R 0.2 1}
+ pickerGamma 0.5
+ addUserKnob {7 pickerBlur l blur R 0 2}
  addUserKnob {20 endGroup n -1}
- addUserKnob {26 ""}
- addUserKnob {26 info l "     " T "<b><i>TPD_ColorMatte V1.0.0</i></b> by Noah Catan\n<br><br>Last Updated 06.07.2021"}
+ addUserKnob {26 text l "      "}
 }
  Input {
   inputs 0
   name Input
-  label "\[value number]"
-  xpos -429
-  ypos 515
- }
- Shuffle {
-  in tpd_colormatte
-  name Shuffle21
-  label "\[value in]"
-  xpos -429
-  ypos 583
+  xpos 209
+  ypos 81
  }
  Dot {
   name Dot6
-  xpos -395
-  ypos 723
+  xpos 243
+  ypos 151
  }
-set Nd8b82400 [stack 0]
- Unpremult {
-  name Unpremult17
-  xpos -345
-  ypos 720
- }
- Dot {
-  name Dot14
-  xpos -223
-  ypos 723
- }
-set Nd8b82000 [stack 0]
+set Nc00d0400 [stack 0]
  Shuffle {
-  red white
-  green white
-  blue white
+  red black
+  green black
+  blue black
   alpha black
-  name Shuffle22
-  label WHITE
-  xpos -257
-  ypos 769
+  name Shuffle2
+  label "remove rgba"
+  xpos 327
+  ypos 142
  }
+set N9d3a7c00 [stack 0]
  Dot {
-  name Dot2
-  xpos 93
-  ypos 778
+  name superdot
+  label "\[value name]"
+  note_font Arial
+  xpos 469
+  ypos 151
  }
-set Nd8baf800 [stack 0]
- Dot {
-  name Dot5
-  xpos 418
-  ypos 778
+push $Nc00d0400
+ Shuffle {
+  in aliased
+  alpha black
+  name Shuffle1
+  label aliased
+  xpos 209
+  ypos 327
  }
-set Nd8baf400 [stack 0]
- Dot {
-  name Dot8
-  xpos 753
-  ypos 778
- }
-set Nd8baf000 [stack 0]
- Dot {
-  name Dot10
-  xpos 1080
-  ypos 778
- }
-set Nd8baec00 [stack 0]
- Dot {
-  name Dot12
-  xpos 1393
-  ypos 778
- }
-set Nd8bae800 [stack 0]
- Dot {
-  name Dot15
-  xpos 1702
-  ypos 778
- }
- Grade {
-  white {0 1 1 0}
-  name Grade5
-  xpos 1668
-  ypos 839
- }
-push $Nd8b82000
- Dot {
-  name Dot1
-  xpos -30
-  ypos 722
- }
-set Nd860dc00 [stack 0]
+set N9d3a7400 [stack 0]
  Dot {
   name Dot3
-  xpos 295
-  ypos 722
+  xpos 105
+  ypos 336
  }
-set Nd860d800 [stack 0]
- Dot {
-  name Dot4
-  xpos 630
-  ypos 722
+set N9d3a7000 [stack 0]
+ NoOp {
+  name PickerCTRL
+  xpos -37
+  ypos 333
+  addUserKnob {20 User}
+  addUserKnob {12 pos}
+  pos {{parent.picker1} {parent.picker1}}
+  addUserKnob {6 color_rgb_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+  addUserKnob {18 col}
+  col {0.6740380526 0.9240379333 0.874037981}
+  addUserKnob {6 col_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
  }
-set Nd860d400 [stack 0]
- Dot {
-  name Dot7
-  xpos 957
-  ypos 722
- }
-set Nd860d000 [stack 0]
- Dot {
-  name Dot9
-  xpos 1270
-  ypos 722
- }
-set Nd860cc00 [stack 0]
- Dot {
-  name Dot11
-  xpos 1579
-  ypos 722
+push $N9d3a7400
+push $N9d3a7c00
+ Clamp {
+  channels rgba
+  maximum 0
+  name Clamp3
+  xpos 327
+  ypos 250
  }
  Difference {
   inputs 2
-  gain {{CONTROL.tolerance*10}}
-  name Difference6
-  xpos 1545
-  ypos 833
- }
- Invert {
-  channels alpha
-  name Invert6
-  xpos 1545
-  ypos 887
- }
-push $Nd8bae800
- Grade {
-  white {1 0 1 0}
-  name Grade4
-  xpos 1359
-  ypos 839
- }
-push $Nd860cc00
- Difference {
-  inputs 2
-  gain {{CONTROL.tolerance*10}}
-  name Difference5
-  xpos 1236
-  ypos 833
- }
- Invert {
-  channels alpha
-  name Invert5
-  xpos 1236
-  ypos 887
- }
-push $Nd8baec00
- Grade {
-  white {1 1 0 0}
-  name Grade3
-  xpos 1046
-  ypos 839
- }
-push $Nd860d000
- Difference {
-  inputs 2
-  gain {{CONTROL.tolerance*10}}
-  name Difference4
-  xpos 923
-  ypos 833
- }
- Invert {
-  channels alpha
-  name Invert4
-  xpos 923
-  ypos 887
- }
-push $Nd8baf000
- Grade {
-  white {0 0 1 0}
-  name Grade2
-  xpos 719
-  ypos 839
- }
-push $Nd860d400
- Difference {
-  inputs 2
-  gain {{CONTROL.tolerance*10}}
+  gain 90
   name Difference2
-  xpos 596
-  ypos 833
+  xpos 327
+  ypos 377
+ }
+ Blur {
+  channels alpha
+  size 5
+  name Blur3
+  xpos 327
+  ypos 413
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.88
+  whitepoint 0.98
+  name Grade3
+  xpos 327
+  ypos 449
+ }
+push $N9d3a7000
+ Shuffle {
+  in antiAliased
+  name Shuffle3
+  label anti-aliased
+  xpos 71
+  ypos 393
+ }
+push $N9d3a7400
+ Merge2 {
+  inputs 2
+  operation difference
+  bbox B
+  name Merge1
+  xpos 209
+  ypos 399
+ }
+ Saturation {
+  saturation 0
+  mode Maximum
+  name Saturation1
+  xpos 209
+  ypos 423
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle4
+  label "to alpha"
+  xpos 209
+  ypos 447
  }
  Invert {
   channels alpha
   name Invert2
-  xpos 596
-  ypos 887
+  xpos 209
+  ypos 483
  }
-push $Nd8baf400
  Grade {
-  white {0 1 0 0}
+  channels alpha
+  gamma {{pickerGamma}}
+  white_clamp true
   name Grade1
-  xpos 384
-  ypos 839
+  xpos 209
+  ypos 519
  }
-push $Nd860d800
- Difference {
-  inputs 2
-  gain {{CONTROL.tolerance*10}}
-  name Difference1
-  xpos 261
-  ypos 833
- }
- Invert {
-  channels alpha
-  name Invert1
-  xpos 261
-  ypos 887
- }
-push $Nd8baf800
  Grade {
-  white {1 0 0 0}
-  name Grade14
-  xpos 59
-  ypos 834
- }
-push $Nd860dc00
- Difference {
-  inputs 2
-  gain {{CONTROL.tolerance*10}}
-  name Difference3
-  xpos -64
-  ypos 828
- }
- Invert {
-  channels alpha
-  name Invert3
-  xpos -64
-  ypos 881
- }
- Multiply {
-  channels rgba
-  value {{enable_m01}}
-  name Multiply1
-  xpos -64
-  ypos 940
+  white {0 0 5 1}
+  white_panelDropped true
+  white_clamp true
+  name Grade2
+  xpos 209
+  ypos 555
  }
  Dot {
-  name Dot13
-  xpos -30
-  ypos 1010
+  name Dot1
+  label "\\nConverge Pass"
+  note_font Arial
+  note_font_size 20
+  xpos 243
+  ypos 593
  }
- ChannelMerge {
-  inputs 2
-  name ChannelMerge1
-  xpos 261
-  ypos 995
-  disable {{enable_m02==0}}
+set N9d34b800 [stack 0]
+push $N9d3a7400
+ Dot {
+  name superdot1
+  label "\[value name]"
+  xpos 466
+  ypos 336
  }
- ChannelMerge {
-  inputs 2
-  name ChannelMerge2
-  xpos 596
-  ypos 995
-  disable {{enable_m03==0}}
- }
- ChannelMerge {
-  inputs 2
-  name ChannelMerge3
-  xpos 923
-  ypos 995
-  disable {{enable_m04==0}}
- }
- ChannelMerge {
-  inputs 2
-  name ChannelMerge4
-  xpos 1236
-  ypos 995
-  disable {{enable_m05==0}}
- }
- ChannelMerge {
-  inputs 2
-  name ChannelMerge5
-  xpos 1545
-  ypos 995
-  disable {{enable_m06==0}}
+ Merge2 {
+  operation plus
+  bbox B
+  name BIG_MERGE
+  xpos 432
+  ypos 497
  }
  Clamp {
-  channels alpha
+  channels rgba
   name Clamp1
-  xpos 1545
-  ypos 1136
+  xpos 432
+  ypos 521
  }
- Group {
-  name ErodeSmooth1
-  tile_color 0xcc804eff
-  xpos 1545
-  ypos 1218
-  addUserKnob {20 ErodeSmooth}
-  addUserKnob {4 type l Type M {linear smooth smooth0 smooth1 "" "" "" ""}}
-  addUserKnob {7 range l "<font color=skyblue>Range</font color>" R 0.1 0.9}
-  range 0.1
-  addUserKnob {41 size l Blur T Blur1.size}
-  addUserKnob {7 tighten l Tighten R 0 2}
-  tighten 1.055
-  addUserKnob {26 ""}
-  addUserKnob {26 "" l mask T ""}
-  addUserKnob {41 maskChannelInput l "" -STARTLINE T Merge1.maskChannelInput}
-  addUserKnob {41 inject -STARTLINE T Merge1.inject}
-  addUserKnob {41 invert_mask l invert -STARTLINE T Merge1.invert_mask}
-  addUserKnob {41 fringe -STARTLINE T Merge1.fringe}
-  addUserKnob {41 mix T Merge1.mix}
-  addUserKnob {20 info}
-  addUserKnob {26 author l Author: T "Tony Lyons"}
-  addUserKnob {26 Desc l Description: T ErodeSmooth}
+ ChannelMerge {
+  inputs 2+1
+  operation multiply
+  name ChannelMerge1
+  xpos 432
+  ypos 578
+  disable {{anti_alias!=1 x38 1}}
  }
-  Input {
-   inputs 0
-   name Inputmask
-   xpos 521
-   ypos 344
-   number 1
-  }
-  Input {
-   inputs 0
-   name Input
-   xpos 380
-   ypos 199
-  }
-set Nd86d7c00 [stack 0]
-  Blur {
-   channels rgba
-   size 5
-   name Blur1
-   label "\[value size]"
-   xpos 229
-   ypos 193
-  }
-  Grade {
-   channels rgba
-   blackpoint {{((.5*tighten)+.25)*range}}
-   whitepoint {{1-((.5*tighten)+.25)*(1-range)}}
-   white_clamp true
-   name Grade9
-   xpos 229
-   ypos 229
-  }
-set Nd86d7400 [stack 0]
-  ColorLookup {
-   lut {master {curve C k 0 s0 1 s0}
-     red {}
-     green {}
-     blue {}
-     alpha {}}
-   name ColorLookupSmooth
-   xpos 229
-   ypos 292
-   disable {{"type == 1 ? 0 : 1"}}
-  }
-  ColorLookup {
-   lut {master {curve C k 0 s0 L 1}
-     red {}
-     green {}
-     blue {}
-     alpha {}}
-   name ColorLookupSmooth0
-   xpos 229
-   ypos 318
-   disable {{"type == 2 ? 0 : 1"}}
-  }
-  ColorLookup {
-   lut {master {curve L 0 C k 1 s0}
-     red {}
-     green {}
-     blue {}
-     alpha {}}
-   name ColorLookupSmooth1
-   xpos 229
-   ypos 344
-   disable {{"type == 3 ? 0 : 1"}}
-  }
-push $Nd86d7c00
-  Merge2 {
-   inputs 2+1
-   operation copy
-   name Merge1
-   label "\[ expr \{ \[value mix] == 1 ? \" \" : \[concat Mix: \[value mix]] \}]"
-   xpos 380
-   ypos 344
-  }
-  Output {
-   name Output1
-   xpos 380
-   ypos 409
-  }
-push $Nd86d7400
-  Viewer {
-   frame_range 1-87
-   name Viewer1
-   xpos 339
-   ypos 229
-  }
- end_group
- Invert {
+set N9d34a800 [stack 0]
+ Dilate {
   channels alpha
-  name Invert7
-  xpos 1545
-  ypos 1284
-  disable {{invertMask==0}}
+  size {{dilate}}
+  name Dilate2
+  xpos 432
+  ypos 637
  }
  Dot {
-  name Dot23
-  xpos 1579
-  ypos 1409
+  name Dot5
+  xpos 466
+  ypos 705
  }
-set Nd8723800 [stack 0]
- Dot {
-  name Dot18
-  xpos 1579
-  ypos 1697
+set N9d34a000 [stack 0]
+ Blur {
+  channels alpha
+  size {{blur}}
+  name Blur2
+  xpos 561
+  ypos 696
  }
-push $Nd8723800
+ Grade {
+  channels alpha
+  blackpoint {{((.5*tighten)+.25)*range}}
+  whitepoint {{1-((.5*tighten)+.25)*(1-range)}}
+  white_clamp true
+  name Grade9
+  xpos 561
+  ypos 732
+ }
+push $N9d34a000
+ Switch {
+  inputs 2
+  which {{erodeSmooth!=0}}
+  name Switch2
+  xpos 432
+  ypos 738
+ }
+ Blur {
+  channels alpha
+  size {{pickerBlur}}
+  name Blur1
+  xpos 432
+  ypos 800
+ }
  Shuffle {
   red alpha
   green alpha
   blue alpha
-  name Shuffle23
-  label "\[value in]"
-  xpos -228
-  ypos 1400
+  name Shuffle5
+  label "\[value in] \[value in2] > \[value out] \[value out2]"
+  xpos 432
+  ypos 847
  }
-set Nd8723000 [stack 0]
- FilterErode {
-  channels rgba
-  size 5
-  name FilterErode1
-  xpos -119
-  ypos 1473
+ Dot {
+  name Dot4
+  xpos 466
+  ypos 900
  }
-push $Nd8723000
+set N9d348800 [stack 0]
+ Dot {
+  name Dot2
+  xpos 466
+  ypos 930
+ }
+push $N9d348800
+push $N9d34b800
  Merge2 {
   inputs 2
-  operation difference
+  bbox B
   name Merge2
-  xpos -228
-  ypos 1525
- }
-push $Nd8b82400
- Merge2 {
-  inputs 2
-  name Merge5
-  xpos -429
-  ypos 1525
+  xpos 209
+  ypos 897
  }
  Copy {
   inputs 2
   from0 rgba.alpha
   to0 rgba.alpha
   name Copy1
-  xpos -429
-  ypos 1688
+  xpos 209
+  ypos 921
  }
  Output {
   name Output1
-  xpos -429
-  ypos 1887
+  xpos 209
+  ypos 996
  }
- NoOp {
-  inputs 0
-  name CONTROL
-  xpos 718
-  ypos 600
-  addUserKnob {20 User}
-  addUserKnob {7 tolerance R 0 10}
-  tolerance 9
+push $N9d34a800
+ Viewer {
+  frame_range 1-64
+  name Viewer1
+  xpos 1069
+  ypos 921
  }
 end_group

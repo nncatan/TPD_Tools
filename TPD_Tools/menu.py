@@ -3,8 +3,8 @@
 #  by Noah Catan
 #
 #  menu.py
-#  Version: 1.0.3
-#  Last Updated: 06.24.2021
+#  Version: 1.0.4
+#  Last Updated: 7.5.2021
 # --------------------------------------------------------
 
 # Global Imports
@@ -24,6 +24,7 @@ menu.addCommand('TPD_Tools/TPD_Prep', 'nuke.createNode("TPD_Prep")')
 # Import Python Scripts
 import TPD_Roto
 import TPD_ColorPalette
+import TPD_AutoCrop
 
 
 # Import Experimental Python Scripts
